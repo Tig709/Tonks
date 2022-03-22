@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BaseProject.GameStates
 {
-    internal class PlayingState
+    class PlayingState
     {
     }
 }
