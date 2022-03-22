@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace BaseProject
 {
-    public class Game1 : GameEnvironment
+    public class TonksGame : GameEnvironment
     {      
         protected override void LoadContent()
         {
