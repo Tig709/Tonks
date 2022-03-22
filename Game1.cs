@@ -15,7 +15,9 @@ namespace BaseProject
             ApplyResolutionSettings();
 
             // TODO: use this.Content to load your game content here
-
+            GameStateManager.AddGameState("Play", new PlayingState());
+            GameStateManager.SwitchTo("Play");
+            
         }
 
     }
