@@ -20,8 +20,8 @@ namespace BaseProject
             player2 = new SpriteGameObject("tanksprites");
             Add(player1);
             Add(player2);
-            player1.Position = new Vector2(50, 100);
-            player2.Position = new Vector2(300, 200);
+            player1.Position = new Vector2(300, 200);
+            player2.Position = new Vector2(50, 100);
             startPosition = GameEnvironment.Screen.ToVector2() / 2;
             accelerationLeft = new Vector2(-10, 0);
             accelerationRight = new Vector2(10, 0);
@@ -42,6 +42,7 @@ namespace BaseProject
         {
             base.Update(gameTime);
 
+
         }
         public override void HandleInput(InputHelper inputHelper)
         {
@@ -54,7 +55,6 @@ namespace BaseProject
                 player1.Position += accelerationTop;
             if(inputHelper.IsKeyDown(Keys.Down))
                 player1.Position += accelerationBottom;
-            base.HandleInput(inputHelper);
             if (inputHelper.IsKeyDown(Keys.A))
                 player2.Position += accelerationLeft;
             if (inputHelper.IsKeyDown(Keys.D))

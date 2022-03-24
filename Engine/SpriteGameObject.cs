@@ -9,6 +9,7 @@ public class SpriteGameObject : GameObject
     protected float scale = 1f;
     public bool PerPixelCollisionDetection = true;
 
+
     public SpriteGameObject(string assetName, int layer = 0, string id = "", int sheetIndex = 0)
         : base(layer, id)
     {

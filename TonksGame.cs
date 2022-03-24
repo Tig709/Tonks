@@ -6,7 +6,8 @@ using Microsoft.Xna.Framework.Input;
 namespace BaseProject
 {
     public class TonksGame : GameEnvironment
-    {      
+    {
+        int sec = 0;
         protected override void LoadContent()
         {
             base.LoadContent();
@@ -16,9 +17,10 @@ namespace BaseProject
 
             // TODO: use this.Content to load your game content here
             GameStateManager.AddGameState("Play", new PlayingState());
-            GameStateManager.SwitchTo("Play");
+            GameStateManager.AddGameState("Begin", new MainState());
+            GameStateManager.SwitchTo("Begin");
             
         }
-
+        
     }
 }
