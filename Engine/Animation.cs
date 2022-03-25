@@ -22,6 +22,7 @@ public class Animation : SpriteSheet
     public void Update(GameTime gameTime)
     {
         time += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
         while (time > frameTime)
         {
             time -= frameTime;

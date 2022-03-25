@@ -5,19 +5,19 @@ using Microsoft.Xna.Framework.Graphics;
 public class SpriteSheet
 {
     protected Texture2D sprite;
+    Rectangle spriteRectangle;
     protected bool[] collisionMask;
     protected int sheetIndex;
     protected int sheetColumns;
     protected int sheetRows;
     protected bool mirror;
     protected float radians;
-    Rectangle spriteRectangle;
+
 
     public SpriteSheet(string assetname, int sheetIndex = 0)
     {
         // retrieve the sprite
         sprite = GameEnvironment.AssetManager.GetSprite(assetname);
-
 
         radians = 0.0f;
 
@@ -37,8 +37,10 @@ public class SpriteSheet
         string[] assetSplit = assetname.Split('@');
         if (assetSplit.Length <= 1)
         {
+            SheetIndex = sheetIndex;
             return;
         }
+        
 
         string sheetNrData = assetSplit[assetSplit.Length - 1];
         string[] colRow = sheetNrData.Split('x');
@@ -47,14 +49,12 @@ public class SpriteSheet
         {
             sheetRows = int.Parse(colRow[1]);
         }
+
         SheetIndex = sheetIndex;
     }
 
-
-
     public void Draw(SpriteBatch spriteBatch, Vector2 position, Vector2 origin, float scale, Color color)
     {
-       
         SpriteEffects spriteEffects = SpriteEffects.None;
         if (mirror)
         {
@@ -63,7 +63,6 @@ public class SpriteSheet
         spriteBatch.Draw(sprite, position, spriteRectangle, color,
             radians, origin, scale, spriteEffects, 0.0f);
     }
-
 
     public bool IsTranslucent(int x, int y)
     {
@@ -100,15 +99,18 @@ public class SpriteSheet
         get { return mirror; }
         set { mirror = value; }
     }
+
     public float Radians
     {
         get { return radians; }
         set { radians = value; }
     }
+
     public int NumberOfSheetElements
     {
         get { return sheetColumns * sheetRows; }
     }
+
     public int SheetIndex
     {
         get { return sheetIndex; }
@@ -128,10 +130,10 @@ public class SpriteSheet
 
     public Rectangle Bounds
     {
-
         get
         {
             return new Rectangle(0, 0, Width, Height);
         }
     }
+
 }
