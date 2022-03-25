@@ -8,7 +8,7 @@ public class SpriteGameObject : GameObject
     protected Vector2 origin;
     protected float scale = 1f;
     public bool PerPixelCollisionDetection = true;
-
+    public Texture2D texture;
 
     public SpriteGameObject(string assetName, int layer = 0, string id = "", int sheetIndex = 0)
         : base(layer, id)
