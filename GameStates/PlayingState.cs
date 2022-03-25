@@ -11,7 +11,8 @@ namespace BaseProject
 
         public PlayingState()
         {
-            this.Add(new SpriteGameObject("background"));
+            
+            this.Add(new SpriteGameObject("Level zonder raster"));
 
             tank = new Tank();
             this.Add(tank);
