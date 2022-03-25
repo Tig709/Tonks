@@ -12,7 +12,8 @@ namespace BaseProject
        GameObjectList unbreakableWall;
         public PlayingState()
         {
-            this.Add(new SpriteGameObject("background"));
+            
+            this.Add(new SpriteGameObject("Level zonder raster"));
 
             firstPlayerTank = new TankFirstPlayer();
             this.Add(firstPlayerTank);
