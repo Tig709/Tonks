@@ -6,8 +6,9 @@ using System.Text;
 
 namespace BaseProject
 {
-     class TankSecondPlayer : SpriteGameObject
+     class TankSecondPlayer : RotatingSpriteGameObject
     {
+        float turningspeed = 1.57f;
         Vector2 startPosition;
         Vector2 accelerationLeft;
         Vector2 accelerationRight;
@@ -15,7 +16,7 @@ namespace BaseProject
         Vector2 accelerationBottom;
         public TankSecondPlayer() : base("tanksprites") 
         {
-            startPosition = GameEnvironment.Screen.ToVector2() / 2;
+            startPosition = new Vector2(1920,1080);
             accelerationLeft = new Vector2(-10, 0);
             accelerationRight = new Vector2(10, 0);
             accelerationTop = new Vector2(0, -10);
@@ -33,12 +34,14 @@ namespace BaseProject
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            position.X = MathHelper.Clamp(position.X, 0, GameEnvironment.Screen.X - 50);
-            position.Y = MathHelper.Clamp(position.Y, 0, GameEnvironment.Screen.Y - 50);
+            position.X = MathHelper.Clamp(position.X, 55, GameEnvironment.Screen.X - 60);
+            position.Y = MathHelper.Clamp(position.Y, 55, GameEnvironment.Screen.Y - 88);
 
         }
         public override void HandleInput(InputHelper inputHelper)
         {
+            base.HandleInput(inputHelper);
+            Origin = Center;
             if (inputHelper.IsKeyDown(Keys.A))
                 Position += accelerationLeft;
             if (inputHelper.IsKeyDown(Keys.D))
@@ -47,6 +50,14 @@ namespace BaseProject
                Position += accelerationTop;
             if (inputHelper.IsKeyDown(Keys.S))
                 Position += accelerationBottom;
+            if (inputHelper.KeyPressed(Keys.E))
+            {
+                Angle += turningspeed;
+            }
+            if (inputHelper.KeyPressed(Keys.Q))
+            {
+                Angle -= turningspeed;
+            }
         }
 
         }
