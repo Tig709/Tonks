@@ -35,7 +35,7 @@ namespace BaseProject
         {
             base.Update(gameTime);
             position.X = MathHelper.Clamp(position.X, 55, GameEnvironment.Screen.X - 60);
-            position.Y = MathHelper.Clamp(position.Y, 55, GameEnvironment.Screen.Y - 134);
+            position.Y = MathHelper.Clamp(position.Y, 55, GameEnvironment.Screen.Y - 88);
 
         }
         public override void HandleInput(InputHelper inputHelper)

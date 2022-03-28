@@ -11,9 +11,12 @@ namespace BaseProject
         TankFirstPlayer firstPlayerTank;
         TankSecondPlayer secondPlayerTank;
         GameObjectList walls ,walls2, walls3, walls4,walls5;
+        Vector2 wallbounce, wallbounce2;
         public PlayingState()
         {
-            
+            wallbounce = new Vector2(-50, 10);
+            wallbounce2 = new Vector2(50, 10);
+
             this.Add(new SpriteGameObject("level_zonder_raster"));
 
             firstPlayerTank = new TankFirstPlayer();
@@ -60,8 +63,64 @@ namespace BaseProject
                 secondPlayerTank.Reset();
                 GameEnvironment.GameStateManager.SwitchTo("Tie");
             }
+            foreach (UnbreakableWall wall in walls.Children) 
+            {
+                if (wall.CollidesWith(firstPlayerTank))
+                {
+                   firstPlayerTank.Position = firstPlayerTank.Position + wallbounce;
+                }
+                else if (wall.CollidesWith(secondPlayerTank))
+                {
+                    secondPlayerTank.Position = secondPlayerTank.Position + wallbounce2;
+                }
+            }
+            foreach (UnbreakableWall wall in walls2.Children)
+            {
+                if (wall.CollidesWith(firstPlayerTank) )
+                {
+                    firstPlayerTank.Position = firstPlayerTank.Position + wallbounce;
+                }
+                else if (wall.CollidesWith(secondPlayerTank))
+                {
+                    secondPlayerTank.Position = secondPlayerTank.Position + wallbounce2;
+                }
+            }
+            foreach (UnbreakableWall wall in walls3.Children)
+            {
+                if (wall.CollidesWith(firstPlayerTank) )
+                {
+                    firstPlayerTank.Position = firstPlayerTank.Position + wallbounce;
 
+                }
+                else if (wall.CollidesWith(secondPlayerTank))
+                {
+                    secondPlayerTank.Position = secondPlayerTank.Position + wallbounce2;
+                }
+            }
+            foreach (UnbreakableWall wall in walls4.Children)
+            {
+                if (wall.CollidesWith(firstPlayerTank) )
+                {
+                    firstPlayerTank.Position = firstPlayerTank.Position + wallbounce;
 
+                }
+                else if (wall.CollidesWith(secondPlayerTank))
+                {
+                    secondPlayerTank.Position = secondPlayerTank.Position + wallbounce2;
+                }
+            }
+            foreach (UnbreakableWall wall in walls5.Children)
+            {
+                if (wall.CollidesWith(firstPlayerTank))
+                {
+                    firstPlayerTank.Position = firstPlayerTank.Position + wallbounce;
+
+                }
+                else if (wall.CollidesWith(secondPlayerTank))
+                {
+                    secondPlayerTank.Position = secondPlayerTank.Position + wallbounce2;
+                }
+            }
         }
     }
     
