@@ -12,7 +12,8 @@ namespace BaseProject
         Vector2 accelerationLeft;
         Vector2 accelerationRight;
         Vector2 accelerationTop;    
-        Vector2 accelerationBottom; 
+        Vector2 accelerationBottom;
+        Vector2 tankSpriteWidth;
         /*SpriteGameObject player1, player2;*/
         public TankFirstPlayer() : base("tankspritesRed")
         {
@@ -27,6 +28,7 @@ namespace BaseProject
             accelerationRight = new Vector2(10, 0);
             accelerationTop = new Vector2(0, -10);
             accelerationBottom = new Vector2(0, 10);
+           
                 
             Reset();
         }
@@ -64,6 +66,7 @@ namespace BaseProject
                 player2.Position += accelerationTop;
             if (inputHelper.IsKeyDown(Keys.S))
                 player2.Position += accelerationBottom;*/
+        
         }
     }
 }

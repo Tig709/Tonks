@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using BaseProject.GameObjects;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,10 +12,15 @@ namespace BaseProject
         TankFirstPlayer firstPlayerTank;
         TankSecondPlayer secondPlayerTank;
        GameObjectList unbreakableWall;
+        GameObjectList bullets;
         public PlayingState()
         {
             
             this.Add(new SpriteGameObject("level_zonder_raster"));
+
+
+            bullets = new GameObjectList();
+            this.Add(bullets);
 
             firstPlayerTank = new TankFirstPlayer();
             this.Add(firstPlayerTank);
@@ -33,7 +40,14 @@ namespace BaseProject
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+            bullets.Position = firstPlayerTank.Position;
 
+        }
+        public override void HandleInput(InputHelper inputHelper)
+        {
+            base.HandleInput(inputHelper);
+            if (inputHelper.KeyPressed(Keys.Space))
+                bullets.Add(new Bullet());
         }
     }
 }

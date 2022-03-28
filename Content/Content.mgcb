@@ -37,6 +37,18 @@
 /processorParam:TextureFormat=Color
 /build:breakable_wall_1.png
 
+#begin bulletRed2_outline.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:bulletRed2_outline.png
+
 #begin level_zonder_raster.png
 /importer:TextureImporter
 /processor:TextureProcessor
