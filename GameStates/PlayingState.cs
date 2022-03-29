@@ -1,4 +1,4 @@
-﻿using BaseProject.GameObjects;
+﻿
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -9,32 +9,52 @@ namespace BaseProject
 {
  class PlayingState : GameObjectList
     {
+        GameObjectList lives, lives1;
+        GameObjectList bullets, bullets2;
         TankFirstPlayer firstPlayerTank;
         TankSecondPlayer secondPlayerTank;
         GameObjectList walls ,walls2, walls3, walls4,walls5;
         Vector2 wallbounce, wallbounce2;
+
+ 
         public PlayingState()
         {
             wallbounce = new Vector2(-50, 10);
             wallbounce2 = new Vector2(50, 10);
 
             this.Add(new SpriteGameObject("level_zonder_raster"));
-
-
+            
             bullets = new GameObjectList();
             this.Add(bullets);
+
+            bullets2 = new GameObjectList();    
+            this.Add(bullets2);
 
             firstPlayerTank = new TankFirstPlayer();
             this.Add(firstPlayerTank);
 
             secondPlayerTank = new TankSecondPlayer();
             this.Add(secondPlayerTank);
-            
+
+            lives = new GameObjectList();
+            lives1 = new GameObjectList();
             walls = new GameObjectList();
             walls2 = new GameObjectList();
             walls3 = new GameObjectList();  
             walls4 = new GameObjectList();
             walls5 = new GameObjectList();
+            string assetNames = "live_amount";
+
+            for (int iLives = 0; iLives < 6; iLives++)
+            {
+                lives.Add(new Lives(assetNames, new Vector2(20, 980)));
+                lives.Add(new Lives(assetNames, new Vector2(120, 980)));
+                lives1.Add(new Lives(assetNames, new Vector2(1800, 980)));
+                lives1.Add(new Lives(assetNames, new Vector2(1700, 980)));
+            }
+         
+            
+      
             String[] assetName = {"unbreakable_wall"};
             int startXPosition = 200,
                 startYPosition = 0,
@@ -58,15 +78,73 @@ namespace BaseProject
             this.Add(walls3);
             this.Add(walls4);
             this.Add(walls5);
+            this.Add(lives);
+            this.Add(lives1);
         }
+        public override void HandleInput(InputHelper inputHelper)
+        {
+            base.HandleInput(inputHelper);
+            if (inputHelper.KeyPressed(Keys.Space))
+            {
+                bullets.Add(new Bullet());
+                bullets.Position = firstPlayerTank.Position;
+            }
+            if (inputHelper.KeyPressed(Keys.L))
+            {
+                bullets2.Add(new Bullet());
+                bullets2.Position = secondPlayerTank.Position;
+            }
+
+
+
+
+            if (inputHelper.KeyPressed(Keys.Tab))
+            {
+                velocity.X = 200;
+            }
+        }
+
+
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+            if(GameEnvironment.Screen.X > 400)
+            {
+                velocity.X = -velocity.X;
+            }
+            if (GameEnvironment.Screen.X < 0)
+            {
+                velocity.X = +velocity.X;
+            }
+
+
+
             if (firstPlayerTank.CollidesWith(secondPlayerTank))
             {
                 firstPlayerTank.Reset();
                 secondPlayerTank.Reset();
                 GameEnvironment.GameStateManager.SwitchTo("Tie");
+            }
+            foreach(Bullet bullet in bullets.Children)
+            {
+                if (bullet.CollidesWith(secondPlayerTank))
+                {
+                    secondPlayerTank.Reset();
+                    this.Remove(lives1); 
+                }
+            }
+            foreach (Bullet bullet in bullets2.Children)
+            {
+                if (bullet.CollidesWith(firstPlayerTank))
+                {
+                    firstPlayerTank.Reset();
+                    this.Remove(lives);
+                }
+                else if (bullet.CollidesWith(firstPlayerTank))
+                {
+                    firstPlayerTank.Reset();
+                    GameEnvironment.GameStateManager.SwitchTo("Dead");
+                }
             }
             foreach (UnbreakableWall wall in walls.Children) 
             {
@@ -127,6 +205,7 @@ namespace BaseProject
                 }
             }
         }
+        
     }
     
 }

@@ -19,6 +19,7 @@ namespace BaseProject
             GameStateManager.AddGameState("Play", new PlayingState());
             GameStateManager.AddGameState("Begin", new MainState());
             GameStateManager.AddGameState("Tie", new TieState());
+            GameStateManager.AddGameState("Dead", new TieState());
             GameStateManager.SwitchTo("Begin");
             
         }

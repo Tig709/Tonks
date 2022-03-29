@@ -23,7 +23,7 @@ namespace BaseProject
             Add(player2);
             player1.Position = new Vector2(300, 200);
             player2.Position = new Vector2(50, 100);*/
-            startPosition = GameEnvironment.Screen.ToVector2() / 2;
+            startPosition = new Vector2(0,0); 
             accelerationLeft = new Vector2(-10, 0);
             accelerationRight = new Vector2(10, 0);
             accelerationTop = new Vector2(0, -10);

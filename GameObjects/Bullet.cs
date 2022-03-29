@@ -6,12 +6,12 @@ using Microsoft.Xna.Framework.Input;
 
 
 
-namespace BaseProject.GameObjects
+namespace BaseProject
 {
 
-    class Bullet : SpriteGameObject
+    class Bullet : RotatingSpriteGameObject
     {
-
+       
         public Bullet() : base("bulletRed2_outline")
         {
 
@@ -19,7 +19,11 @@ namespace BaseProject.GameObjects
             //position = new Vector2(Mouse.GetState().X, Mouse.GetState().Y - 20);
             
             
-            this.velocity.Y = -200;
+            this.velocity.Y = -600;
+        }
+        public override void HandleInput(InputHelper inputHelper)
+        {
+            base.HandleInput(inputHelper);
         }
     }
 }
