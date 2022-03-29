@@ -8,6 +8,7 @@ namespace BaseProject
  class PlayingState : GameObjectList
     {
         Tank tank;
+        Upgrades upgrade;
 
         public PlayingState()
         {
@@ -15,6 +16,8 @@ namespace BaseProject
 
             tank = new Tank();
             this.Add(tank);
+            upgrade = new Upgrades();
+            this.Add(upgrade);
         }
         public override void Update(GameTime gameTime)
         {

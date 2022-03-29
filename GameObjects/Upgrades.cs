@@ -6,15 +6,18 @@ using System.Text;
 
 namespace BaseProject
 {
-    class Upgrades : SpriteGameObject
+    class Upgrades : GameObjectList
     {
         Boolean activated = false;
         int health;
         Vector2 imagePos;
 
-        public Upgrades() : base("tankie")
+        SpriteGameObject healthUpgrade;
+        public Upgrades()
         {
-            imagePos = new Vector2(400, 50);
+            healthUpgrade = new SpriteGameObject("tankie");
+            this.Add(healthUpgrade);
+            healthUpgrade.position = new Vector2(400, 50);
             health = 100;
         }
         void HealthMultiplier()
