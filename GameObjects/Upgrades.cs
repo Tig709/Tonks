@@ -10,21 +10,24 @@ namespace BaseProject
     {
         Boolean activated = false;
         int health;
-        Vector2 imagePos;
-
         SpriteGameObject healthUpgrade;
+        
         public Upgrades()
+        {
+            UpgradeEssentials();
+        }
+
+        virtual public void UpgradeEssentials()
         {
             healthUpgrade = new SpriteGameObject("tankie");
             this.Add(healthUpgrade);
             healthUpgrade.position = new Vector2(400, 50);
             health = 100;
         }
-        void HealthMultiplier()
+        
+        virtual public void Modifier()
         {
-            health = 200;
-            position = imagePos;
-            
+            health = 100 * 2;
         }
 
         public override void Update(GameTime gameTime)
@@ -32,9 +35,10 @@ namespace BaseProject
             base.Update(gameTime);
             if (activated == true)
             {
-                HealthMultiplier();
+                Modifier();
             }
         }
+        
         public override void HandleInput(InputHelper inputHelper)
         {
             base.HandleInput(inputHelper);
