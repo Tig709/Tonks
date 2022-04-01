@@ -19,15 +19,15 @@ namespace BaseProject
 
         virtual public void UpgradeEssentials()
         {
-            healthUpgrade = new SpriteGameObject("tankie");
-            this.Add(healthUpgrade);
-            healthUpgrade.position = new Vector2(400, 50);
+            healthUpgrade = new SpriteGameObject("HealthUpgrade");
+            healthUpgrade.position = new Vector2(100, 50);
             health = 100;
         }
         
         virtual public void Modifier()
         {
             health = 100 * 2;
+            this.Add(healthUpgrade);
         }
 
         public override void Update(GameTime gameTime)
