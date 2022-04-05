@@ -5,17 +5,23 @@ using System.Text;
 
 namespace BaseProject
 {
- class PlayingState : GameObjectList
+    class PlayingState : GameObjectList
     {
-        Tank tank;
+        const int PLAYER_COUNT = 2;
+
+        Tank[] tanks = new Tank[PLAYER_COUNT];
 
         public PlayingState()
         {
             this.Add(new SpriteGameObject("background"));
 
-            tank = new Tank();
-            this.Add(tank);
+            for (int i = 0; i < PLAYER_COUNT; i++)
+            {
+                tanks[i] = new Tank(i);
+                this.Add(tanks[i]);
+            }
         }
+
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
