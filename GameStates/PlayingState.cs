@@ -107,7 +107,7 @@ namespace BaseProject
             }
             else
             {
-                if (frameCounter >= 2)
+                if (frameCounter >= 6)
                 {
                     velocity.X = 0;
                     position.X = 0;
@@ -121,7 +121,7 @@ namespace BaseProject
             }
             else
             {
-                if (frameCounter >= 2)
+                if (frameCounter >= 6)
                 {
                     velocity.X = 0;
                     position.X = 0;
@@ -161,6 +161,7 @@ namespace BaseProject
                 explosion.Visible = true;
                 healthbarFirst -= 90;
                 theHelicopter.Reset();
+                ScreenShake();
 
             }
             if (secondPlayerTank.CollidesWith(theHelicopter))
@@ -171,6 +172,7 @@ namespace BaseProject
                 explosion.Visible = true;
                 healthbarSecond -= 90;
                 theHelicopter.Reset();
+                ScreenShake();
             }
 
             else if(explosionTimer >= 15 )  
@@ -186,7 +188,7 @@ namespace BaseProject
                 secondPlayerTank.Reset();
                 GameEnvironment.GameStateManager.SwitchTo("Tie");
             }
-            foreach(Bullet bullet in bullets.Children)
+            foreach (Bullet bullet in bullets.Children)
             {
                 if (bullet.CollidesWith(secondPlayerTank))
                 {

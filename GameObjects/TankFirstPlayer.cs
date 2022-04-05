@@ -26,7 +26,7 @@ namespace BaseProject
             Add(player2);
             player1.Position = new Vector2(300, 200);
             player2.Position = new Vector2(50, 100);*/
-            startPosition = new Vector2(0,0); 
+            startPosition = new Vector2(100,100); 
             accelerationLeft = new Vector2(-10, 0);
             accelerationRight = new Vector2(10, 0);
             accelerationTop = new Vector2(0, -10);
@@ -46,9 +46,7 @@ namespace BaseProject
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            position.X = MathHelper.Clamp(position.X, 55, GameEnvironment.Screen.X - 60);
-            position.Y = MathHelper.Clamp(position.Y, 55, GameEnvironment.Screen.Y - 88);
-
+            WrapScreen();   
         }
         public override void HandleInput(InputHelper inputHelper)
         {
@@ -78,6 +76,25 @@ namespace BaseProject
             if (inputHelper.KeyPressed(Keys.N))
             {
                 Angle -= turningspeed;
+            }
+        }
+        public void WrapScreen()
+        {
+            if (position.X < 0)
+            {
+                position.X = GameEnvironment.Screen.ToVector2().X;
+            }
+            else if (position.X > GameEnvironment.Screen.ToVector2().X)
+            {
+                position.X = 0;
+            }
+            if (position.Y < 0)
+            {
+                position.Y = GameEnvironment.Screen.ToVector2().Y;
+            }
+            else if (position.Y > GameEnvironment.Screen.ToVector2().Y)
+            {
+                position.Y = 0;
             }
         }
     }

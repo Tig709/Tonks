@@ -18,7 +18,7 @@ namespace BaseProject
      
         public TankSecondPlayer() : base("tanksprites") 
         {
-            startPosition = new Vector2(1920,1080);
+            startPosition = new Vector2(1820,980);
             accelerationLeft = new Vector2(-10, 0);
             accelerationRight = new Vector2(10, 0);
             accelerationTop = new Vector2(0, -10);
@@ -36,9 +36,7 @@ namespace BaseProject
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            position.X = MathHelper.Clamp(position.X, 55, GameEnvironment.Screen.X - 60);
-            position.Y = MathHelper.Clamp(position.Y, 55, GameEnvironment.Screen.Y - 88);
-
+            WrapScreen();
         }
         public override void HandleInput(InputHelper inputHelper)
         {
@@ -61,6 +59,25 @@ namespace BaseProject
                 Angle -= turningspeed;
             }
         }
-
+        public void WrapScreen()
+        {
+            if (position.X < 0)
+            {
+                position.X = GameEnvironment.Screen.ToVector2().X;
+            }
+            else if (position.X > GameEnvironment.Screen.ToVector2().X)
+            {
+                position.X = 0;
+            }
+            if (position.Y < 0)
+            {
+                position.Y = GameEnvironment.Screen.ToVector2().Y;
+            }
+            else if (position.Y > GameEnvironment.Screen.ToVector2().Y)
+            {
+                position.Y = 0;
+            }
         }
+
+    }
 }
