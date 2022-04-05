@@ -14,6 +14,8 @@ namespace BaseProject
         Vector2 accelerationRight;
         Vector2 accelerationTop;
         Vector2 accelerationBottom;
+        int acceleration = 5;
+     
         public TankSecondPlayer() : base("tanksprites") 
         {
             startPosition = new Vector2(1920,1080);
@@ -43,13 +45,13 @@ namespace BaseProject
             base.HandleInput(inputHelper);
             Origin = Center;
             if (inputHelper.IsKeyDown(Keys.A))
-                Position += accelerationLeft;
+                Degrees -= 6;
             if (inputHelper.IsKeyDown(Keys.D))
-                Position += accelerationRight;
+                Degrees += 6;
             if (inputHelper.IsKeyDown(Keys.W))
-               Position += accelerationTop;
+                this.position += AngularDirection * acceleration;
             if (inputHelper.IsKeyDown(Keys.S))
-                Position += accelerationBottom;
+                this.position -= AngularDirection * acceleration;
             if (inputHelper.KeyPressed(Keys.E))
             {
                 Angle += turningspeed;
