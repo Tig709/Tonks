@@ -6,6 +6,7 @@ public class GameObjectList : GameObject
 {
     protected List<GameObject> children;
 
+
     public GameObjectList(int layer = 0, string id = "") : base(layer, id)
     {
         children = new List<GameObject>();
