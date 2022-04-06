@@ -8,11 +8,14 @@ namespace BaseProject
 {
      class TankFirstPlayer : RotatingSpriteGameObject
     {
+        Vector2 wheels;
+        Vector2 gun;
         Vector2 startPosition;
         Vector2 accelerationLeft;
         Vector2 accelerationRight;
         Vector2 accelerationTop;    
         Vector2 accelerationBottom;
+        int acceleration = 5;
         float turningspeed = 1.57f;
        
         public TankFirstPlayer() : base("tankspritesRed")
@@ -23,12 +26,13 @@ namespace BaseProject
             Add(player2);
             player1.Position = new Vector2(300, 200);
             player2.Position = new Vector2(50, 100);*/
-            startPosition = new Vector2(0,0); 
+            startPosition = new Vector2(100,100); 
             accelerationLeft = new Vector2(-10, 0);
             accelerationRight = new Vector2(10, 0);
             accelerationTop = new Vector2(0, -10);
             accelerationBottom = new Vector2(0, 10);
 
+            
             Reset();
         }
         public override void Reset()
@@ -42,9 +46,7 @@ namespace BaseProject
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            position.X = MathHelper.Clamp(position.X, 55, GameEnvironment.Screen.X - 60);
-            position.Y = MathHelper.Clamp(position.Y, 55, GameEnvironment.Screen.Y - 88);
-
+            WrapScreen();   
         }
         public override void HandleInput(InputHelper inputHelper)
         {
@@ -52,8 +54,21 @@ namespace BaseProject
             Origin = Center;
             if (inputHelper.IsKeyDown(Keys.Left))
             {
-                Position += accelerationLeft;
+                Degrees -= 6;
             }
+           
+            if (inputHelper.IsKeyDown(Keys.Right))
+            {
+                Degrees += 6;
+            }
+            if (inputHelper.IsKeyDown(Keys.Up))
+            {
+                this.position += AngularDirection * acceleration;
+            }
+            if (inputHelper.IsKeyDown(Keys.Down))
+            {
+                this.position -= AngularDirection * acceleration;
+            } 
             if (inputHelper.KeyPressed(Keys.M))
             {
                 Angle += turningspeed;
@@ -62,17 +77,24 @@ namespace BaseProject
             {
                 Angle -= turningspeed;
             }
-            if (inputHelper.IsKeyDown(Keys.Right))
+        }
+        public void WrapScreen()
+        {
+            if (position.X < 0)
             {
-                Position += accelerationRight;
+                position.X = GameEnvironment.Screen.ToVector2().X;
             }
-            if (inputHelper.IsKeyDown(Keys.Up))
+            else if (position.X > GameEnvironment.Screen.ToVector2().X)
             {
-                Position += accelerationTop;
+                position.X = 0;
             }
-            if (inputHelper.IsKeyDown(Keys.Down))
+            if (position.Y < 0)
             {
-                Position += accelerationBottom;
+                position.Y = GameEnvironment.Screen.ToVector2().Y;
+            }
+            else if (position.Y > GameEnvironment.Screen.ToVector2().Y)
+            {
+                position.Y = 0;
             }
         }
     }

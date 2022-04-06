@@ -3,21 +3,19 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BaseProject.GameStates
+namespace BaseProject
 {
-   class WinState : SpriteGameObject
+ class WinState2 : SpriteGameObject
     {
-        public WinState() : base("tie_state")
+        public WinState2() : base("winState_player_2")
         {
 
         }
         public override void HandleInput(InputHelper inputHelper)
         {
-
             base.HandleInput(inputHelper);
-            if (inputHelper.KeyPressed(Keys.Enter))
+            if (inputHelper.KeyPressed(Keys.P))
                 GameEnvironment.GameStateManager.SwitchTo("Play");
         }
     }
 }
-
