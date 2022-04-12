@@ -1,4 +1,5 @@
 ﻿
+using BaseProject.GameObjects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace BaseProject
 {
- class PlayingState : GameObjectList
+  class PlayingState : GameObjectList
     {
         GameObjectList lives, lives1;
         GameObjectList bullets, bullets2;
@@ -16,16 +17,18 @@ namespace BaseProject
         GameObjectList walls;
         Helicopter theHelicopter;
         GameObjectList explosion;
+        GameObjectList score;
         Vector2 wallbounce, wallbounce2;
         int frameCounter = 0;
         int explosionTimer = 0;
         int healthbarFirst = 100;
         int healthbarSecond = 100;
-        int roundCounter1, roundCounter2;
-
-
-        public PlayingState()
+        int roundCounter1 = 0, roundCounter2 = 0;
+        
+         public PlayingState()
         {
+            
+
             wallbounce = new Vector2(-50, 10);
             wallbounce2 = new Vector2(50, 10);
 
@@ -43,7 +46,9 @@ namespace BaseProject
             secondPlayerTank = new TankSecondPlayer();
             this.Add(secondPlayerTank);
 
-          
+            score = new GameObjectList();
+            this.Add(score);
+
 
             lives = new GameObjectList();
             lives1 = new GameObjectList();
@@ -57,9 +62,18 @@ namespace BaseProject
                 lives1.Add(new Lives(assetNames, new Vector2(1800, 980)));
                 lives1.Add(new Lives(assetNames, new Vector2(1700, 980)));
             }
-         
-            
-      
+
+            for (int iScore = 0; iScore < 4; iScore++) {
+                 
+                string[] assetNamesScore = {  "text_0", "text_1", "text_3", "text_4", "text_dots", };
+               
+                score.Add(new Score(assetNamesScore[roundCounter1], new Vector2(GameEnvironment.Screen.X / 2-50, 50)));
+                score.Add(new Score(assetNamesScore[4], new Vector2(GameEnvironment.Screen.X / 2 , 50)));
+                score.Add(new Score(assetNamesScore[roundCounter2], new Vector2(GameEnvironment.Screen.X / 2  +50, 50)));
+
+
+            }
+
             String[] assetName = {"unbreakable_wall"};
             int startXPosition = 200,
                 startYPosition = 0,
@@ -212,27 +226,36 @@ namespace BaseProject
 
             if (healthbarFirst <= 0)
             {
-                GameEnvironment.GameStateManager.SwitchTo("Dead2");//dead veranderen naar end of round screen
+                GameEnvironment.GameStateManager.SwitchTo("End");//dead veranderen naar end of round screen
+                roundCounter2++;
                 healthbarFirst = 100;
                 healthbarSecond = 100;
-                roundCounter2++;
+              
+                
             }
 
             if(healthbarSecond <= 0)
             {
-                GameEnvironment.GameStateManager.SwitchTo("Dead1");//dead veranderen naar end of round screen
+                GameEnvironment.GameStateManager.SwitchTo("End");//dead veranderen naar end of round screen
+                roundCounter1++;
                 healthbarSecond = 100;
                 healthbarFirst = 100;
-                roundCounter1++;
+               
+              
+
             }
 
-            if (roundCounter2 == 3) { 
-            //MOET NOG GEMAAKT WORDEN : WINSTATE VOOR PLAYER2, SPEL IS OVER ETC.
+            if (roundCounter2 == 3) {
+                //MOET NOG GEMAAKT WORDEN : WINSTATE VOOR PLAYER2, SPEL IS OVER ETC.
+                GameEnvironment.GameStateManager.SwitchTo("WinState2");
+                base.Reset();
             }
 
             if (roundCounter1 == 3)
             {
                 //MOET NOG GEMAAKT WORDEN : WINSTATE VOOR PLAYER1, SPEL IS OVER ETC.
+                GameEnvironment.GameStateManager.SwitchTo("WinState1");
+                base.Reset();
             }
 
 
