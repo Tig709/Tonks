@@ -247,14 +247,14 @@ namespace BaseProject
 
             if (roundCounter2 == 3) {
                 //MOET NOG GEMAAKT WORDEN : WINSTATE VOOR PLAYER2, SPEL IS OVER ETC.
-                GameEnvironment.GameStateManager.SwitchTo("WinState2");
+                GameEnvironment.GameStateManager.SwitchTo("winState_player_2");
                 base.Reset();
             }
 
             if (roundCounter1 == 3)
             {
                 //MOET NOG GEMAAKT WORDEN : WINSTATE VOOR PLAYER1, SPEL IS OVER ETC.
-                GameEnvironment.GameStateManager.SwitchTo("WinState1");
+                GameEnvironment.GameStateManager.SwitchTo("winState_player_1");
                 base.Reset();
             }
 
