@@ -10,7 +10,7 @@ namespace BaseProject
 {
     public class PlayingState : GameObjectList
     {
-        Tank tank;
+
         Upgrades upgrade;
         GameObjectList lives, lives1;
         GameObjectList bullets, bullets2;
@@ -33,11 +33,11 @@ namespace BaseProject
         public PlayingState()
         {
 
-            tank = new Tank();
-            this.Add(tank);
+
+
             upgrade = new Upgrades();
             this.Add(upgrade);
-        }
+
 
             wallbounce = new Vector2(-50, 10);
             wallbounce2 = new Vector2(50, 10);
@@ -56,8 +56,8 @@ namespace BaseProject
             secondPlayerTank = new TankSecondPlayer();
             this.Add(secondPlayerTank);
 
-           score = new GameObjectList();
-           this.Add(score);
+            score = new GameObjectList();
+            this.Add(score);
 
 
             lives = new GameObjectList();
@@ -117,8 +117,10 @@ namespace BaseProject
 
             explosion = new GameObjectList();
             this.Add(explosion);
-
         }
+
+
+
         public override void HandleInput(InputHelper inputHelper)
         {
             base.HandleInput(inputHelper);
@@ -152,7 +154,7 @@ namespace BaseProject
                 }
             }
 
-          
+
             upgrade = new Upgrades();
             this.Add(upgrade);
         }
@@ -225,8 +227,8 @@ namespace BaseProject
                     healthbarSecond -= 60;
                     this.Remove(lives1);
 
-                    
-                    
+
+
                 }
                 if (bullet.CollidesWith(theHelicopter))
                 {
@@ -240,23 +242,23 @@ namespace BaseProject
                 }
             }
 
-            if(healthbarFirst <= 0)
+            if (healthbarFirst <= 0)
             {
                 GameEnvironment.GameStateManager.SwitchTo("Dead2");
                 healthbarFirst = 100;
                 healthbarSecond = 100;
             }
-            if(healthbarSecond <= 0)
+            if (healthbarSecond <= 0)
             {
                 GameEnvironment.GameStateManager.SwitchTo("Dead1");
                 healthbarSecond = 100;
                 healthbarFirst = 100;
             }
-            if(helipcoterHealth <= 0)
+            if (helipcoterHealth <= 0)
             {
                 helipcoterHealth = 1000;
-                theHelicopter.Velocity = new Vector2(0,0);
-               theHelicopter.Reset();   
+                theHelicopter.Velocity = new Vector2(0, 0);
+                theHelicopter.Reset();
             }
 
             foreach (Bullet bullet in bullets2.Children)
@@ -361,7 +363,8 @@ namespace BaseProject
 
         }
     }
-
 }
+
+
 
 
