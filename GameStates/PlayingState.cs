@@ -10,6 +10,8 @@ namespace BaseProject
 {
     public class PlayingState : GameObjectList
     {
+        Tank tank;
+        Upgrades upgrade;
         GameObjectList lives, lives1;
         GameObjectList bullets, bullets2;
         TankFirstPlayer firstPlayerTank;
@@ -27,11 +29,15 @@ namespace BaseProject
         public int roundCounter1, roundCounter2;
         string[] assetNamesScore = { "text_0", "text_1", "text_2", "text_3", "text_dots", };
         GameObject score1, score2, scoreText;
-        Upgrades upgrade;
 
         public PlayingState()
         {
 
+            tank = new Tank();
+            this.Add(tank);
+            upgrade = new Upgrades();
+            this.Add(upgrade);
+        }
 
             wallbounce = new Vector2(-50, 10);
             wallbounce2 = new Vector2(50, 10);
