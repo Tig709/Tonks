@@ -8,7 +8,7 @@ namespace BaseProject
 {
     class Upgrades : GameObjectList
     {
-        Boolean activated = false;
+        public Boolean activated = false;
         int health;
         SpriteGameObject healthUpgrade;
         
@@ -20,7 +20,7 @@ namespace BaseProject
         virtual public void UpgradeEssentials()
         {
             healthUpgrade = new SpriteGameObject("HealthUpgrade");
-            healthUpgrade.position = new Vector2(100, 50);
+            this.position = new Vector2(100, 50);
             health = 100;
         }
         
