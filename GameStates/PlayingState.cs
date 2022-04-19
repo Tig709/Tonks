@@ -21,11 +21,8 @@ namespace BaseProject
         int explosionTimer = 0;
         int healthbarFirst = 100;
         int healthbarSecond = 100;
-
-        int helipcoterHealth = 1000;
-
         int roundCounter1, roundCounter2;
-
+        int helipcoterHealth = 1000;
 
 
         public PlayingState()
@@ -196,8 +193,9 @@ namespace BaseProject
                     bullets.Reset();
                     healthbarSecond -= 60;
                     this.Remove(lives1);
-
                     
+                    
+
                     
                 }
                 if (bullet.CollidesWith(theHelicopter))
@@ -206,12 +204,13 @@ namespace BaseProject
                     helipcoterHealth -= 60;
                     theHelicopter.Scale -= 0.5f;
                 }
+            }
+
                 else
                 {
                     theHelicopter.Scale = 1;
                 }
             }
-
             if(healthbarFirst <= 0)
             {
                 GameEnvironment.GameStateManager.SwitchTo("Dead2");
@@ -230,7 +229,6 @@ namespace BaseProject
                 theHelicopter.Velocity = new Vector2(0,0);
                theHelicopter.Reset();   
             }
-
             foreach (Bullet bullet in bullets2.Children)
             {
                 if (bullet.CollidesWith(firstPlayerTank))
