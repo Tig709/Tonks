@@ -6,22 +6,28 @@ using System.Text;
 
 namespace BaseProject
 {
-    class Upgrades : SpriteGameObject
+    class Upgrades : GameObjectList
     {
-        Boolean activated = false;
+        public Boolean activated = false;
         int health;
-        Vector2 imagePos;
-
-        public Upgrades() : base("tankie")
+        SpriteGameObject healthUpgrade;
+        
+        public Upgrades()
         {
-            imagePos = new Vector2(400, 50);
+            UpgradeEssentials();
+        }
+
+        virtual public void UpgradeEssentials()
+        {
+            healthUpgrade = new SpriteGameObject("HealthUpgrade");
+            this.position = new Vector2(100, 50);
             health = 100;
         }
-        void HealthMultiplier()
+        
+        virtual public void Modifier()
         {
-            health = 200;
-            position = imagePos;
-            
+            health = 100 * 2;
+            this.Add(healthUpgrade);
         }
 
         public override void Update(GameTime gameTime)
@@ -29,9 +35,10 @@ namespace BaseProject
             base.Update(gameTime);
             if (activated == true)
             {
-                HealthMultiplier();
+                Modifier();
             }
         }
+        
         public override void HandleInput(InputHelper inputHelper)
         {
             base.HandleInput(inputHelper);

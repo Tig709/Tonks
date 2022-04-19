@@ -27,6 +27,8 @@ namespace BaseProject
         public int roundCounter1, roundCounter2;
         string[] assetNamesScore = { "text_0", "text_1", "text_2", "text_3", "text_dots", };
         GameObject score1, score2, scoreText;
+        Tank tank;
+        Upgrades upgrade;
 
         public PlayingState()
         {
@@ -145,6 +147,10 @@ namespace BaseProject
                 }
             }
 
+            tank = new Tank();
+            this.Add(tank);
+            upgrade = new Upgrades();
+            this.Add(upgrade);
         }
         public void ScreenShake()
         {
