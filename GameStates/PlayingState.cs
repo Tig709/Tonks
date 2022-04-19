@@ -48,8 +48,8 @@ namespace BaseProject
             secondPlayerTank = new TankSecondPlayer();
             this.Add(secondPlayerTank);
 
-           // score = new GameObjectList();
-          //  this.Add(score);
+           score = new GameObjectList();
+           this.Add(score);
 
 
             lives = new GameObjectList();
@@ -305,6 +305,7 @@ namespace BaseProject
                         secondPlayerTank.Position = secondPlayerTank.Position + wallbounce;
                     }
                 }
+
             }
 
         }
