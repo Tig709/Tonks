@@ -23,6 +23,7 @@ namespace BaseProject
         int explosionTimer = 0;
         int healthbarFirst = 100;
         int healthbarSecond = 100;
+        int helipcoterHealth = 1000;
         public int roundCounter1, roundCounter2;
         string[] assetNamesScore = { "text_0", "text_1", "text_2", "text_3", "text_dots", };
         GameObject score1, score2, scoreText;
@@ -228,7 +229,7 @@ namespace BaseProject
                     theHelicopter.Scale = 1;
                 }
             }
-<<<<<<< HEAD
+
             if(healthbarFirst <= 0)
             {
                 GameEnvironment.GameStateManager.SwitchTo("Dead2");
@@ -247,9 +248,7 @@ namespace BaseProject
                 theHelicopter.Velocity = new Vector2(0,0);
                theHelicopter.Reset();   
             }
-=======
 
->>>>>>> 1a6da18f72c68e831d33a2a7d34b59dbe3ce2d34
             foreach (Bullet bullet in bullets2.Children)
             {
                 if (bullet.CollidesWith(firstPlayerTank))
