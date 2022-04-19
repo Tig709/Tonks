@@ -15,8 +15,7 @@ namespace BaseProject
         Vector2 startPosition;
         Vector2 startSnelheid;
         float turningspeed = 1.57f;
-        public Bullet(Vector2 startPosition, Vector2 startSnelheid
-            ) : base("bulletRed2_outline")
+        public Bullet(Vector2 startPosition, Vector2 startSnelheid) : base("tank_bullet")
         {
 
             origin = Center;
@@ -24,11 +23,11 @@ namespace BaseProject
             this.startPosition = startPosition;
             this.startSnelheid = startSnelheid;
             velocity += startSnelheid;
+
         }
         public override void HandleInput(InputHelper inputHelper)
         {
             base.HandleInput(inputHelper);
-          
         }
         public override void Reset()
         {
@@ -65,5 +64,6 @@ namespace BaseProject
                 position.Y = 0;
             }
         }
+
     }
 }
