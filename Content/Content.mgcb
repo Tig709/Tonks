@@ -37,7 +37,6 @@
 /processorParam:TextureFormat=Color
 /build:background.png
 
-#begin HealthUpgrade.png
 #begin breakable_wall_1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -86,6 +85,18 @@
 /processorParam:TextureFormat=Color
 /build:explosion_heli.png
 
+#begin HealthUpgrade.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:HealthUpgrade.png
+
 #begin level_zonder_raster.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -122,6 +133,30 @@
 /processorParam:TextureFormat=Color
 /build:mainState.png
 
+#begin spr_mine.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:spr_mine.png
+
+#begin spr_mine.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:spr_mine.png
+
 #begin tank_bullet.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -133,18 +168,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:tank_bullet.png
-
-#begin HealthUpgrade.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:HealthUpgrade.png
 
 #begin tank_sprites2.png
 /importer:TextureImporter
@@ -253,18 +276,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:text_dots.png
-
-#begin text_score.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:text_score.png
 
 #begin text_score.png
 /importer:TextureImporter
