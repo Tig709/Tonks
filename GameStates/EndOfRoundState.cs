@@ -20,12 +20,16 @@ namespace BaseProject
 
             score = new GameObjectList();
             this.Add(score);
-            
+
+            roundCounter1 = PlayingState.RoundCounterP1;
+            roundCounter2 = PlayingState.RoundCounterP2;
 
             score1 = new Score(assetNamesScore[roundCounter1], new Vector2(GameEnvironment.Screen.X / 2 - 50, 50));
             scoreText = new Score(assetNamesScore[4], new Vector2(GameEnvironment.Screen.X / 2, 50));
             score2 = new Score(assetNamesScore[roundCounter2], new Vector2(GameEnvironment.Screen.X / 2 + 50, 50));
-           
+
+            
+
             this.Add(score1);
             this.Add(scoreText);
             this.Add(score2);
@@ -34,9 +38,8 @@ namespace BaseProject
 
         public override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
-            
-            
+            UpdateScore();
+            base.Update(gameTime);                 
         }
         public override void HandleInput(InputHelper inputHelper)
         {
@@ -45,5 +48,20 @@ namespace BaseProject
             if (inputHelper.KeyPressed(Keys.Enter))
                 GameEnvironment.GameStateManager.SwitchTo("Play");
         }
+
+        public void UpdateScore() {
+            Remove(score1);
+            Remove(score2);
+
+            roundCounter1 = PlayingState.RoundCounterP1;
+            roundCounter2 = PlayingState.RoundCounterP2;
+
+            score1 = new Score(assetNamesScore[roundCounter1], new Vector2(GameEnvironment.Screen.X / 2 - 50, 50));
+            score2 = new Score(assetNamesScore[roundCounter2], new Vector2(GameEnvironment.Screen.X / 2 + 50, 50));
+
+            this.Add(score1);
+            this.Add(score2);
+        }
+        
     }
 }

@@ -26,9 +26,17 @@ namespace BaseProject
         int healthbarFirst = 100;
         int healthbarSecond = 100;
         int helipcoterHealth = 1000;
-        public int roundCounter1, roundCounter2;
+        public static int roundCounter1, roundCounter2;
         string[] assetNamesScore = { "text_0", "text_1", "text_2", "text_3", "text_dots", };
         GameObject score1, score2, scoreText;
+
+        public static int RoundCounterP1 { get { return roundCounter1; }
+            set { RoundCounterP1 = roundCounter1; }
+        }
+        public static int RoundCounterP2 { get { return roundCounter2; }
+
+            set { RoundCounterP2 = roundCounter2; }
+        }
 
         public PlayingState()
         {
@@ -226,7 +234,7 @@ namespace BaseProject
                     bullets.Reset();
                     healthbarSecond -= 60;
                     this.Remove(lives1);
-
+                    
 
 
                 }
@@ -242,18 +250,7 @@ namespace BaseProject
                 }
             }
 
-            if (healthbarFirst <= 0)
-            {
-                GameEnvironment.GameStateManager.SwitchTo("Dead2");
-                healthbarFirst = 100;
-                healthbarSecond = 100;
-            }
-            if (healthbarSecond <= 0)
-            {
-                GameEnvironment.GameStateManager.SwitchTo("Dead1");
-                healthbarSecond = 100;
-                healthbarFirst = 100;
-            }
+          
             if (helipcoterHealth <= 0)
             {
                 helipcoterHealth = 1000;
