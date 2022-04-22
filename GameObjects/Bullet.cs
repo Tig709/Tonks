@@ -23,6 +23,7 @@ namespace BaseProject
             this.startPosition = startPosition;
             this.startSnelheid = startSnelheid;
             velocity += startSnelheid;
+            AngularDirection = velocity;
 
         }
         public override void HandleInput(InputHelper inputHelper)
@@ -41,27 +42,27 @@ namespace BaseProject
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            WrapScreen();
-            frameCounter++; 
-          
+            WrapBullet();
+            frameCounter++;
+            AngularDirection = velocity;
         }
-        public void WrapScreen()
+        public void WrapBullet()
         {
-            if (position.X < 0)
+            if (position.X < 0+Width/2)
             {
-                position.X = GameEnvironment.Screen.ToVector2().X;
+                velocity.X *= -1;
             }
-            else if (position.X > GameEnvironment.Screen.ToVector2().X)
+            else if (position.X > GameEnvironment.Screen.ToVector2().X-Width/2)
             {
-                position.X = 0;
+                velocity.X *= -1;
             }
             if (position.Y < 0)
             {
-                position.Y = GameEnvironment.Screen.ToVector2().Y;
+                velocity.Y *= -1;
             }
-            else if (position.Y > GameEnvironment.Screen.ToVector2().Y)
+            else if (position.Y > GameEnvironment.Screen.ToVector2().Y-Height/2)
             {
-                position.Y = 0;
+                velocity.Y *= -1;
             }
         }
 

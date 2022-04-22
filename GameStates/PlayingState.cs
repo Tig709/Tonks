@@ -7,17 +7,19 @@ using System.Text;
 
 namespace BaseProject
 {
- class PlayingState : GameObjectList
+    class PlayingState : GameObjectList
     {
         GameObjectList lives, lives1;
         GameObjectList bullets, bullets2;
         TankFirstPlayer firstPlayerTank;
         TankSecondPlayer secondPlayerTank;
-        GameObjectList walls;
+        SpriteGameObject wall;
+        /*GameObjectList walls;*/
         Helicopter theHelicopter;
         GameObjectList explosion;
-        Vector2 wallbounce, wallbounce2;
+        Vector2 wallbounce, wallbounce2, positionPrevious;
         int frameCounter = 0;
+        int bulletTimer = 0;
         int explosionTimer = 0;
         int healthbarFirst = 100;
         int healthbarSecond = 100;
@@ -29,13 +31,16 @@ namespace BaseProject
         {
             wallbounce = new Vector2(-50, 10);
             wallbounce2 = new Vector2(50, 10);
+            positionPrevious = new Vector2();
 
-            this.Add(new SpriteGameObject("level_zonder_raster"));
-            
+            this.Add(new SpriteGameObject("spr_background"));
+            wall = new SpriteGameObject("spr_walls");
+            this.Add(wall);
+
             bullets = new GameObjectList();
             this.Add(bullets);
 
-            bullets2 = new GameObjectList();    
+            bullets2 = new GameObjectList();
             this.Add(bullets2);
 
             firstPlayerTank = new TankFirstPlayer();
@@ -44,11 +49,11 @@ namespace BaseProject
             secondPlayerTank = new TankSecondPlayer();
             this.Add(secondPlayerTank);
 
-          
+
 
             lives = new GameObjectList();
             lives1 = new GameObjectList();
-            walls = new GameObjectList();
+            /*walls = new GameObjectList();*/
             string assetNames = "live_amount";
 
             for (int iLives = 0; iLives < 6; iLives++)
@@ -58,10 +63,10 @@ namespace BaseProject
                 lives1.Add(new Lives(assetNames, new Vector2(1800, 980)));
                 lives1.Add(new Lives(assetNames, new Vector2(1700, 980)));
             }
-         
-            
-      
-            String[] assetName = {"unbreakable_wall"};
+
+
+
+           /* String[] assetName = { "unbreakable_wall" };
             int startXPosition = 200,
                 startYPosition = 0,
                 nWallsPerRow = 6;
@@ -71,7 +76,7 @@ namespace BaseProject
                     walls.Add(new UnbreakableWall(assetName[iWallType],
                          new Vector2(startXPosition + iWall, startYPosition + iWallType)));
                     walls.Add(new UnbreakableWall(assetName[iWallType],
-                                  new Vector2(startXPosition + iWall+1500, startYPosition + iWallType+800)));
+                                  new Vector2(startXPosition + iWall + 1500, startYPosition + iWallType + 800)));
                     walls.Add(new UnbreakableWall(assetName[iWallType],
                                   new Vector2(startXPosition + iWall + 800, startYPosition + iWallType + 400)));
                     walls.Add(new UnbreakableWall(assetName[iWallType],
@@ -79,26 +84,27 @@ namespace BaseProject
                     walls.Add(new UnbreakableWall(assetName[iWallType],
                                   new Vector2(startXPosition + iWall, startYPosition + iWallType + 800)));
                 }
-            this.Add(walls);
-            
+            this.Add(walls);*/
+
             this.Add(lives);
             this.Add(lives1);
 
             theHelicopter = new Helicopter();
             this.Add(theHelicopter);
-
+ 
             explosion = new GameObjectList();
             this.Add(explosion);
-         
+
         }
         public override void HandleInput(InputHelper inputHelper)
         {
             base.HandleInput(inputHelper);
-            if (inputHelper.KeyPressed(Keys.Space))
+            if (inputHelper.KeyPressed(Keys.L) && bulletTimer >= 100)
             {
                 bullets.Add(new Bullet(new Vector2(firstPlayerTank.Position.X, firstPlayerTank.Position.Y), new Vector2(firstPlayerTank.AngularDirection.X * 500, firstPlayerTank.AngularDirection.Y * 500)));
                 ScreenShake();
-                
+                bulletTimer = 0;
+
             }
             else
             {
@@ -109,10 +115,11 @@ namespace BaseProject
                     frameCounter = 0;
                 }
             }
-            if (inputHelper.KeyPressed(Keys.L))
+            if (inputHelper.KeyPressed(Keys.Space)&& bulletTimer >= 100)
             {
                 bullets2.Add(new Bullet(new Vector2(secondPlayerTank.Position.X, secondPlayerTank.Position.Y), new Vector2(secondPlayerTank.AngularDirection.X * 500, secondPlayerTank.AngularDirection.Y * 500)));
                 ScreenShake();
+                bulletTimer = 0;
             }
             else
             {
@@ -121,22 +128,25 @@ namespace BaseProject
                     velocity.X = 0;
                     position.X = 0;
                     frameCounter = 0;
+                    
                 }
             }
 
         }
         public void ScreenShake()
         {
-              velocity.X = 1000; 
+            velocity.X = 1000;
 
         }
 
 
         public override void Update(GameTime gameTime)
         {
+            
             base.Update(gameTime);
             frameCounter++;
             explosionTimer++;
+            bulletTimer++;
 
             if (GameEnvironment.Screen.X > 400)
             {
@@ -170,7 +180,7 @@ namespace BaseProject
                 ScreenShake();
             }
 
-            else if(explosionTimer >= 15 )  
+            else if (explosionTimer >= 15)
             {
                 explosionTimer = 0;
                 explosion.Reset();
@@ -182,10 +192,11 @@ namespace BaseProject
                 firstPlayerTank.Reset();
                 secondPlayerTank.Reset();
                 GameEnvironment.GameStateManager.SwitchTo("Tie");
+                bullets.Reset();
             }
             foreach (Bullet bullet in bullets.Children)
             {
-               
+
 
                 if (bullet.CollidesWith(secondPlayerTank))
                 {
@@ -193,10 +204,10 @@ namespace BaseProject
                     bullets.Reset();
                     healthbarSecond -= 60;
                     this.Remove(lives1);
-                    
-                    
 
-                    
+
+
+
                 }
                 if (bullet.CollidesWith(theHelicopter))
                 {
@@ -204,30 +215,31 @@ namespace BaseProject
                     helipcoterHealth -= 60;
                     theHelicopter.Scale -= 0.5f;
                 }
-            }
+
 
                 else
                 {
                     theHelicopter.Scale = 1;
                 }
             }
-            if(healthbarFirst <= 0)
+
+            if (healthbarFirst <= 0)
             {
-                GameEnvironment.GameStateManager.SwitchTo("Dead2");
+                GameEnvironment.GameStateManager.SwitchTo("winState_player_1");
                 healthbarFirst = 100;
                 healthbarSecond = 100;
             }
-            if(healthbarSecond <= 0)
+            if (healthbarSecond <= 0)
             {
-                GameEnvironment.GameStateManager.SwitchTo("Dead1");
+                GameEnvironment.GameStateManager.SwitchTo("winState_player_2");
                 healthbarSecond = 100;
                 healthbarFirst = 100;
             }
-            if(helipcoterHealth <= 0)
+            if (helipcoterHealth <= 0)
             {
                 helipcoterHealth = 1000;
-                theHelicopter.Velocity = new Vector2(0,0);
-               theHelicopter.Reset();   
+                theHelicopter.Velocity = new Vector2(0, 0);
+                theHelicopter.Reset();
             }
             foreach (Bullet bullet in bullets2.Children)
             {
@@ -254,22 +266,22 @@ namespace BaseProject
 
             if (healthbarFirst <= 0)
             {
-                GameEnvironment.GameStateManager.SwitchTo("Dead2");//dead veranderen naar end of round screen
+                GameEnvironment.GameStateManager.SwitchTo("winState_player_1");//dead veranderen naar end of round screen
                 healthbarFirst = 100;
                 healthbarSecond = 100;
                 roundCounter2++;
             }
 
-            if(healthbarSecond <= 0)
+            if (healthbarSecond <= 0)
             {
-                GameEnvironment.GameStateManager.SwitchTo("Dead1");//dead veranderen naar end of round screen
+                GameEnvironment.GameStateManager.SwitchTo("winState_player_2");//dead veranderen naar end of round screen
                 healthbarSecond = 100;
                 healthbarFirst = 100;
                 roundCounter1++;
             }
 
-            if (roundCounter2 == 3) { 
-            //MOET NOG GEMAAKT WORDEN : WINSTATE VOOR PLAYER2, SPEL IS OVER ETC.
+            if (roundCounter2 == 3) {
+                //MOET NOG GEMAAKT WORDEN : WINSTATE VOOR PLAYER2, SPEL IS OVER ETC.
             }
 
             if (roundCounter1 == 3)
@@ -277,36 +289,61 @@ namespace BaseProject
                 //MOET NOG GEMAAKT WORDEN : WINSTATE VOOR PLAYER1, SPEL IS OVER ETC.
             }
 
-
-            
-            foreach (UnbreakableWall wall in walls.Children) 
+            if (wall.CollidesWith(firstPlayerTank))
             {
-                if (wall.CollidesWith(firstPlayerTank))
+                if (firstPlayerTank.Position.X <= wall.Position.X || firstPlayerTank.Position.X >= wall.Position.X)
                 {
-                    if (firstPlayerTank.Position.X <= wall.Position.X)
-                    {
-                        firstPlayerTank.Position = firstPlayerTank.Position + wallbounce;
-                    }
-                    else if (firstPlayerTank.Position.X >= wall.Position.X)
-                    {
-                        firstPlayerTank.Position = firstPlayerTank.Position + wallbounce2;
-                    }
+                    /*firstPlayerTank.Position = firstPlayerTank.Position + wallbounce;*/
+                    firstPlayerTank.WallCorrect();
                 }
-                else if (wall.CollidesWith(secondPlayerTank))
+               /* else if (firstPlayerTank.Position.X >= wall.Position.X)
                 {
-                    if (secondPlayerTank.Position.X >= wall.Position.X)
-                    {
-                        secondPlayerTank.Position = secondPlayerTank.Position + wallbounce2;
-                    }
-                    if (secondPlayerTank.Position.X <= wall.Position.X)
-                    {
-                        secondPlayerTank.Position = secondPlayerTank.Position + wallbounce;
-                    }
+                    *//*firstPlayerTank.Position = firstPlayerTank.Position + wallbounce2;*//*
+                    firstPlayerTank.WallCorrect();
+                }*/
+            }
+            else if (wall.CollidesWith(secondPlayerTank))
+            {
+                if (secondPlayerTank.Position.X >= wall.Position.X || secondPlayerTank.Position.X <= wall.Position.X)
+                {
+                    secondPlayerTank.WallCorrect();
                 }
+            /*    if (secondPlayerTank.Position.X <= wall.Position.X)
+                {
+                    secondPlayerTank.Position = secondPlayerTank.Position + wallbounce;
+                }*/
             }
-            
-            }
+
+            /* foreach (UnbreakableWall wall in walls.Children)
+             {
+                 if (wall.CollidesWith(firstPlayerTank))
+                 {
+                     if (firstPlayerTank.Position.X <= wall.Position.X)
+                     {
+                         firstPlayerTank.Position = firstPlayerTank.Position + wallbounce;
+                     }
+                     else if (firstPlayerTank.Position.X >= wall.Position.X)
+                     {
+                         firstPlayerTank.Position = firstPlayerTank.Position + wallbounce2;
+                     }
+                 }
+
+                 else if (wall.CollidesWith(secondPlayerTank))
+                 {
+                     if (secondPlayerTank.Position.X >= wall.Position.X)
+                     {
+                         secondPlayerTank.Position = secondPlayerTank.Position + wallbounce2;
+                     }
+                     if (secondPlayerTank.Position.X <= wall.Position.X)
+                     {
+                         secondPlayerTank.Position = secondPlayerTank.Position + wallbounce;
+                     }
+                 }
+             }*/
+
+
         }
+    }
         
     }
     

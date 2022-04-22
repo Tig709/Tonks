@@ -15,7 +15,8 @@ namespace BaseProject
         Vector2 accelerationRight;
         Vector2 accelerationTop;    
         Vector2 accelerationBottom;
-        int acceleration = 5;
+        Vector2 positionPrevious;
+        int acceleration = 500;
         float turningspeed = 1.57f;
        
         public TankFirstPlayer() : base("tankspritesRed")
@@ -31,8 +32,9 @@ namespace BaseProject
             accelerationRight = new Vector2(10, 0);
             accelerationTop = new Vector2(0, -10);
             accelerationBottom = new Vector2(0, 10);
+            positionPrevious = new Vector2();
 
-            
+
             Reset();
         }
         public override void Reset()
@@ -45,11 +47,13 @@ namespace BaseProject
 
         public override void Update(GameTime gameTime)
         {
+            positionPrevious = position;
             base.Update(gameTime);
             WrapScreen();   
         }
         public override void HandleInput(InputHelper inputHelper)
         {
+            velocity = new Vector2(0,0);
             base.HandleInput(inputHelper);
             Origin = Center;
             if (inputHelper.IsKeyDown(Keys.Left))
@@ -63,20 +67,22 @@ namespace BaseProject
             }
             if (inputHelper.IsKeyDown(Keys.Up))
             {
-                this.position += AngularDirection * acceleration;
+                /*this.position += AngularDirection * acceleration;*/
+                velocity = AngularDirection * acceleration;
             }
             if (inputHelper.IsKeyDown(Keys.Down))
             {
-                this.position -= AngularDirection * acceleration;
+                /*this.position -= AngularDirection * acceleration;*/
+                velocity = -AngularDirection * acceleration;
             } 
-            if (inputHelper.KeyPressed(Keys.M))
+           /* if (inputHelper.KeyPressed(Keys.M))
             {
                 Angle += turningspeed;
             }
             if (inputHelper.KeyPressed(Keys.N))
             {
                 Angle -= turningspeed;
-            }
+            }*/
         }
         public void WrapScreen()
         {
@@ -96,6 +102,14 @@ namespace BaseProject
             {
                 position.Y = 0;
             }
+        }
+        public void WallCorrect()
+        {
+            WallCorrect(positionPrevious);
+        }
+        public void WallCorrect(Vector2 position)
+        {
+            this.position = position;
         }
     }
 }
