@@ -9,11 +9,11 @@ namespace BaseProject
 {
     class PlayingState : GameObjectList
     {
-        GameObjectList lives, lives1;
+        
         GameObjectList bullets, bullets2;
         TankFirstPlayer firstPlayerTank;
         TankSecondPlayer secondPlayerTank;
-        SpriteGameObject wall;
+        SpriteGameObject wall, breakableWall, pit;
         Helicopter theHelicopter;
         GameObjectList explosion;
         Vector2 wallbounce, wallbounce2, positionPrevious;
@@ -24,6 +24,7 @@ namespace BaseProject
         int healthbarSecond = 100;
         int roundCounter1, roundCounter2;
         int helipcoterHealth = 1000;
+        int wallHealth = 180;
 
 
         public PlayingState()
@@ -35,6 +36,11 @@ namespace BaseProject
             this.Add(new SpriteGameObject("spr_background"));
             wall = new SpriteGameObject("spr_walls");
             this.Add(wall);
+            breakableWall = new SpriteGameObject("spr_breakable_wall");
+            this.Add(breakableWall);
+            pit = new SpriteGameObject("spr_pit");
+            this.Add(pit);
+
 
             bullets = new GameObjectList();
             this.Add(bullets);
@@ -47,28 +53,6 @@ namespace BaseProject
 
             secondPlayerTank = new TankSecondPlayer();
             this.Add(secondPlayerTank);
-
-
-
-            lives = new GameObjectList();
-            lives1 = new GameObjectList();
-         
-            string assetNames = "live_amount";
-
-            for (int iLives = 0; iLives < 6; iLives++)
-            {
-                lives.Add(new Lives(assetNames, new Vector2(20, 980)));
-                lives.Add(new Lives(assetNames, new Vector2(120, 980)));
-                lives1.Add(new Lives(assetNames, new Vector2(1800, 980)));
-                lives1.Add(new Lives(assetNames, new Vector2(1700, 980)));
-            }
-
-
-
-
-
-            this.Add(lives);
-            this.Add(lives1);
 
             theHelicopter = new Helicopter();
             this.Add(theHelicopter);
@@ -117,7 +101,6 @@ namespace BaseProject
         public void ScreenShake()
         {
             velocity.X = 1000;
-
         }
 
 
@@ -140,7 +123,7 @@ namespace BaseProject
 
             if (firstPlayerTank.CollidesWith(theHelicopter))
             {
-                this.Remove(lives);
+                
 
                 explosion.Add(new Explosion(new Vector2(firstPlayerTank.Position.X, firstPlayerTank.Position.Y)));
                 explosionTimer++;
@@ -152,7 +135,7 @@ namespace BaseProject
             }
             if (secondPlayerTank.CollidesWith(theHelicopter))
             {
-                this.Remove(lives1);
+               
                 explosion.Add(new Explosion(new Vector2(secondPlayerTank.Position.X, secondPlayerTank.Position.Y)));
                 explosionTimer++;
                 explosion.Visible = true;
@@ -178,18 +161,22 @@ namespace BaseProject
             foreach (Bullet bullet in bullets.Children)
             {
 
-
+                if (bullet.CollidesWith(breakableWall))
+                {
+                    bullets.Reset();
+                    wallHealth = -60; 
+                }
+                if(wallHealth >= 0)
+                {
+                    breakableWall.Visible = false;
+                }
                 if (bullet.CollidesWith(secondPlayerTank))
                 {
                     secondPlayerTank.Reset();
                     bullets.Reset();
                     healthbarSecond -= 60;
-                    this.Remove(lives1);
-
-
-
-
                 }
+
                 if (bullet.CollidesWith(theHelicopter))
                 {
                     bullets.Reset();
@@ -229,7 +216,7 @@ namespace BaseProject
                     firstPlayerTank.Reset();
                     bullets2.Reset();
                     healthbarFirst -= 60;
-                    this.Remove(lives);
+                   
 
                 }
                 if (bullet.CollidesWith(theHelicopter))
