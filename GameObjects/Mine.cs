@@ -15,11 +15,12 @@ namespace BaseProject
         Vector2 startPosition;
         
       
-        public Mine(Vector2 startPosition) : base("spr_mine")
+        public Mine(string assetNames, Vector2 startPosition) : base(assetNames)
         {
             origin = Center;
             this.position = startPosition;
             this.startPosition = startPosition;
+            
          }
         public override void HandleInput(InputHelper inputHelper)
         {
