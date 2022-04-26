@@ -17,7 +17,6 @@ namespace BaseProject
         Helicopter theHelicopter;
         GameObjectList explosion;
         GameObjectList score, walls;
-        GameObjectList score;
         GameObjectList minesPlayer1, minesPlayer2;
         Vector2 wallbounce, wallbounce2, positionPrevious;
         Vector2 minePosition;
