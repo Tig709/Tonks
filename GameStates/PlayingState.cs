@@ -9,7 +9,7 @@ namespace BaseProject
 {
     class PlayingState : GameObjectList
     {
-        
+        Upgrades upgrade;
         GameObjectList bullets, bullets2;
         TankFirstPlayer firstPlayerTank;
         TankSecondPlayer secondPlayerTank;
@@ -17,6 +17,7 @@ namespace BaseProject
         Helicopter theHelicopter;
         GameObjectList explosion;
         GameObjectList score;
+        GameObjectList minesPlayer1, minesPlayer2;
         Vector2 wallbounce, wallbounce2, positionPrevious;
         Vector2 minePosition;
         int frameCounter = 0;
