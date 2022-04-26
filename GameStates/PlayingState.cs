@@ -11,7 +11,7 @@ namespace BaseProject
     {
 
         Upgrades upgrade;
-        GameObjectList lives, lives1;
+    
         GameObjectList bullets, bullets2;
         TankFirstPlayer firstPlayerTank;
         TankSecondPlayer secondPlayerTank;
@@ -21,20 +21,21 @@ namespace BaseProject
         Vector2 wallbounce, wallbounce2, positionPrevious;
         GameObjectList score;
         GameObjectList minesPlayer1, minesPlayer2;
-        Vector2 wallbounce, wallbounce2;
-        Vector2 minePosition;
+              Vector2 minePosition;
+        int helipcoterHealth = 1000;
         int frameCounter = 0;
         int bulletTimer = 0;
         int explosionTimer = 0;
         int healthbarFirst = 100;
         int healthbarSecond = 100;
-        int roundCounter1, roundCounter2;
-        public int roundCounter1, roundCounter2;
+        public static int roundCounter1, roundCounter2;
         string[] assetNamesScore = { "text_0", "text_1", "text_2", "text_3", "text_dots", };
         string[] mineType = { "spr_mine", "spr_mine2" };
         GameObject score1, score2, scoreText;
 
-        public PlayingState()
+        public static int RoundCounterP1
+        {
+            get { return roundCounter1; }
             set { RoundCounterP1 = roundCounter1; }
         }
         public static int RoundCounterP2 { get { return roundCounter2; }
@@ -77,19 +78,6 @@ namespace BaseProject
             this.Add(score);
 
 
-            lives = new GameObjectList();
-            lives1 = new GameObjectList();
-         
-            string assetNames = "live_amount";
-
-            for (int iLives = 0; iLives < 6; iLives++)
-            {
-                lives.Add(new Lives(assetNames, new Vector2(20, 980)));
-                lives.Add(new Lives(assetNames, new Vector2(120, 980)));
-                lives1.Add(new Lives(assetNames, new Vector2(1800, 980)));
-                lives1.Add(new Lives(assetNames, new Vector2(1700, 980)));
-            }
-
 
 
 
@@ -98,34 +86,7 @@ namespace BaseProject
             this.Add(scoreText);
             this.Add(score2);
 
-            String[] assetName = { "unbreakable_wall" };
-            int startXPosition = 200,
-                startYPosition = 0,
-                nWallsPerRow = 6;
-            for (int iWallType = 0; iWallType < assetName.Length; iWallType++)
-                for (int iWall = 0; iWall < nWallsPerRow; iWall++)
-                {
-                    walls.Add(new UnbreakableWall(assetName[iWallType],
-                         new Vector2(startXPosition + iWall, startYPosition + iWallType)));
-                    walls.Add(new UnbreakableWall(assetName[iWallType],
-                                  new Vector2(startXPosition + iWall + 1500, startYPosition + iWallType + 800)));
-                    walls.Add(new UnbreakableWall(assetName[iWallType],
-                                  new Vector2(startXPosition + iWall + 800, startYPosition + iWallType + 400)));
-                    walls.Add(new UnbreakableWall(assetName[iWallType],
-                                  new Vector2(startXPosition + iWall + 1500, startYPosition + iWallType)));
-                    walls.Add(new UnbreakableWall(assetName[iWallType],
-                                  new Vector2(startXPosition + iWall, startYPosition + iWallType + 800)));
-                }
-            this.Add(walls);
-            this.Add(lives);
-                                  new Vector2(startXPosition + iWall + 1500, startYPosition + iWallType)));
-                    walls.Add(new UnbreakableWall(assetName[iWallType],
-                                  new Vector2(startXPosition + iWall, startYPosition + iWallType + 800)));
-                }
-            this.Add(walls);
-
-            this.Add(lives1);
-
+           
             theHelicopter = new Helicopter();
             this.Add(theHelicopter);
  
@@ -214,7 +175,7 @@ namespace BaseProject
 
             if (firstPlayerTank.CollidesWith(theHelicopter))
             {
-                this.Remove(lives);
+           
 
                 explosion.Add(new Explosion(new Vector2(firstPlayerTank.Position.X, firstPlayerTank.Position.Y)));
                 explosionTimer++;
@@ -226,7 +187,7 @@ namespace BaseProject
             }
             if (secondPlayerTank.CollidesWith(theHelicopter))
             {
-                this.Remove(lives1);
+               
                 explosion.Add(new Explosion(new Vector2(secondPlayerTank.Position.X, secondPlayerTank.Position.Y)));
                 explosionTimer++;
                 explosion.Visible = true;
@@ -253,17 +214,16 @@ namespace BaseProject
             {
 
 
-                    this.Remove(lives1);
 
 
 
 
                     healthbarSecond -= 60;
-                    this.Remove(lives1);
+
 
                     
                     
-                }
+                
                 if (bullet.CollidesWith(theHelicopter))
                 {
                     bullets.Reset();
@@ -303,7 +263,7 @@ namespace BaseProject
                     firstPlayerTank.Reset();
                     bullets2.Reset();
                     healthbarFirst -= 60;
-                    this.Remove(lives);
+                   
                     
 
                 }
