@@ -21,7 +21,7 @@ namespace BaseProject
         Vector2 wallbounce, wallbounce2, positionPrevious;
         GameObjectList score;
         GameObjectList minesPlayer1, minesPlayer2;
-              Vector2 minePosition;
+        Vector2 minePosition;
         int helipcoterHealth = 1000;
         int frameCounter = 0;
         int bulletTimer = 0;
@@ -82,7 +82,7 @@ namespace BaseProject
 
 
 
-
+            this.Add(score1);
             this.Add(scoreText);
             this.Add(score2);
 
@@ -238,18 +238,7 @@ namespace BaseProject
                 }
             }
 
-            if(healthbarFirst <= 0)
-            {
-                GameEnvironment.GameStateManager.SwitchTo("Dead2");
-                healthbarFirst = 100;
-                healthbarSecond = 100;
-            }
-            if(healthbarSecond <= 0)
-            {
-                GameEnvironment.GameStateManager.SwitchTo("Dead1");
-                healthbarSecond = 100;
-                healthbarFirst = 100;
-            }
+           
             if(helipcoterHealth <= 0)
             {
                 helipcoterHealth = 1000;
@@ -298,11 +287,13 @@ namespace BaseProject
 
             if (roundCounter2 == 3) {
                 //MOET NOG GEMAAKT WORDEN : WINSTATE VOOR PLAYER2, SPEL IS OVER ETC.
+                GameEnvironment.GameStateManager.SwitchTo("End");
             }
 
             if (roundCounter1 == 3)
             {
                 //MOET NOG GEMAAKT WORDEN : WINSTATE VOOR PLAYER1, SPEL IS OVER ETC.
+                GameEnvironment.GameStateManager.SwitchTo("End");
             }
 
             if (wall.CollidesWith(firstPlayerTank))
