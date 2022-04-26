@@ -272,31 +272,6 @@ namespace BaseProject
 
             }
 
-            if (healthbarFirst <= 0)
-            {
-                bullets.Reset();
-                bullets2.Reset();
-                firstPlayerTank.Reset();
-                secondPlayerTank.Reset();
-                GameEnvironment.GameStateManager.SwitchTo("winState_player_1");//dead veranderen naar end of round screen
-                healthbarFirst = 100;
-                healthbarSecond = 100;
-                roundCounter2++;
-              
-            }
-
-            if (healthbarSecond <= 0)
-            {
-                bullets2.Reset();
-                bullets.Reset();
-                firstPlayerTank.Reset();
-                secondPlayerTank.Reset();
-                GameEnvironment.GameStateManager.SwitchTo("winState_player_2");//dead veranderen naar end of round screen
-                healthbarSecond = 100;
-                healthbarFirst = 100;
-                roundCounter1++;
-            
-            }
 
             if (roundCounter2 == 3) {
                 //MOET NOG GEMAAKT WORDEN : WINSTATE VOOR PLAYER2, SPEL IS OVER ETC.
