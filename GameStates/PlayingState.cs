@@ -9,7 +9,7 @@ namespace BaseProject
 {
     class PlayingState : GameObjectList
     {
-
+        Upgrades upgrade;
         GameObjectList bullets, bullets2;
         TankFirstPlayer firstPlayerTank;
         TankSecondPlayer secondPlayerTank;
@@ -17,8 +17,10 @@ namespace BaseProject
         Helicopter theHelicopter;
         GameObjectList explosion;
         GameObjectList score, walls;
+        GameObjectList score;
+        GameObjectList minesPlayer1, minesPlayer2;
         Vector2 wallbounce, wallbounce2, positionPrevious;
-
+        Vector2 minePosition;
         int frameCounter = 0;
         int bulletTimer = 0;
         int explosionTimer = 0;
@@ -48,7 +50,9 @@ namespace BaseProject
 
         public PlayingState()
         {
+
             wallbounce = new Vector2(-50, 10);
+
             wallbounce2 = new Vector2(50, 10);
             positionPrevious = new Vector2();
 
@@ -61,12 +65,20 @@ namespace BaseProject
             pit = new SpriteGameObject("spr_pit");
             this.Add(pit);
 
+            upgrade = new Upgrades();
+            this.Add(upgrade);
 
             bullets = new GameObjectList();
             this.Add(bullets);
 
             bullets2 = new GameObjectList();
             this.Add(bullets2);
+
+            minesPlayer1 = new GameObjectList();
+            this.Add(minesPlayer1);
+
+            minesPlayer2 = new GameObjectList();
+            this.Add(minesPlayer2);
 
             firstPlayerTank = new TankFirstPlayer();
             this.Add(firstPlayerTank);
@@ -95,8 +107,10 @@ namespace BaseProject
 
             explosion = new GameObjectList();
             this.Add(explosion);
-
         }
+
+
+
         public override void HandleInput(InputHelper inputHelper)
         {
             base.HandleInput(inputHelper);
@@ -122,6 +136,18 @@ namespace BaseProject
                 ScreenShake();
                 bulletTimer = 0;
             }
+
+            if (inputHelper.KeyPressed(Keys.X))
+            {
+                minePosition = this.firstPlayerTank.position;
+                minesPlayer1.Add(new Mine(mineType[0],new Vector2(minePosition.X, minePosition.Y)));
+            }
+            if (inputHelper.KeyPressed(Keys.B))
+            {
+                minePosition = this.secondPlayerTank.position;
+                minesPlayer2.Add(new Mine(mineType[1],new Vector2(minePosition.X, minePosition.Y)));
+            }
+
             else
             {
                 if (frameCounter >= 6)
@@ -133,6 +159,10 @@ namespace BaseProject
                 }
             }
 
+
+            upgrade = new Upgrades();
+            this.Add(upgrade);
+            
         }
         public void ScreenShake()
         {
