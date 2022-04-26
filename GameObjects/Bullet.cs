@@ -41,6 +41,36 @@ namespace BaseProject
         }
         public override void Update(GameTime gameTime)
         {
+            foreach (UnbreakableWall wall in wall.Children)
+            {
+                if (this.CollidesWith(wall))
+                {
+                    if (Position.X < wall.Position.X)
+                    {
+                        Console.WriteLine("collision1");
+                        Velocity *= new Vector2(-1, 1);
+                        position.X = wall.Position.X - Width - wall.Width;
+                    }
+                    if (Position.X > wall.Position.X)
+                    {
+                        Console.WriteLine("collision2");
+                        Velocity *= new Vector2(-1, 1);
+                        position.X = wall.Position.X + Width + wall.Width;
+                    }
+                    /* if (Position.Y > wall.Position.Y)
+                     {
+                         Console.WriteLine("collision3");
+                         Velocity *= new Vector2(1, -1);
+                         position.Y = wall.Position.Y - Height - wall.Height;
+                     }
+                     if (Position.Y < wall.Position.Y)
+                     {
+                         Console.WriteLine("collision4");
+                         Velocity *= new Vector2(1, -1);
+                         position.Y = wall.Position.Y + Height + wall.Height;
+                     }*/
+                }
+            }
             base.Update(gameTime);
             WrapBullet();
             frameCounter++;
@@ -65,6 +95,5 @@ namespace BaseProject
                 velocity.Y *= -1;
             }
         }
-
     }
 }
