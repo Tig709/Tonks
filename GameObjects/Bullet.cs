@@ -11,20 +11,24 @@ namespace BaseProject
 
     class Bullet : RotatingSpriteGameObject
     {
+        GameObjectList wall;
         int frameCounter;
+        Vector2 positionPrevious;
         Vector2 startPosition;
         Vector2 startSnelheid;
+        Vector2 positionWall;
         float turningspeed = 1.57f;
 
-        public Bullet(Vector2 startPosition, Vector2 startSnelheid) : base("tank_bullet")
+        public Bullet(Vector2 startPosition, Vector2 startSnelheid, GameObjectList wall) : base("tank_bullet")
         {
-
+            this.wall = wall;
             origin = Center;
             this.position = startPosition;
             this.startPosition = startPosition;
             this.startSnelheid = startSnelheid;
             velocity += startSnelheid;
             AngularDirection = velocity;
+            positionPrevious = new Vector2();
 
         }
         public override void HandleInput(InputHelper inputHelper)
@@ -42,6 +46,7 @@ namespace BaseProject
         }
         public override void Update(GameTime gameTime)
         {
+            positionPrevious = position;
             base.Update(gameTime);
             WrapBullet();
             frameCounter++;
@@ -66,7 +71,18 @@ namespace BaseProject
                 velocity.Y *= -1;
             }
         }
-      
 
+        public void WrapWallBullet(Vector2 positionWall, int heightWall, int widthWall)
+        {
+            if (position.X - Width / 2 < positionWall.X - widthWall / 2 || position.X + Width / 2 > positionWall.X + widthWall / 2)
+            {
+                velocity.X *= -1;
+                Console.WriteLine("Collission Left or Right");
+            }
+            else if (position.Y - Height / 2 < positionWall.Y - heightWall / 2 || position.Y + Height / 2 > positionWall.Y + heightWall / 2)
+            {
+                velocity.Y *= -1;
+            }
+        }
     }
 }

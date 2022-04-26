@@ -67,6 +67,9 @@ namespace BaseProject
             upgrade = new Upgrades();
             this.Add(upgrade);
 
+            walls = new GameObjectList();
+            this.Add(walls);
+
             bullets = new GameObjectList();
             this.Add(bullets);
 
@@ -93,13 +96,10 @@ namespace BaseProject
             this.Add(score1);
             this.Add(scoreText);
             this.Add(score2);
-            walls = new GameObjectList();
-            this.Add(walls);
-
-            walls.Add(new UnbreakableWall("unbreakable_wall",new Vector2(235,0)));
-            walls.Add(new UnbreakableWall("unbreakable_wall", new Vector2(1685, 0)));
-            walls.Add(new UnbreakableWall("unbreakable_wall", new Vector2(235, 800)));
-            walls.Add(new UnbreakableWall("unbreakable_wall", new Vector2(1685, 800)));
+            walls.Add(new UnbreakableWall("unbreakable_wall",new Vector2(265, 128)));
+            walls.Add(new UnbreakableWall("unbreakable_wall", new Vector2(1715, 128)));
+            walls.Add(new UnbreakableWall("unbreakable_wall", new Vector2(265, 928)));
+            walls.Add(new UnbreakableWall("unbreakable_wall", new Vector2(1715, 928)));
 
             theHelicopter = new Helicopter();
             this.Add(theHelicopter);
@@ -115,7 +115,7 @@ namespace BaseProject
             base.HandleInput(inputHelper);
             if (inputHelper.KeyPressed(Keys.L) && bulletTimer >= 100)
             {
-                bullets.Add(new Bullet(new Vector2(firstPlayerTank.Position.X, firstPlayerTank.Position.Y), new Vector2(firstPlayerTank.AngularDirection.X * 500, firstPlayerTank.AngularDirection.Y * 500)));
+                bullets.Add(new Bullet(new Vector2(firstPlayerTank.Position.X, firstPlayerTank.Position.Y), new Vector2(firstPlayerTank.AngularDirection.X * 500, firstPlayerTank.AngularDirection.Y * 500), walls));
                 ScreenShake();
                 bulletTimer = 0;
 
@@ -131,7 +131,7 @@ namespace BaseProject
             }
             if (inputHelper.KeyPressed(Keys.Space) && bulletTimer >= 100)
             {
-                bullets2.Add(new Bullet(new Vector2(secondPlayerTank.Position.X, secondPlayerTank.Position.Y), new Vector2(secondPlayerTank.AngularDirection.X * 500, secondPlayerTank.AngularDirection.Y * 500)));
+                bullets2.Add(new Bullet(new Vector2(secondPlayerTank.Position.X, secondPlayerTank.Position.Y), new Vector2(secondPlayerTank.AngularDirection.X * 500, secondPlayerTank.AngularDirection.Y * 500), walls));
                 ScreenShake();
                 bulletTimer = 0;
             }
@@ -167,7 +167,6 @@ namespace BaseProject
 
         public override void Update(GameTime gameTime)
         {
-
             base.Update(gameTime);
             frameCounter++;
             explosionTimer++;
@@ -240,6 +239,14 @@ namespace BaseProject
                         healthbarSecond -= 60;
                     }
 
+                    foreach (UnbreakableWall wall in walls.Children)
+                    {
+                        if (bullet.CollidesWith(wall))
+                        {
+                            bullet.WrapWallBullet(wall.position, wall.Height, wall.Width);
+                        }
+                    }
+
                     if (bullet.CollidesWith(theHelicopter))
                     {
                         bullet.Reset();
@@ -264,6 +271,13 @@ namespace BaseProject
                 if (wallHealth <= 0)
                 {
                     breakableWall.Visible = false;
+                }
+                foreach (UnbreakableWall wall in walls.Children)
+                {
+                    if (bullet2.CollidesWith(wall))
+                    {
+                        bullet2.WrapWallBullet(wall.position, wall.Height, wall.Width);
+                    }
                 }
             }
 
