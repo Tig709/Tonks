@@ -29,6 +29,7 @@ namespace BaseProject
         int helipcoterHealth = 1000;
         public static int roundCounter1, roundCounter2;
         string[] assetNamesScore = { "text_0", "text_1", "text_2", "text_3", "text_dots", };
+        string[] mineType = { "spr_mine", "spr_mine2" };
         GameObject score1, score2, scoreText;
 
         public static int RoundCounterP1 { get { return roundCounter1; }
@@ -112,6 +113,18 @@ namespace BaseProject
                 ScreenShake();
                 bulletTimer = 0;
             }
+
+            if (inputHelper.KeyPressed(Keys.X))
+            {
+                minePosition = this.firstPlayerTank.position;
+                minesPlayer1.Add(new Mine(mineType[0],new Vector2(minePosition.X, minePosition.Y)));
+            }
+            if (inputHelper.KeyPressed(Keys.B))
+            {
+                minePosition = this.secondPlayerTank.position;
+                minesPlayer2.Add(new Mine(mineType[1],new Vector2(minePosition.X, minePosition.Y)));
+            }
+
             else
             {
                 if (frameCounter >= 6)

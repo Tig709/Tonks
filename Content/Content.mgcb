@@ -169,7 +169,7 @@
 /processorParam:TextureFormat=Color
 /build:spr_mine.png
 
-#begin spr_mine.png
+#begin spr_mine2.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -179,7 +179,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:spr_mine.png
+/build:spr_mine2.png
 
 #begin tank_bullet.png
 /importer:TextureImporter
