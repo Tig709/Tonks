@@ -16,15 +16,31 @@ namespace BaseProject
         SpriteGameObject wall, breakableWall, pit;
         Helicopter theHelicopter;
         GameObjectList explosion;
+        GameObjectList score;
         Vector2 wallbounce, wallbounce2, positionPrevious;
         int frameCounter = 0;
         int bulletTimer = 0;
         int explosionTimer = 0;
         int healthbarFirst = 100;
         int healthbarSecond = 100;
-        int roundCounter1, roundCounter2;
         int helipcoterHealth = 1000;
         int wallHealth = 180;
+        public static int roundCounter1, roundCounter2;
+        string[] assetNamesScore = { "text_0", "text_1", "text_2", "text_3", "text_dots", };
+        string[] mineType = { "spr_mine", "spr_mine2" };
+        GameObject score1, score2, scoreText;
+
+        public static int RoundCounterP1
+        {
+            get { return roundCounter1; }
+            set { RoundCounterP1 = roundCounter1; }
+        }
+        public static int RoundCounterP2
+        {
+            get { return roundCounter2; }
+
+            set { RoundCounterP2 = roundCounter2; }
+        }
 
 
         public PlayingState()
@@ -53,6 +69,15 @@ namespace BaseProject
 
             secondPlayerTank = new TankSecondPlayer();
             this.Add(secondPlayerTank);
+            score = new GameObjectList();
+            this.Add(score);
+
+            score1 = new Score(assetNamesScore[roundCounter1], new Vector2(GameEnvironment.Screen.X / 2 - 50, 50));
+            scoreText = new Score(assetNamesScore[4], new Vector2(GameEnvironment.Screen.X / 2, 50));
+            score2 = new Score(assetNamesScore[roundCounter2], new Vector2(GameEnvironment.Screen.X / 2 + 50, 50));
+            this.Add(score1);
+            this.Add(scoreText);
+            this.Add(score2);
 
             theHelicopter = new Helicopter();
             this.Add(theHelicopter);
@@ -194,15 +219,29 @@ namespace BaseProject
 
             if (healthbarFirst <= 0)
             {
-                GameEnvironment.GameStateManager.SwitchTo("winState_player_1");
+                GameEnvironment.GameStateManager.SwitchTo("End");
+                this.Remove(score2);
+                roundCounter2++;
+
+                score.Add(new Score(assetNamesScore[roundCounter2], new Vector2(GameEnvironment.Screen.X / 2 + 50, 50)));
+                this.Add(score);
                 healthbarFirst = 100;
                 healthbarSecond = 100;
+                firstPlayerTank.Reset();
+                secondPlayerTank.Reset();
             }
             if (healthbarSecond <= 0)
             {
-                GameEnvironment.GameStateManager.SwitchTo("winState_player_2");
+                GameEnvironment.GameStateManager.SwitchTo("End");
+                this.Remove(score1);
+                roundCounter1++;
+
+                score.Add(new Score(assetNamesScore[roundCounter1], new Vector2(GameEnvironment.Screen.X / 2 - 50, 50)));
+                this.Add(score);
                 healthbarSecond = 100;
                 healthbarFirst = 100;
+                firstPlayerTank.Reset();
+                secondPlayerTank.Reset();
             }
             if (helipcoterHealth <= 0)
             {
