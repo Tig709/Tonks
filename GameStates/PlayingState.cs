@@ -90,9 +90,9 @@ namespace BaseProject
         public override void HandleInput(InputHelper inputHelper)
         {
             base.HandleInput(inputHelper);
-            if(inputHelper.KeyPressed(Keys.L) && bulletTimer >= 100)
+            if (inputHelper.KeyPressed(Keys.L) && bulletTimer >= 100)
             {
-                bullets.Add(new Bullet(new Vector2(firstPlayerTank.Position.X,firstPlayerTank.Position.Y), new Vector2(firstPlayerTank.AngularDirection.X * 500, firstPlayerTank.AngularDirection.Y * 500)));
+                bullets.Add(new Bullet(new Vector2(firstPlayerTank.Position.X, firstPlayerTank.Position.Y), new Vector2(firstPlayerTank.AngularDirection.X * 500, firstPlayerTank.AngularDirection.Y * 500)));
                 ScreenShake();
                 bulletTimer = 0;
 
@@ -112,18 +112,6 @@ namespace BaseProject
                 ScreenShake();
                 bulletTimer = 0;
             }
-
-            if (inputHelper.KeyPressed(Keys.X))
-            {
-                minePosition = this.firstPlayerTank.position;
-                minesPlayer1.Add(new Mine(new Vector2(minePosition.X, minePosition.Y)));
-            }
-            if (inputHelper.KeyPressed(Keys.B))
-            {
-                minePosition = this.secondPlayerTank.position;
-                minesPlayer2.Add(new Mine(new Vector2(minePosition.X, minePosition.Y)));
-            }
-
             else
             {
                 if (frameCounter >= 6)
@@ -135,12 +123,7 @@ namespace BaseProject
                 }
             }
 
-
-            upgrade = new Upgrades();
-            this.Add(upgrade);
-
         }
-    
         public void ScreenShake()
         {
             velocity.X = 1000;
@@ -167,7 +150,7 @@ namespace BaseProject
 
             if (firstPlayerTank.CollidesWith(theHelicopter))
             {
-                
+               
 
                 explosion.Add(new Explosion(new Vector2(firstPlayerTank.Position.X, firstPlayerTank.Position.Y)));
                 explosionTimer++;
@@ -179,7 +162,7 @@ namespace BaseProject
             }
             if (secondPlayerTank.CollidesWith(theHelicopter))
             {
-               
+                
                 explosion.Add(new Explosion(new Vector2(secondPlayerTank.Position.X, secondPlayerTank.Position.Y)));
                 explosionTimer++;
                 explosion.Visible = true;
@@ -202,28 +185,44 @@ namespace BaseProject
                 GameEnvironment.GameStateManager.SwitchTo("Tie");
                 bullets.Reset();
             }
-            foreach (Bullet bullet1 in bullets.Children)
+            foreach (Bullet bullet in bullets.Children)
             {
-                bullet1.Reset();
-                healthbarSecond -= 60;
 
-                if (bullet1.CollidesWith(theHelicopter))
+
+                if (bullet.CollidesWith(secondPlayerTank))
+                {
+                    secondPlayerTank.Reset();
+                    bullets.Reset();
+                    healthbarSecond -= 60;
+                   
+
+
+
+
+                }
+                if (bullet.CollidesWith(theHelicopter))
                 {
                     bullets.Reset();
                     helipcoterHealth -= 60;
                     theHelicopter.Scale -= 0.5f;
                 }
+
+
                 else
                 {
                     theHelicopter.Scale = 1;
                 }
             }
 
-
-
-            if (helipcoterHealth <= 0)
+            if (healthbarFirst <= 0)
             {
-               
+                GameEnvironment.GameStateManager.SwitchTo("winState_player_1");
+                healthbarFirst = 100;
+                healthbarSecond = 100;
+            }
+            if (healthbarSecond <= 0)
+            {
+                GameEnvironment.GameStateManager.SwitchTo("winState_player_2");
                 healthbarSecond = 100;
                 healthbarFirst = 100;
             }
@@ -242,7 +241,6 @@ namespace BaseProject
                     healthbarFirst -= 60;
                     
 
-
                 }
                 if (bullet.CollidesWith(theHelicopter))
                 {
@@ -257,7 +255,7 @@ namespace BaseProject
 
             }
 
-           /* if (healthbarFirst <= 0)
+            if (healthbarFirst <= 0)
             {
                 GameEnvironment.GameStateManager.SwitchTo("winState_player_1");//dead veranderen naar end of round screen
                 healthbarFirst = 100;
@@ -271,9 +269,9 @@ namespace BaseProject
                 healthbarSecond = 100;
                 healthbarFirst = 100;
                 roundCounter1++;
-            }*/
+            }
 
-            if (roundCounter2 == 3) 
+            if (roundCounter2 == 3)
             {
                 //MOET NOG GEMAAKT WORDEN : WINSTATE VOOR PLAYER2, SPEL IS OVER ETC.
             }
