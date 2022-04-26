@@ -65,6 +65,17 @@ namespace BaseProject
                 velocity.Y *= -1;
             }
         }
+       /* public void wallWrap()
+        {
+            if (position.X > PlayingState.wall.Position.X)
+            {
+                velocity.X *= -1;
+            }
+            if (position.Y < PlayingState.wall.Position.Y)
+            {
+                velocity.Y *= -1;
+            }
+        }*/
 
     }
 }

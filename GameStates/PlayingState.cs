@@ -163,32 +163,33 @@ namespace BaseProject
 
                 if (bullet.CollidesWith(breakableWall))
                 {
-                    bullets.Reset();
-                    wallHealth = -60; 
+                    bullet.Reset();
+                    wallHealth = -60;
                 }
-                if(wallHealth >= 0)
+                if (wallHealth <= 0)
                 {
                     breakableWall.Visible = false;
                 }
                 if (bullet.CollidesWith(secondPlayerTank))
                 {
-                    secondPlayerTank.Reset();
-                    bullets.Reset();
+                   /* secondPlayerTank.Reset();*/
+                    bullet.Reset();
                     healthbarSecond -= 60;
                 }
 
                 if (bullet.CollidesWith(theHelicopter))
                 {
-                    bullets.Reset();
+                    bullet.Reset();
                     helipcoterHealth -= 60;
                     theHelicopter.Scale -= 0.5f;
                 }
-
+                
 
                 else
                 {
                     theHelicopter.Scale = 1;
                 }
+              
             }
 
             if (healthbarFirst <= 0)
@@ -213,15 +214,15 @@ namespace BaseProject
             {
                 if (bullet.CollidesWith(firstPlayerTank))
                 {
-                    firstPlayerTank.Reset();
-                    bullets2.Reset();
+                    /*firstPlayerTank.Reset();*/
+                    bullet.Reset();
                     healthbarFirst -= 60;
                    
 
                 }
                 if (bullet.CollidesWith(theHelicopter))
                 {
-                    bullets.Reset();
+                    bullet.Reset();
                     helipcoterHealth -= 60;
                     theHelicopter.Scale -= 0.5f;
                 }
@@ -234,18 +235,28 @@ namespace BaseProject
 
             if (healthbarFirst <= 0)
             {
+                bullets.Reset();
+                bullets2.Reset();
+                firstPlayerTank.Reset();
+                secondPlayerTank.Reset();
                 GameEnvironment.GameStateManager.SwitchTo("winState_player_1");//dead veranderen naar end of round screen
                 healthbarFirst = 100;
                 healthbarSecond = 100;
                 roundCounter2++;
+              
             }
 
             if (healthbarSecond <= 0)
             {
+                bullets2.Reset();
+                bullets.Reset();
+                firstPlayerTank.Reset();
+                secondPlayerTank.Reset();
                 GameEnvironment.GameStateManager.SwitchTo("winState_player_2");//dead veranderen naar end of round screen
                 healthbarSecond = 100;
                 healthbarFirst = 100;
                 roundCounter1++;
+            
             }
 
             if (roundCounter2 == 3) {
