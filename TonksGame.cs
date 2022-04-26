@@ -7,11 +7,11 @@ namespace BaseProject
 {
     public class TonksGame : GameEnvironment
     {
-        int sec = 0;
+        /*int sec = 0;*/
         protected override void LoadContent()
         {
             base.LoadContent();
-
+            /*GraphicsDebug.*/
             screen = new Point(1920, 1080);
             ApplyResolutionSettings();
 
