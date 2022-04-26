@@ -92,7 +92,7 @@ namespace BaseProject
             base.HandleInput(inputHelper);
             if (inputHelper.KeyPressed(Keys.L) && bulletTimer >= 100)
             {
-                bullets.Add(new Bullet(new Vector2(firstPlayerTank.Position.X, firstPlayerTank.Position.Y), new Vector2(firstPlayerTank.AngularDirection.X * 500, firstPlayerTank.AngularDirection.Y * 500)));
+                bullets.Add(new Bullet(new Vector2(firstPlayerTank.Position.X, firstPlayerTank.Position.Y), new Vector2(firstPlayerTank.AngularDirection.X * 500, firstPlayerTank.AngularDirection.Y * 500), wall));
                 ScreenShake();
                 bulletTimer = 0;
 
@@ -108,7 +108,7 @@ namespace BaseProject
             }
             if (inputHelper.KeyPressed(Keys.Space) && bulletTimer >= 100)
             {
-                bullets2.Add(new Bullet(new Vector2(secondPlayerTank.Position.X, secondPlayerTank.Position.Y), new Vector2(secondPlayerTank.AngularDirection.X * 500, secondPlayerTank.AngularDirection.Y * 500)));
+                bullets2.Add(new Bullet(new Vector2(secondPlayerTank.Position.X, secondPlayerTank.Position.Y), new Vector2(secondPlayerTank.AngularDirection.X * 500, secondPlayerTank.AngularDirection.Y * 500), wall));
                 ScreenShake();
                 bulletTimer = 0;
             }
@@ -194,11 +194,10 @@ namespace BaseProject
                     secondPlayerTank.Reset();
                     bullets.Reset();
                     healthbarSecond -= 60;
-                   
-
-
-
-
+                }
+                if (bullet.CollidesWith(wall))
+                {
+                    bullet.WrapBulletWall();
                 }
                 if (bullet.CollidesWith(theHelicopter))
                 {
