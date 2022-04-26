@@ -55,14 +55,7 @@ namespace BaseProject
                 velocity = AngularDirection * acceleration;
             if (inputHelper.IsKeyDown(Keys.S))
                 velocity = -AngularDirection * acceleration;
-          /*  if (inputHelper.KeyPressed(Keys.E))
-            {
-                Angle += turningspeed;
-            }
-            if (inputHelper.KeyPressed(Keys.Q))
-            {
-                Angle -= turningspeed;
-            }*/
+        
         }
         public void WrapScreen()
         {

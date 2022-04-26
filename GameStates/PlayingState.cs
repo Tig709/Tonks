@@ -14,7 +14,6 @@ namespace BaseProject
         TankFirstPlayer firstPlayerTank;
         TankSecondPlayer secondPlayerTank;
         SpriteGameObject wall;
-        /*GameObjectList walls;*/
         Helicopter theHelicopter;
         GameObjectList explosion;
         Vector2 wallbounce, wallbounce2, positionPrevious;
@@ -53,7 +52,7 @@ namespace BaseProject
 
             lives = new GameObjectList();
             lives1 = new GameObjectList();
-            /*walls = new GameObjectList();*/
+         
             string assetNames = "live_amount";
 
             for (int iLives = 0; iLives < 6; iLives++)
@@ -66,25 +65,7 @@ namespace BaseProject
 
 
 
-           /* String[] assetName = { "unbreakable_wall" };
-            int startXPosition = 200,
-                startYPosition = 0,
-                nWallsPerRow = 6;
-            for (int iWallType = 0; iWallType < assetName.Length; iWallType++)
-                for (int iWall = 0; iWall < nWallsPerRow; iWall++)
-                {
-                    walls.Add(new UnbreakableWall(assetName[iWallType],
-                         new Vector2(startXPosition + iWall, startYPosition + iWallType)));
-                    walls.Add(new UnbreakableWall(assetName[iWallType],
-                                  new Vector2(startXPosition + iWall + 1500, startYPosition + iWallType + 800)));
-                    walls.Add(new UnbreakableWall(assetName[iWallType],
-                                  new Vector2(startXPosition + iWall + 800, startYPosition + iWallType + 400)));
-                    walls.Add(new UnbreakableWall(assetName[iWallType],
-                                  new Vector2(startXPosition + iWall + 1500, startYPosition + iWallType)));
-                    walls.Add(new UnbreakableWall(assetName[iWallType],
-                                  new Vector2(startXPosition + iWall, startYPosition + iWallType + 800)));
-                }
-            this.Add(walls);*/
+
 
             this.Add(lives);
             this.Add(lives1);
@@ -293,14 +274,10 @@ namespace BaseProject
             {
                 if (firstPlayerTank.Position.X <= wall.Position.X || firstPlayerTank.Position.X >= wall.Position.X)
                 {
-                    /*firstPlayerTank.Position = firstPlayerTank.Position + wallbounce;*/
+                
                     firstPlayerTank.WallCorrect();
                 }
-               /* else if (firstPlayerTank.Position.X >= wall.Position.X)
-                {
-                    *//*firstPlayerTank.Position = firstPlayerTank.Position + wallbounce2;*//*
-                    firstPlayerTank.WallCorrect();
-                }*/
+  
             }
             else if (wall.CollidesWith(secondPlayerTank))
             {
@@ -308,38 +285,10 @@ namespace BaseProject
                 {
                     secondPlayerTank.WallCorrect();
                 }
-            /*    if (secondPlayerTank.Position.X <= wall.Position.X)
-                {
-                    secondPlayerTank.Position = secondPlayerTank.Position + wallbounce;
-                }*/
+    
             }
 
-            /* foreach (UnbreakableWall wall in walls.Children)
-             {
-                 if (wall.CollidesWith(firstPlayerTank))
-                 {
-                     if (firstPlayerTank.Position.X <= wall.Position.X)
-                     {
-                         firstPlayerTank.Position = firstPlayerTank.Position + wallbounce;
-                     }
-                     else if (firstPlayerTank.Position.X >= wall.Position.X)
-                     {
-                         firstPlayerTank.Position = firstPlayerTank.Position + wallbounce2;
-                     }
-                 }
-
-                 else if (wall.CollidesWith(secondPlayerTank))
-                 {
-                     if (secondPlayerTank.Position.X >= wall.Position.X)
-                     {
-                         secondPlayerTank.Position = secondPlayerTank.Position + wallbounce2;
-                     }
-                     if (secondPlayerTank.Position.X <= wall.Position.X)
-                     {
-                         secondPlayerTank.Position = secondPlayerTank.Position + wallbounce;
-                     }
-                 }
-             }*/
+          
 
 
         }

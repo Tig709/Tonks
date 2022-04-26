@@ -21,12 +21,7 @@ namespace BaseProject
        
         public TankFirstPlayer() : base("tankspritesRed")
         {
-           /* player1 = new SpriteGameObject("tankspritesRed");
-            player2 = new SpriteGameObject("tanksprites");
-            Add(player1);
-            Add(player2);
-            player1.Position = new Vector2(300, 200);
-            player2.Position = new Vector2(50, 100);*/
+
             startPosition = new Vector2(100,100); 
             accelerationLeft = new Vector2(-10, 0);
             accelerationRight = new Vector2(10, 0);
