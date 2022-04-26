@@ -9,6 +9,8 @@ namespace BaseProject
 {
     class PlayingState : GameObjectList
     {
+
+        Upgrades upgrade;
         GameObjectList lives, lives1;
         GameObjectList bullets, bullets2;
         TankFirstPlayer firstPlayerTank;
@@ -17,18 +19,32 @@ namespace BaseProject
         Helicopter theHelicopter;
         GameObjectList explosion;
         Vector2 wallbounce, wallbounce2, positionPrevious;
+        GameObjectList score;
+        GameObjectList minesPlayer1, minesPlayer2;
+        Vector2 wallbounce, wallbounce2;
+        Vector2 minePosition;
         int frameCounter = 0;
         int bulletTimer = 0;
         int explosionTimer = 0;
         int healthbarFirst = 100;
         int healthbarSecond = 100;
         int roundCounter1, roundCounter2;
-        int helipcoterHealth = 1000;
+        public int roundCounter1, roundCounter2;
+        string[] assetNamesScore = { "text_0", "text_1", "text_2", "text_3", "text_dots", };
+        string[] mineType = { "spr_mine", "spr_mine2" };
+        GameObject score1, score2, scoreText;
 
+        public PlayingState()
+            set { RoundCounterP1 = roundCounter1; }
+        }
+        public static int RoundCounterP2 { get { return roundCounter2; }
+
+            set { RoundCounterP2 = roundCounter2; }
+        }
 
         public PlayingState()
         {
-            wallbounce = new Vector2(-50, 10);
+
             wallbounce2 = new Vector2(50, 10);
             positionPrevious = new Vector2();
 
@@ -36,11 +52,20 @@ namespace BaseProject
             wall = new SpriteGameObject("spr_walls");
             this.Add(wall);
 
+            upgrade = new Upgrades();
+            this.Add(upgrade);
+
             bullets = new GameObjectList();
             this.Add(bullets);
 
             bullets2 = new GameObjectList();
             this.Add(bullets2);
+
+            minesPlayer1 = new GameObjectList();
+            this.Add(minesPlayer1);
+
+            minesPlayer2 = new GameObjectList();
+            this.Add(minesPlayer2);
 
             firstPlayerTank = new TankFirstPlayer();
             this.Add(firstPlayerTank);
@@ -48,6 +73,8 @@ namespace BaseProject
             secondPlayerTank = new TankSecondPlayer();
             this.Add(secondPlayerTank);
 
+           score = new GameObjectList();
+            this.Add(score);
 
 
             lives = new GameObjectList();
@@ -67,7 +94,36 @@ namespace BaseProject
 
 
 
+
+            this.Add(scoreText);
+            this.Add(score2);
+
+            String[] assetName = { "unbreakable_wall" };
+            int startXPosition = 200,
+                startYPosition = 0,
+                nWallsPerRow = 6;
+            for (int iWallType = 0; iWallType < assetName.Length; iWallType++)
+                for (int iWall = 0; iWall < nWallsPerRow; iWall++)
+                {
+                    walls.Add(new UnbreakableWall(assetName[iWallType],
+                         new Vector2(startXPosition + iWall, startYPosition + iWallType)));
+                    walls.Add(new UnbreakableWall(assetName[iWallType],
+                                  new Vector2(startXPosition + iWall + 1500, startYPosition + iWallType + 800)));
+                    walls.Add(new UnbreakableWall(assetName[iWallType],
+                                  new Vector2(startXPosition + iWall + 800, startYPosition + iWallType + 400)));
+                    walls.Add(new UnbreakableWall(assetName[iWallType],
+                                  new Vector2(startXPosition + iWall + 1500, startYPosition + iWallType)));
+                    walls.Add(new UnbreakableWall(assetName[iWallType],
+                                  new Vector2(startXPosition + iWall, startYPosition + iWallType + 800)));
+                }
+            this.Add(walls);
             this.Add(lives);
+                                  new Vector2(startXPosition + iWall + 1500, startYPosition + iWallType)));
+                    walls.Add(new UnbreakableWall(assetName[iWallType],
+                                  new Vector2(startXPosition + iWall, startYPosition + iWallType + 800)));
+                }
+            this.Add(walls);
+
             this.Add(lives1);
 
             theHelicopter = new Helicopter();
@@ -75,8 +131,10 @@ namespace BaseProject
  
             explosion = new GameObjectList();
             this.Add(explosion);
-
         }
+
+
+
         public override void HandleInput(InputHelper inputHelper)
         {
             base.HandleInput(inputHelper);
@@ -102,6 +160,18 @@ namespace BaseProject
                 ScreenShake();
                 bulletTimer = 0;
             }
+
+            if (inputHelper.KeyPressed(Keys.X))
+            {
+                minePosition = this.firstPlayerTank.position;
+                minesPlayer1.Add(new Mine(mineType[0],new Vector2(minePosition.X, minePosition.Y)));
+            }
+            if (inputHelper.KeyPressed(Keys.B))
+            {
+                minePosition = this.secondPlayerTank.position;
+                minesPlayer2.Add(new Mine(mineType[1],new Vector2(minePosition.X, minePosition.Y)));
+            }
+
             else
             {
                 if (frameCounter >= 6)
@@ -113,6 +183,10 @@ namespace BaseProject
                 }
             }
 
+
+            upgrade = new Upgrades();
+            this.Add(upgrade);
+            
         }
         public void ScreenShake()
         {
@@ -179,16 +253,16 @@ namespace BaseProject
             {
 
 
-                if (bullet.CollidesWith(secondPlayerTank))
-                {
-                    secondPlayerTank.Reset();
-                    bullets.Reset();
-                    healthbarSecond -= 60;
                     this.Remove(lives1);
 
 
 
 
+                    healthbarSecond -= 60;
+                    this.Remove(lives1);
+
+                    
+                    
                 }
                 if (bullet.CollidesWith(theHelicopter))
                 {
@@ -204,19 +278,19 @@ namespace BaseProject
                 }
             }
 
-            if (healthbarFirst <= 0)
+            if(healthbarFirst <= 0)
             {
-                GameEnvironment.GameStateManager.SwitchTo("winState_player_1");
+                GameEnvironment.GameStateManager.SwitchTo("Dead2");
                 healthbarFirst = 100;
                 healthbarSecond = 100;
             }
-            if (healthbarSecond <= 0)
+            if(healthbarSecond <= 0)
             {
-                GameEnvironment.GameStateManager.SwitchTo("winState_player_2");
+                GameEnvironment.GameStateManager.SwitchTo("Dead1");
                 healthbarSecond = 100;
                 healthbarFirst = 100;
             }
-            if (helipcoterHealth <= 0)
+            if(helipcoterHealth <= 0)
             {
                 helipcoterHealth = 1000;
                 theHelicopter.Velocity = new Vector2(0, 0);
@@ -230,6 +304,7 @@ namespace BaseProject
                     bullets2.Reset();
                     healthbarFirst -= 60;
                     this.Remove(lives);
+                    
 
                 }
                 if (bullet.CollidesWith(theHelicopter))
@@ -288,12 +363,13 @@ namespace BaseProject
     
             }
 
-          
+
+
 
 
         }
     }
-        
-    }
-    
+
+}
+
 
