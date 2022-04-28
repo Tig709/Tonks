@@ -31,11 +31,11 @@ namespace BaseProject
             texts = new GameObjectList();
             this.Add(texts);
 
-            texts.Add(new Text("start", 0));
+            texts.Add(new Text("play", 0));
             texts.Add(new Text("settings", 1));
             texts.Add(new Text("map", 2));
             texts.Add(new Text("exit", 3));
-            texts.Add(new Text("startTransparent", 4));
+            texts.Add(new Text("playTransparent", 4));
             texts.Add(new Text("settingsTransparent", 5));
             texts.Add(new Text("mapTransparent", 6));
             texts.Add(new Text("exitTransparent", 7));
@@ -86,6 +86,14 @@ namespace BaseProject
                     }
                 } else
                     button.selected = false;
+
+                foreach(Text text in texts.Children)
+                {
+                    if(button.buttonIndex == text.textIndex)
+                    {
+                        text.position = button.position;
+                    }
+                }
             }
         }
     }
