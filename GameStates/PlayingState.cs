@@ -14,6 +14,7 @@ namespace BaseProject
         TankFirstPlayer firstPlayerTank;
         TankSecondPlayer secondPlayerTank;
         SpriteGameObject wall, breakableWall, pit;
+        Warning theWarning;
         Helicopter theHelicopter;
         GameObjectList explosion;
         GameObjectList score, walls;
@@ -87,8 +88,11 @@ namespace BaseProject
 
             secondPlayerTank = new TankSecondPlayer();
             this.Add(secondPlayerTank);
+            
             score = new GameObjectList();
             this.Add(score);
+
+            
 
             score1 = new Score(assetNamesScore[roundCounter1], new Vector2(GameEnvironment.Screen.X / 2 - 50, 50));
             scoreText = new Score(assetNamesScore[4], new Vector2(GameEnvironment.Screen.X / 2, 50));
@@ -103,6 +107,9 @@ namespace BaseProject
 
             theHelicopter = new Helicopter();
             this.Add(theHelicopter);
+
+            theWarning = new Warning();
+            this.Add(theWarning);
 
             explosion = new GameObjectList();
             this.Add(explosion);
@@ -171,6 +178,16 @@ namespace BaseProject
             frameCounter++;
             explosionTimer++;
             bulletTimer++;
+            theWarning.position.X = theHelicopter.position.X;
+
+            if (theHelicopter.position.Y > 0 - theHelicopter.Height / 2 && theHelicopter.position.Y < GameEnvironment.Screen.Y + theHelicopter.Height / 2)
+            {
+                Console.WriteLine(theHelicopter.position.Y);
+                theWarning.helicopterOnScreen = true;
+            } else
+            {
+                theWarning.helicopterOnScreen = false;
+            }
 
             if (GameEnvironment.Screen.X > 400)
             {
@@ -190,6 +207,7 @@ namespace BaseProject
                 explosion.Visible = true;
                 healthbarFirst -= 90;
                 theHelicopter.Reset();
+                theWarning.helicopterOnScreen = false;
                 ScreenShake();
 
             }
@@ -201,6 +219,7 @@ namespace BaseProject
                 explosion.Visible = true;
                 healthbarSecond -= 90;
                 theHelicopter.Reset();
+                theWarning.helicopterOnScreen = false;
                 ScreenShake();
             }
 
@@ -252,10 +271,7 @@ namespace BaseProject
                         bullet.Reset();
                         helipcoterHealth -= 60;
                         theHelicopter.Scale -= 0.5f;
-                    }
-
-
-                    else
+                    } else
                     {
                         theHelicopter.Scale = 1;
                     }

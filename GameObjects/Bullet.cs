@@ -77,7 +77,6 @@ namespace BaseProject
             if (position.X - Width / 2 < positionWall.X - widthWall / 2 || position.X + Width / 2 > positionWall.X + widthWall / 2)
             {
                 velocity.X *= -1;
-                Console.WriteLine("Collission Left or Right");
             }
             else if (position.Y - Height / 2 < positionWall.Y - heightWall / 2 || position.Y + Height / 2 > positionWall.Y + heightWall / 2)
             {
