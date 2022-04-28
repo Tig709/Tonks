@@ -265,6 +265,12 @@
 /processorParam:TextureFormat=Color
 /build:settingsTransparent.png
 
+#begin shoot.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:shoot.mp3
+
 #begin spr_background.png
 /importer:TextureImporter
 /processor:TextureProcessor

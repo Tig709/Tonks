@@ -56,7 +56,6 @@ namespace BaseProject
             wallbounce2 = new Vector2(50, 10);
             /*positionPrevious = new Vector2();*/
 
-
             this.Add(new SpriteGameObject("spr_background"));
            /* wall = new SpriteGameObject("spr_walls");
             this.Add(wall);*/
@@ -122,6 +121,7 @@ namespace BaseProject
             base.HandleInput(inputHelper);
             if (inputHelper.KeyPressed(Keys.L) && bulletTimer >= 100)
             {
+                
                 bullets.Add(new Bullet(new Vector2(firstPlayerTank.Position.X, firstPlayerTank.Position.Y), new Vector2(firstPlayerTank.AngularDirection.X * 500, firstPlayerTank.AngularDirection.Y * 500), walls));
                 ScreenShake();
                 bulletTimer = 0;
