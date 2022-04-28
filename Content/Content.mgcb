@@ -145,6 +145,12 @@
 /processorParam:TextureFormat=Color
 /build:HealthUpgrade.png
 
+#begin helicopterFlyBy.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:helicopterFlyBy.wav
+
 #begin level_zonder_raster.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -217,6 +223,12 @@
 /processorParam:TextureFormat=Color
 /build:mapTransparent.png
 
+#begin monoShoot.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:monoShoot.wav
+
 #begin play.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -265,11 +277,11 @@
 /processorParam:TextureFormat=Color
 /build:settingsTransparent.png
 
-#begin shoot.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
+#begin shoot.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:shoot.mp3
+/build:shoot.wav
 
 #begin spr_background.png
 /importer:TextureImporter

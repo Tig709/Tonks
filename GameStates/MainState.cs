@@ -74,7 +74,6 @@ namespace BaseProject
             base.Update(gameTime);
             foreach(Button button in buttons.Children)
             {
-                Console.WriteLine(button.buttonIndex);
                 if(selectedButton == button.buttonIndex)
                 {
                         button.selected = true;
