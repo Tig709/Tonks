@@ -16,7 +16,7 @@ namespace BaseProject
         Vector2 startSnelheid;
         float turningspeed = 1.57f;
 
-        public Bullet(Vector2 startPosition, Vector2 startSnelheid) : base("tank_bullet")
+        public Bullet(String assetName,Vector2 startPosition, Vector2 startSnelheid) : base(assetName)
         {
 
             origin = Center;
