@@ -414,9 +414,9 @@ namespace BaseProject
         
         }
 
-        public void generateSound(string assetName, float volume, float pitch, float positionX, bool panning)
+        public void generateSound(string assetName, float volume, float pitch, float positionX, bool stereoPanning)
         {
-            if (panning)
+            if (stereoPanning)
             {
                 soundPanning = (positionX - GameEnvironment.Screen.X) / (GameEnvironment.Screen.X);
                 volumePan = 1 - (float)Math.Sqrt(Math.Pow(soundPanning, 2));
