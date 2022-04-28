@@ -48,7 +48,10 @@ namespace BaseProject
             base.HandleInput(inputHelper);
             if (inputHelper.KeyPressed(Keys.Enter) && selectedButton == 0)
                 GameEnvironment.GameStateManager.SwitchTo("Play");
-            
+
+            if (inputHelper.KeyPressed(Keys.Enter) && selectedButton == 3)
+                Environment.Exit(0);
+
             if (inputHelper.KeyPressed(Keys.Down) && selectedButton < 4)
             {
                 if (selectedButton < 4)
