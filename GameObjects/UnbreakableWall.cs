@@ -11,6 +11,7 @@ namespace BaseProject
         Vector2 secondWallPosition;
         public UnbreakableWall(String assetName, Vector2 position) : base(assetName)
         {
+            origin = Center;
             this.Position = position;
             firstWallPosition = new Vector2(100,0);
             secondWallPosition = new Vector2(300,0);
