@@ -25,6 +25,7 @@ namespace BaseProject
         Vector2 offset_heli = new Vector2(5,25);
         int frameCounter = 0;
         int bulletTimer = 0;
+        int bulletTimer2 = 0;
         int explosionTimer = 0;
         int healthbarFirst = 100;
         int healthbarSecond = 100;
@@ -143,11 +144,11 @@ namespace BaseProject
                     frameCounter = 0;
                 }
             }
-            if (inputHelper.KeyPressed(Keys.Space) && bulletTimer >= 100)
+            if (inputHelper.KeyPressed(Keys.Space) && bulletTimer2 >= 100)
             {
                 bullets2.Add(new Bullet("tank_bullet1",new Vector2(secondPlayerTank.Position.X, secondPlayerTank.Position.Y), new Vector2(secondPlayerTank.AngularDirection.X * 500, secondPlayerTank.AngularDirection.Y * 500)));
                 ScreenShake();
-                bulletTimer = 0;
+                bulletTimer2 = 0;
                 GameEnvironment.AssetManager.generateSound("monoShoot", 1.0f, -0.2f, secondPlayerTank.position.X, true);
             }
 
@@ -185,6 +186,7 @@ namespace BaseProject
             frameCounter++;
             explosionTimer++;
             bulletTimer++;
+            bulletTimer2++; 
             theWarning.position.X = theHelicopter.position.X;
 
             if (wasHelicopterOnScreen == false && theWarning.helicopterOnScreen == true)
@@ -380,11 +382,13 @@ namespace BaseProject
             if (roundCounter2 == 3)
             {
                 //MOET NOG GEMAAKT WORDEN : WINSTATE VOOR PLAYER2, SPEL IS OVER ETC.
+                GameEnvironment.GameStateManager.SwitchTo("winState_player_2");
             }
 
             if (roundCounter1 == 3)
             {
                 //MOET NOG GEMAAKT WORDEN : WINSTATE VOOR PLAYER1, SPEL IS OVER ETC.
+                GameEnvironment.GameStateManager.SwitchTo("winState_player_1");
             }
             foreach (UnbreakableWall wall in walls.Children)
             {
