@@ -22,7 +22,7 @@ namespace BaseProject
         GameObjectList minesPlayer1, minesPlayer2;
         Vector2 wallbounce, wallbounce2, positionPrevious;
         Vector2 minePosition;
-        Vector2 offset_heli = new Vector2(150,170);
+        Vector2 offset_heli = new Vector2(5,25);
         int frameCounter = 0;
         int bulletTimer = 0;
         int explosionTimer = 0;
