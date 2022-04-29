@@ -65,6 +65,7 @@ namespace BaseProject
 
         public override void Update(GameTime gameTime)
         {
+            GameEnvironment.AssetManager.mainVolume = volumeIndex / 5;
             base.Update(gameTime);
             foreach(Button button in buttons.Children)
             {

@@ -28,6 +28,8 @@ public class AssetManager
     {
         SoundEffect snd = contentManager.Load<SoundEffect>(assetName);
         snd.Play(volume * mainVolume, pitch, pan);
+        Console.WriteLine(mainVolume);
+        Console.WriteLine(volume);
     }
 
     public void PlayMusic(string assetName, bool repeat = true)
