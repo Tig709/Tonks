@@ -35,7 +35,7 @@ namespace BaseProject
         string[] mineType = { "spr_mine", "spr_mine2" };
         GameObject score1, score2, scoreText;
         bool wasHelicopterOnScreen;
-        
+        bool isDashing;
 
 
         public static int RoundCounterP1
@@ -171,7 +171,32 @@ namespace BaseProject
                     frameCounter = 0;
                 }
             }
+            
+            //Dashing
+            if (inputHelper.KeyPressed(Keys.M))
+            {
+                isDashing = true;
+            }
 
+            if (isDashing)
+            {
+                firstPlayerTank.position += firstPlayerTank.AngularDirection * 150;
+                foreach (UnbreakableWall wall in walls.Children)
+                {
+                    if (firstPlayerTank.CollidesWith(wall))
+                    {
+                        Bounce();
+                    }
+                }
+                isDashing = false;
+            }
+
+
+        }
+
+        public void Bounce()
+        {
+           firstPlayerTank.position -= firstPlayerTank.AngularDirection * 100;
         }
         public void ScreenShake()
         {
