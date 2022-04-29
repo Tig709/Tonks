@@ -13,24 +13,23 @@ namespace BaseProject
         float spawningPositionY;
         public bool selected;
         public int buttonIndex;
-        int buttonStandardPositionX = 1450;
-        int buttonOffScreenPositionX = 3000;
+        public float standardX;
+        public float offScreenX;
 
-        public Button(string spriteName, float spawningPositionY, int buttonIn) : base(spriteName)
+        public Button(string spriteName, float buttonStandardPositionX, float buttonOffScreenPositionX, float spawningPositionY, int buttonIn, bool selectedBool) : base(spriteName)
         {
             origin = Center;
-
+            selected = selectedBool;
             buttonIndex = buttonIn;
-            if(this.buttonIndex == 0 || this.buttonIndex == 5 || this.buttonIndex == 6 || this.buttonIndex == 7)
+            if (selected)
             {
-                selected = true;
                 position = new Vector2(buttonStandardPositionX, spawningPositionY);
-            }
-            if(this.buttonIndex == 1 || this.buttonIndex == 2 || this.buttonIndex == 3 || this.buttonIndex == 4)
+            } else
             {
-                selected = false;
                 position = new Vector2(buttonOffScreenPositionX, spawningPositionY);
             }
+            standardX = buttonStandardPositionX;
+            offScreenX = buttonOffScreenPositionX;
         }
 
         public override void Update(GameTime gameTime)
@@ -38,11 +37,11 @@ namespace BaseProject
             base.Update(gameTime);
             if (selected)
             {
-                position.X = buttonStandardPositionX;
+                position.X = standardX;
             }
             if (!selected)
             {
-                position.X = buttonOffScreenPositionX;
+                position.X = offScreenX;
             }
         }
     }

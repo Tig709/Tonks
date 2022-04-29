@@ -11,6 +11,8 @@ namespace BaseProject
         GameObjectList buttons;
         GameObjectList texts;
         public int selectedButton;
+        int buttonStandardPositionX = 1450;
+        int buttonOffScreenPositionX = 4000;
 
         public MainState()
         {
@@ -19,14 +21,14 @@ namespace BaseProject
             buttons = new GameObjectList();
             this.Add(buttons);
 
-            buttons.Add(new Button("buttonSelected", 100, 0));
-            buttons.Add(new Button("buttonSelected", 300, 1));
-            buttons.Add(new Button("buttonSelected", 500, 2));
-            buttons.Add(new Button("buttonSelected", 700, 3));
-            buttons.Add(new Button("buttonTransparent", 100, 4));
-            buttons.Add(new Button("buttonTransparent", 300, 5));
-            buttons.Add(new Button("buttonTransparent", 500, 6));
-            buttons.Add(new Button("buttonTransparent", 700, 7));
+            buttons.Add(new Button("buttonSelected", buttonStandardPositionX, buttonOffScreenPositionX, 100, 0, true));
+            buttons.Add(new Button("buttonSelected", buttonStandardPositionX, buttonOffScreenPositionX, 300, 1, false));
+            buttons.Add(new Button("buttonSelected", buttonStandardPositionX, buttonOffScreenPositionX, 500, 2, false));
+            buttons.Add(new Button("buttonSelected", buttonStandardPositionX, buttonOffScreenPositionX, 700, 3, false));
+            buttons.Add(new Button("buttonTransparent", buttonStandardPositionX, buttonOffScreenPositionX, 100, 4, false));
+            buttons.Add(new Button("buttonTransparent", buttonStandardPositionX, buttonOffScreenPositionX, 300, 5, true));
+            buttons.Add(new Button("buttonTransparent", buttonStandardPositionX, buttonOffScreenPositionX, 500, 6, true));
+            buttons.Add(new Button("buttonTransparent", buttonStandardPositionX, buttonOffScreenPositionX, 700, 7, true));
 
             texts = new GameObjectList();
             this.Add(texts);
@@ -41,13 +43,15 @@ namespace BaseProject
             texts.Add(new Text("exitTransparent", 7));
 
             selectedButton = 0;
-
         }
         public override void HandleInput(InputHelper inputHelper)
         {
             base.HandleInput(inputHelper);
             if (inputHelper.KeyPressed(Keys.Enter) && selectedButton == 0)
                 GameEnvironment.GameStateManager.SwitchTo("Play");
+
+            if (inputHelper.KeyPressed(Keys.Enter) && selectedButton == 1)
+                GameEnvironment.GameStateManager.SwitchTo("Settings");
 
             if (inputHelper.KeyPressed(Keys.Enter) && selectedButton == 3)
                 Environment.Exit(0);

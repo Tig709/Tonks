@@ -32,8 +32,6 @@ namespace BaseProject
         string[] assetNamesScore = { "text_0", "text_1", "text_2", "text_3", "text_dots", };
         string[] mineType = { "spr_mine", "spr_mine2" };
         GameObject score1, score2, scoreText;
-        float masterVolume = 0.4f;
-        float soundPanning, volumePan, volumePanB;
         bool wasHelicopterOnScreen;
         
 
@@ -127,7 +125,7 @@ namespace BaseProject
                 bullets.Add(new Bullet(new Vector2(firstPlayerTank.Position.X, firstPlayerTank.Position.Y), new Vector2(firstPlayerTank.AngularDirection.X * 500, firstPlayerTank.AngularDirection.Y * 500), walls));
                 ScreenShake();
                 bulletTimer = 0;
-                generateSound("monoShoot", 1.0f, -0.2f, firstPlayerTank.position.X, true);
+                GameEnvironment.AssetManager.generateSound("monoShoot", 1.0f, -0.2f, firstPlayerTank.position.X, true);
 
             }
             else
@@ -144,7 +142,7 @@ namespace BaseProject
                 bullets2.Add(new Bullet(new Vector2(secondPlayerTank.Position.X, secondPlayerTank.Position.Y), new Vector2(secondPlayerTank.AngularDirection.X * 500, secondPlayerTank.AngularDirection.Y * 500), walls));
                 ScreenShake();
                 bulletTimer = 0;
-                generateSound("monoShoot", 1.0f, -0.2f, secondPlayerTank.position.X, true);
+                GameEnvironment.AssetManager.generateSound("monoShoot", 1.0f, -0.2f, secondPlayerTank.position.X, true);
             }
 
             if (inputHelper.KeyPressed(Keys.X))
@@ -186,16 +184,17 @@ namespace BaseProject
             if (wasHelicopterOnScreen == false && theWarning.helicopterOnScreen == true)
             {
                 wasHelicopterOnScreen = true;
-                generateSound("helicopterFlyBy", 0.8f, 0, theHelicopter.position.X, true);
+                GameEnvironment.AssetManager.generateSound("helicopterFlyBy", 0.8f, 0, theHelicopter.position.X, true);
             }
 
             if (wasHelicopterOnScreen == true && theWarning.helicopterOnScreen == false)
-                wasHelicopterOnScreen= false;
+                wasHelicopterOnScreen = false;
 
             if (theHelicopter.position.Y > 0 - theHelicopter.Height / 2 && theHelicopter.position.Y < GameEnvironment.Screen.Y + theHelicopter.Height / 2)
             {
                 theWarning.helicopterOnScreen = true;
-            } else
+            }
+            else
             {
                 theWarning.helicopterOnScreen = false;
             }
@@ -248,45 +247,46 @@ namespace BaseProject
                 GameEnvironment.GameStateManager.SwitchTo("Tie");
                 bullets.Reset();
             }
-            
+
             foreach (Bullet bullet in bullets.Children)
             {
-                
-                    if (bullet.CollidesWith(breakableWall))
-                    {
-                        bullet.Reset();
-                        wallHealth -= 60;
-                    }
-                   
-                    if (wallHealth <= 0)
-                    {
-                        breakableWall.Visible = false;
-                    }
-                    if (bullet.CollidesWith(secondPlayerTank))
-                    {
-                        /* secondPlayerTank.Reset();*/
-                        bullet.Reset();
-                        healthbarSecond -= 60;
-                    }
 
-                    foreach (UnbreakableWall wall in walls.Children)
-                    {
-                        if (bullet.CollidesWith(wall))
-                        {
-                            bullet.WrapWallBullet(wall.position, wall.Height, wall.Width);
-                        }
-                    }
+                if (bullet.CollidesWith(breakableWall))
+                {
+                    bullet.Reset();
+                    wallHealth -= 60;
+                }
 
-                    if (bullet.CollidesWith(theHelicopter))
+                if (wallHealth <= 0)
+                {
+                    breakableWall.Visible = false;
+                }
+                if (bullet.CollidesWith(secondPlayerTank))
+                {
+                    /* secondPlayerTank.Reset();*/
+                    bullet.Reset();
+                    healthbarSecond -= 60;
+                }
+
+                foreach (UnbreakableWall wall in walls.Children)
+                {
+                    if (bullet.CollidesWith(wall))
                     {
-                        bullet.Reset();
-                        helipcoterHealth -= 60;
-                        theHelicopter.Scale -= 0.5f;
-                    } else
-                    {
-                        theHelicopter.Scale = 1;
+                        bullet.WrapWallBullet(wall.position, wall.Height, wall.Width);
                     }
-               
+                }
+
+                if (bullet.CollidesWith(theHelicopter))
+                {
+                    bullet.Reset();
+                    helipcoterHealth -= 60;
+                    theHelicopter.Scale -= 0.5f;
+                }
+                else
+                {
+                    theHelicopter.Scale = 1;
+                }
+
             }
             foreach (Bullet bullet2 in bullets2.Children)
             {
@@ -308,7 +308,7 @@ namespace BaseProject
                 }
             }
 
-                if (healthbarFirst <= 0)
+            if (healthbarFirst <= 0)
             {
                 GameEnvironment.GameStateManager.SwitchTo("End");
                 this.Remove(score2);
@@ -411,25 +411,8 @@ namespace BaseProject
                     secondPlayerTank.WallCorrect();
                 }
             }
-        
-        }
 
-        public void generateSound(string assetName, float volume, float pitch, float positionX, bool stereoPanning)
-        {
-            if (stereoPanning)
-            {
-                soundPanning = (positionX - GameEnvironment.Screen.X) / (GameEnvironment.Screen.X);
-                volumePan = 1 - (float)Math.Sqrt(Math.Pow(soundPanning, 2));
-                volumePanB = 1 - volumePan;
-                GameEnvironment.AssetManager.PlaySound(assetName, masterVolume * volume * volumePan, pitch, 1.0f);
-                GameEnvironment.AssetManager.PlaySound(assetName, masterVolume * volume * (1 - volumePan), pitch, -1.0f);
-            } 
-            else 
-            {
-                GameEnvironment.AssetManager.PlaySound(assetName, masterVolume * volume, pitch, 0.0f);
-            }
         }
-
     }
 }
     
