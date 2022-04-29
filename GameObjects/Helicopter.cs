@@ -11,6 +11,7 @@ namespace BaseProject
         Vector2 startPosition;
         public Helicopter() : base("attack_heli")
         {
+
             this.position.X = GameEnvironment.Random.Next(0,GameEnvironment.Screen.X);
             this.position.Y = GameEnvironment.Random.Next(-500,-300);
             this.velocity.X = 0;

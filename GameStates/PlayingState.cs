@@ -14,12 +14,14 @@ namespace BaseProject
         TankFirstPlayer firstPlayerTank;
         TankSecondPlayer secondPlayerTank;
         SpriteGameObject wall, breakableWall, pit;
+        RotatingSpriteGameObject propeller;
         Helicopter theHelicopter;
         GameObjectList explosion;
         GameObjectList score, walls;
         GameObjectList minesPlayer1, minesPlayer2;
         Vector2 wallbounce, wallbounce2, positionPrevious;
         Vector2 minePosition;
+        Vector2 offset_heli = new Vector2(150,170);
         int frameCounter = 0;
         int bulletTimer = 0;
         int explosionTimer = 0;
@@ -56,7 +58,7 @@ namespace BaseProject
             /*positionPrevious = new Vector2();*/
 
 
-            this.Add(new SpriteGameObject("spr_background"));
+            this.Add(new SpriteGameObject("spr_dirt"));
            /* wall = new SpriteGameObject("spr_walls");
             this.Add(wall);*/
             breakableWall = new SpriteGameObject("spr_breakable_wall");
@@ -103,7 +105,9 @@ namespace BaseProject
 
             theHelicopter = new Helicopter();
             this.Add(theHelicopter);
-
+            propeller = new RotatingSpriteGameObject("attack_heli_propeller");
+            propeller.Origin = propeller.Center;
+            this.Add(propeller);
             explosion = new GameObjectList();
             this.Add(explosion);
         }
@@ -115,7 +119,7 @@ namespace BaseProject
             base.HandleInput(inputHelper);
             if (inputHelper.KeyPressed(Keys.L) && bulletTimer >= 100)
             {
-                bullets.Add(new Bullet(new Vector2(firstPlayerTank.Position.X, firstPlayerTank.Position.Y), new Vector2(firstPlayerTank.AngularDirection.X * 500, firstPlayerTank.AngularDirection.Y * 500)));
+                bullets.Add(new Bullet("tank_bullet",new Vector2(firstPlayerTank.Position.X, firstPlayerTank.Position.Y), new Vector2(firstPlayerTank.AngularDirection.X * 500, firstPlayerTank.AngularDirection.Y * 500)));
                 ScreenShake();
                 bulletTimer = 0;
 
@@ -131,7 +135,7 @@ namespace BaseProject
             }
             if (inputHelper.KeyPressed(Keys.Space) && bulletTimer >= 100)
             {
-                bullets2.Add(new Bullet(new Vector2(secondPlayerTank.Position.X, secondPlayerTank.Position.Y), new Vector2(secondPlayerTank.AngularDirection.X * 500, secondPlayerTank.AngularDirection.Y * 500)));
+                bullets2.Add(new Bullet("tank_bullet1",new Vector2(secondPlayerTank.Position.X, secondPlayerTank.Position.Y), new Vector2(secondPlayerTank.AngularDirection.X * 500, secondPlayerTank.AngularDirection.Y * 500)));
                 ScreenShake();
                 bulletTimer = 0;
             }
@@ -172,7 +176,9 @@ namespace BaseProject
             frameCounter++;
             explosionTimer++;
             bulletTimer++;
-
+            propeller.Degrees += 10;
+            propeller.Position = theHelicopter.Position + offset_heli;
+            propeller.velocity *= propeller.Degrees;
             if (GameEnvironment.Screen.X > 400)
             {
                 velocity.X = -velocity.X;
