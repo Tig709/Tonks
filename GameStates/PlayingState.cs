@@ -29,7 +29,7 @@ namespace BaseProject
         int explosionTimer = 0;
         int healthbarFirst = 100;
         int healthbarSecond = 100;
-        int helipcoterHealth = 1000;
+        int helipcoterHealth = 600;
         int wallHealth = 180;
         public static int roundCounter1, roundCounter2;
         string[] assetNamesScore = { "text_0", "text_1", "text_2", "text_3", "text_dots", };
@@ -351,8 +351,8 @@ namespace BaseProject
             }
             if (helipcoterHealth <= 0)
             {
-                helipcoterHealth = 1000;
-                theHelicopter.Velocity = new Vector2(0, 0);
+                helipcoterHealth = 600;
+               /* theHelicopter.Velocity = new Vector2(0, 0);*/
                 theHelicopter.Reset();
             }
             foreach (Bullet bullet in bullets2.Children)
