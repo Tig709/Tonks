@@ -19,7 +19,7 @@ namespace BaseProject
         Helicopter theHelicopter;
         GameObjectList explosion;
         GameObjectList score, walls;
-        GameObjectList minesPlayer1, minesPlayer2;
+        Mine minePlayer1, minePlayer2;
         Vector2 wallbounce, wallbounce2, positionPrevious;
         Vector2 minePosition;
         Vector2 offset_heli = new Vector2(5,25);
@@ -81,11 +81,11 @@ namespace BaseProject
             bullets2 = new GameObjectList();
             this.Add(bullets2);
 
-            minesPlayer1 = new GameObjectList();
-            this.Add(minesPlayer1);
+            minePlayer1 = new Mine("spr_mine", firstPlayerTank.position);
+            this.Add(minePlayer1);
 
-            minesPlayer2 = new GameObjectList();
-            this.Add(minesPlayer2);
+            minePlayer2 = new Mine("spr_mine2", secondPlayerTank.position);
+            this.Add(minePlayer2);
 
             firstPlayerTank = new TankFirstPlayer();
             this.Add(firstPlayerTank);
@@ -155,12 +155,12 @@ namespace BaseProject
             if (inputHelper.KeyPressed(Keys.X))
             {
                 minePosition = this.firstPlayerTank.position;
-                minesPlayer1.Add(new Mine(mineType[0],new Vector2(minePosition.X, minePosition.Y)));
+                
             }
             if (inputHelper.KeyPressed(Keys.B))
             {
                 minePosition = this.secondPlayerTank.position;
-                minesPlayer2.Add(new Mine(mineType[1],new Vector2(minePosition.X, minePosition.Y)));
+               
             }
 
             else
