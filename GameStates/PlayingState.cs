@@ -257,6 +257,7 @@ namespace BaseProject
                 secondPlayerTank.Reset();
                 GameEnvironment.GameStateManager.SwitchTo("Tie");
                 bullets.Reset();
+                bullets2.Reset();
             }
 
             foreach (Bullet bullet in bullets.Children)
