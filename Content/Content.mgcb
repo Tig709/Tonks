@@ -73,6 +73,18 @@
 /processorParam:TextureFormat=Color
 /build:buttonSelected.png
 
+#begin buttonTransparent.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:buttonTransparent.png
+
 #begin EndOfRoundStateTest.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -84,6 +96,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:EndOfRoundStateTest.png
+
+#begin exit.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:exit.png
+
+#begin exitTransparent.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:exitTransparent.png
 
 #begin explosion_heli.png
 /importer:TextureImporter
@@ -108,6 +144,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:HealthUpgrade.png
+
+#begin helicopterFlyBy.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:helicopterFlyBy.wav
 
 #begin level_zonder_raster.png
 /importer:TextureImporter
@@ -169,7 +211,7 @@
 /processorParam:TextureFormat=Color
 /build:map.png
 
-#begin master.png
+#begin mapTransparent.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -179,19 +221,13 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:master.png
+/build:mapTransparent.png
 
-#begin masterTransparent.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:masterTransparent.png
+#begin monoShoot.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:monoShoot.wav
 
 #begin play.png
 /importer:TextureImporter
@@ -205,6 +241,18 @@
 /processorParam:TextureFormat=Color
 /build:play.png
 
+#begin playTransparent.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:playTransparent.png
+
 #begin settings.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -217,7 +265,7 @@
 /processorParam:TextureFormat=Color
 /build:settings.png
 
-#begin settingsBackground.png
+#begin settingsTransparent.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -227,31 +275,13 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:settingsBackground.png
+/build:settingsTransparent.png
 
-#begin soundBar.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:soundBar.png
-
-#begin soundBarTransparent.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:soundBarTransparent.png
+#begin shoot.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:shoot.wav
 
 #begin spr_background.png
 /importer:TextureImporter

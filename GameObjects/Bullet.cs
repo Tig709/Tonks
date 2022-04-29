@@ -18,6 +18,7 @@ namespace BaseProject
         Vector2 startSnelheid;
         Vector2 positionWall;
         float turningspeed = 1.57f;
+        float distanceY, distanceX;
 
         public Bullet(Vector2 startPosition, Vector2 startSnelheid, GameObjectList wall) : base("tank_bullet")
         {
@@ -74,13 +75,20 @@ namespace BaseProject
 
         public void WrapWallBullet(Vector2 positionWall, int heightWall, int widthWall)
         {
-            if (position.X - Width / 2 < positionWall.X - widthWall / 2 || position.X + Width / 2 > positionWall.X + widthWall / 2)
+            distanceX = Convert.ToSingle(Math.Sqrt(Math.Pow(position.X - positionWall.X, 2))) / widthWall;
+            distanceY = Convert.ToSingle(Math.Sqrt(Math.Pow(position.Y - positionWall.Y, 2))) / heightWall;
+
+            if (position.X - Width / 2 < positionWall.X - widthWall / 2 || position.X + Width / 2 > positionWall.X + widthWall / 2 && distanceX > distanceY)
             {
                 velocity.X *= -1;
             }
-            else if (position.Y - Height / 2 < positionWall.Y - heightWall / 2 || position.Y + Height / 2 > positionWall.Y + heightWall / 2)
+            if (position.Y - Height / 2 < positionWall.Y - heightWall / 2 || position.Y + Height / 2 > positionWall.Y + heightWall / 2 && distanceY > distanceX)
             {
                 velocity.Y *= -1;
+            }
+            if (distanceY == distanceX)
+            {
+                velocity *= new Vector2(-1, -1);
             }
         }
     }

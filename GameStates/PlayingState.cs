@@ -32,6 +32,9 @@ namespace BaseProject
         string[] assetNamesScore = { "text_0", "text_1", "text_2", "text_3", "text_dots", };
         string[] mineType = { "spr_mine", "spr_mine2" };
         GameObject score1, score2, scoreText;
+        float masterVolume = 0.4f;
+        float soundPanning, volumePan, volumePanB;
+        bool wasHelicopterOnScreen;
         
 
 
@@ -55,7 +58,6 @@ namespace BaseProject
 
             wallbounce2 = new Vector2(50, 10);
             /*positionPrevious = new Vector2();*/
-
 
             this.Add(new SpriteGameObject("spr_background"));
            /* wall = new SpriteGameObject("spr_walls");
@@ -125,6 +127,7 @@ namespace BaseProject
                 bullets.Add(new Bullet(new Vector2(firstPlayerTank.Position.X, firstPlayerTank.Position.Y), new Vector2(firstPlayerTank.AngularDirection.X * 500, firstPlayerTank.AngularDirection.Y * 500), walls));
                 ScreenShake();
                 bulletTimer = 0;
+                generateSound("monoShoot", 1.0f, -0.2f, firstPlayerTank.position.X, true);
 
             }
             else
@@ -141,6 +144,7 @@ namespace BaseProject
                 bullets2.Add(new Bullet(new Vector2(secondPlayerTank.Position.X, secondPlayerTank.Position.Y), new Vector2(secondPlayerTank.AngularDirection.X * 500, secondPlayerTank.AngularDirection.Y * 500), walls));
                 ScreenShake();
                 bulletTimer = 0;
+                generateSound("monoShoot", 1.0f, -0.2f, secondPlayerTank.position.X, true);
             }
 
             if (inputHelper.KeyPressed(Keys.X))
@@ -161,7 +165,6 @@ namespace BaseProject
                     velocity.X = 0;
                     position.X = 0;
                     frameCounter = 0;
-
                 }
             }
 
@@ -180,9 +183,17 @@ namespace BaseProject
             bulletTimer++;
             theWarning.position.X = theHelicopter.position.X;
 
+            if (wasHelicopterOnScreen == false && theWarning.helicopterOnScreen == true)
+            {
+                wasHelicopterOnScreen = true;
+                generateSound("helicopterFlyBy", 0.8f, 0, theHelicopter.position.X, true);
+            }
+
+            if (wasHelicopterOnScreen == true && theWarning.helicopterOnScreen == false)
+                wasHelicopterOnScreen= false;
+
             if (theHelicopter.position.Y > 0 - theHelicopter.Height / 2 && theHelicopter.position.Y < GameEnvironment.Screen.Y + theHelicopter.Height / 2)
             {
-                Console.WriteLine(theHelicopter.position.Y);
                 theWarning.helicopterOnScreen = true;
             } else
             {
@@ -401,6 +412,22 @@ namespace BaseProject
                 }
             }
         
+        }
+
+        public void generateSound(string assetName, float volume, float pitch, float positionX, bool stereoPanning)
+        {
+            if (stereoPanning)
+            {
+                soundPanning = (positionX - GameEnvironment.Screen.X) / (GameEnvironment.Screen.X);
+                volumePan = 1 - (float)Math.Sqrt(Math.Pow(soundPanning, 2));
+                volumePanB = 1 - volumePan;
+                GameEnvironment.AssetManager.PlaySound(assetName, masterVolume * volume * volumePan, pitch, 1.0f);
+                GameEnvironment.AssetManager.PlaySound(assetName, masterVolume * volume * (1 - volumePan), pitch, -1.0f);
+            } 
+            else 
+            {
+                GameEnvironment.AssetManager.PlaySound(assetName, masterVolume * volume, pitch, 0.0f);
+            }
         }
 
     }

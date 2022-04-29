@@ -12,7 +12,7 @@ namespace BaseProject
         public Helicopter() : base("attack_heli")
         {
             origin = Center;
-            this.position.X = GameEnvironment.Random.Next(0, GameEnvironment.Screen.X);
+            this.position.X = GameEnvironment.Random.Next(0 + Width, GameEnvironment.Screen.X - Width);
             this.position.Y = GameEnvironment.Random.Next(-500, -300);
             this.velocity.X = 0;
             this.velocity.Y = 0;
@@ -22,7 +22,7 @@ namespace BaseProject
         public override void Reset()
         {
             base.Reset();
-            this.position.X = GameEnvironment.Random.Next(0, GameEnvironment.Screen.X);
+            this.position.X = GameEnvironment.Random.Next(0 + Width, GameEnvironment.Screen.X - Width);
             this.position.Y = GameEnvironment.Random.Next(-500, -300);
         }
         public override void Update(GameTime gameTime)
@@ -37,7 +37,7 @@ namespace BaseProject
             {
                 velocity.Y = 0;
                 timer = 0;
-                this.position.X = GameEnvironment.Random.Next(0, GameEnvironment.Screen.X);
+                this.position.X = GameEnvironment.Random.Next(0 + Width, GameEnvironment.Screen.X - Width);
                 this.position.Y = GameEnvironment.Random.Next(-500, -300);
             }
         }
