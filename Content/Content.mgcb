@@ -332,7 +332,6 @@
 /build:shoot.wav
 
 #begin soundBar.png
-#begin spr_background.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -343,6 +342,29 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:soundBar.png
+
+#begin soundBarTransparent.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:soundBarTransparent.png
+
+#begin spr_background.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
 /build:spr_background.png
 
 #begin spr_breakable_wall.png
@@ -357,7 +379,18 @@
 /processorParam:TextureFormat=Color
 /build:spr_breakable_wall.png
 
-#begin soundBarTransparent.png
+#begin spr_dash.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:spr_dash.png
+
 #begin spr_dirt.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -368,10 +401,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:soundBarTransparent.png
 /build:spr_dirt.png
 
-#begin spr_mine.png
+#begin spr_double_lives.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -381,9 +413,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:spr_mine.png
+/build:spr_double_lives.png
 
-#begin spr_mine2.png
+#begin spr_invisibilty.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -393,7 +425,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:spr_mine2.png
+/build:spr_invisibilty.png
 
 #begin spr_mine.png
 /importer:TextureImporter
@@ -610,6 +642,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:unbreakable_wall.png
+
+#begin upgradeState.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:upgradeState.png
 
 #begin warning.png
 /importer:TextureImporter
