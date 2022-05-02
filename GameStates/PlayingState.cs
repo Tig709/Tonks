@@ -21,8 +21,9 @@ namespace BaseProject
         GameObjectList score, walls;
         GameObjectList minesPlayer1, minesPlayer2;
         Vector2 wallbounce, wallbounce2, positionPrevious;
-        Vector2 minePosition;
+        Vector2 minePosition1, minePosition2;
         Vector2 offset_heli = new Vector2(5,25);
+        MineExplosion explosion1, explosion2;
         int frameCounter = 0;
         int bulletTimer = 0;
         int bulletTimer2 = 0;
@@ -31,9 +32,17 @@ namespace BaseProject
         int healthbarSecond = 100;
         int helipcoterHealth = 600;
         int wallHealth = 180;
+        int nextExplosionSpriteCounter = 0;
+        int explosionSprite;
+        Boolean mine1Placed = false;
+        Boolean mine2Placed = false;
+        Boolean p1Explosion = false;
+        Boolean p2Explosion = false;
         public static int roundCounter1, roundCounter2;
         string[] assetNamesScore = { "text_0", "text_1", "text_2", "text_3", "text_dots", };
         string[] mineType = { "spr_mine", "spr_mine2" };
+        string[] bombAssets = { "explosion1", "explosionSmoke1" , "explosion2" , "explosionSmoke2" , "explosion3" , "explosionSmoke3" , 
+            "explosion4" ,"explosionSmoke4", "explosion5", "explosionSmoke5" };
         GameObject score1, score2, scoreText;
         bool wasHelicopterOnScreen;
         float soundPanning;
@@ -58,6 +67,7 @@ namespace BaseProject
         {
             wallbounce = new Vector2(-50, 10);
             wallbounce2 = new Vector2(50, 10);
+            
             /*positionPrevious = new Vector2();*/
 
 
@@ -66,6 +76,13 @@ namespace BaseProject
             this.Add(wall);*/
             breakableWall = new SpriteGameObject("spr_breakable_wall");
             this.Add(breakableWall);
+
+           // explosion1 = new MineExplosion(bombAssets[0]);
+           // this.Add(explosion1);
+
+            explosion2 = new MineExplosion(bombAssets[0]);
+            this.Add(explosion2);
+
             pit = new SpriteGameObject("spr_pit");
             this.Add(pit);
 
@@ -129,7 +146,7 @@ namespace BaseProject
             base.HandleInput(inputHelper);
             if (inputHelper.KeyPressed(Keys.L) && bulletTimer >= 100)
             {
-                bullets.Add(new Bullet("tank_bullet",new Vector2(firstPlayerTank.Position.X, firstPlayerTank.Position.Y), new Vector2(firstPlayerTank.AngularDirection.X * 500, firstPlayerTank.AngularDirection.Y * 500)));
+                bullets.Add(new Bullet("tank_bullet", new Vector2(firstPlayerTank.Position.X, firstPlayerTank.Position.Y), new Vector2(firstPlayerTank.AngularDirection.X * 500, firstPlayerTank.AngularDirection.Y * 500)));
                 ScreenShake();
                 bulletTimer = 0;
                 generateSound("monoShoot", 1.0f, -0.2f, firstPlayerTank.position.X, true);
@@ -146,7 +163,7 @@ namespace BaseProject
             }
             if (inputHelper.KeyPressed(Keys.Space) && bulletTimer2 >= 100)
             {
-                bullets2.Add(new Bullet("tank_bullet1",new Vector2(secondPlayerTank.Position.X, secondPlayerTank.Position.Y), new Vector2(secondPlayerTank.AngularDirection.X * 500, secondPlayerTank.AngularDirection.Y * 500)));
+                bullets2.Add(new Bullet("tank_bullet1", new Vector2(secondPlayerTank.Position.X, secondPlayerTank.Position.Y), new Vector2(secondPlayerTank.AngularDirection.X * 500, secondPlayerTank.AngularDirection.Y * 500)));
                 ScreenShake();
                 bulletTimer2 = 0;
                 generateSound("monoShoot", 1.0f, -0.2f, secondPlayerTank.position.X, true);
@@ -154,14 +171,27 @@ namespace BaseProject
 
             if (inputHelper.KeyPressed(Keys.X))
             {
-                minePosition = this.firstPlayerTank.position;
-                minesPlayer1.Add(new Mine(mineType[0],new Vector2(minePosition.X, minePosition.Y)));
+                minePosition1 = this.firstPlayerTank.position;
+                minesPlayer1.Add(new Mine(mineType[0], minePosition1));
+                mine1Placed = true;
             }
             if (inputHelper.KeyPressed(Keys.B))
             {
-                minePosition = this.secondPlayerTank.position;
-                minesPlayer2.Add(new Mine(mineType[1],new Vector2(minePosition.X, minePosition.Y)));
+                minePosition2 = this.secondPlayerTank.position;
+                minesPlayer2.Add(new Mine(mineType[1], minePosition2));
+                mine2Placed = true;
             }
+
+            if (inputHelper.KeyPressed(Keys.C) && mine1Placed) {
+                p1Explosion = true;
+              
+               
+
+            } 
+
+                if (inputHelper.KeyPressed(Keys.V)&& mine2Placed ) {
+                p2Explosion = true;
+            } 
 
             else
             {
@@ -186,7 +216,26 @@ namespace BaseProject
             frameCounter++;
             explosionTimer++;
             bulletTimer++;
-            bulletTimer2++; 
+            bulletTimer2++;
+            // dit maken voor 2e mines
+            if (p1Explosion == true)
+            {
+                nextExplosionSpriteCounter++;
+                if (nextExplosionSpriteCounter == 5 &&explosionSprite <= 8) { explosionSprite++; nextExplosionSpriteCounter = 0; }
+
+                if (explosionSprite <= bombAssets.Length)
+                {
+                    explosion1 = new MineExplosion(bombAssets[explosionSprite]);
+                    this.Add(explosion1);
+
+                    visible = true;
+                    explosion1.position = minePosition1;
+
+                
+                }
+                else { visible = false; explosionSprite = 0; } ;
+            }
+            
             theWarning.position.X = theHelicopter.position.X;
 
             if (wasHelicopterOnScreen == false && theWarning.helicopterOnScreen == true)
