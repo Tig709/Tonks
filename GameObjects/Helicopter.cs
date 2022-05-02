@@ -96,7 +96,7 @@ namespace BaseProject
             }
             if (timer > 20)
             {
-                timer = -300;
+                timer = -400;
             }
         }
     }
