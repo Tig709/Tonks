@@ -45,9 +45,11 @@ namespace BaseProject
             "explosion4" ,"explosionSmoke4", "explosion5", "explosionSmoke5" };
         GameObject score1, score2, scoreText;
         bool wasHelicopterOnScreen;
+        bool isDashing;
+        bool doubleBulletsEquipped;
+
         float soundPanning;
         float volumePan;
-
 
 
         public static int RoundCounterP1
@@ -169,6 +171,14 @@ namespace BaseProject
                 generateSound("monoShoot", 1.0f, -0.2f, secondPlayerTank.position.X, true);
             }
 
+            if (inputHelper.KeyPressed(Keys.Space) && bulletTimer >= 100 && doubleBulletsEquipped)
+            {
+                bullets2.Add(new Bullet("tank_bullet1", new Vector2(secondPlayerTank.Position.X, secondPlayerTank.Position.Y), new Vector2(secondPlayerTank.AngularDirection.X * 500, secondPlayerTank.AngularDirection.Y * 500)));
+                ScreenShake();
+                bulletTimer = 0;
+                GameEnvironment.AssetManager.generateSound("monoShoot", 1.0f, -0.2f, secondPlayerTank.position.X, true);
+            }
+
             if (inputHelper.KeyPressed(Keys.X))
             {
                 minePosition1 = this.firstPlayerTank.position;
@@ -202,7 +212,32 @@ namespace BaseProject
                     frameCounter = 0;
                 }
             }
+            
+            //Dashing
+            if (inputHelper.KeyPressed(Keys.M))
+            {
+                isDashing = true;
+            }
 
+            if (isDashing)
+            {
+                firstPlayerTank.position += firstPlayerTank.AngularDirection * 150;
+                foreach (UnbreakableWall wall in walls.Children)
+                {
+                    if (firstPlayerTank.CollidesWith(wall))
+                    {
+                        Bounce();
+                    }
+                }
+                isDashing = false;
+            }
+
+
+        }
+
+        public void Bounce()
+        {
+           firstPlayerTank.position -= firstPlayerTank.AngularDirection * 100;
         }
         public void ScreenShake()
         {
