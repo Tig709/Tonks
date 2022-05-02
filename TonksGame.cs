@@ -23,6 +23,7 @@ namespace BaseProject
             GameStateManager.AddGameState("winState_player_1", new WinState1());
             GameStateManager.AddGameState("winState_player_2", new WinState2());
             GameStateManager.AddGameState("End", new EndOfRoundState());
+            GameStateManager.AddGameState("Upgrade", new UpgradeState());
             GameStateManager.SwitchTo("Begin");
             
         }
