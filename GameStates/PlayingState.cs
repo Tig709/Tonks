@@ -9,10 +9,15 @@ namespace BaseProject
 {
     class PlayingState : GameObjectList
     {
+        const int PLAYER_COUNT = 2;
+        bool isFiring;
+        bool wasFiring;
+
+        GameObjectList tanks;
+        GameObjectList bullets_;
+
         GameObjectList lives, lives1;
         GameObjectList bullets, bullets2;
-        TankFirstPlayer firstPlayerTank;
-        TankSecondPlayer secondPlayerTank;
         GameObjectList walls ,walls2, walls3, walls4,walls5;
         Helicopter theHelicopter;
         GameObjectList explosion;
@@ -21,31 +26,31 @@ namespace BaseProject
         int explosionTimer = 0;
         int healthbarFirst = 100;
         int healthbarSecond = 100;
-        const int PLAYER_COUNT = 2;
 
-        Tank[] tanks = new Tank[PLAYER_COUNT];
-
+        
         public PlayingState()
         {
             wallbounce = new Vector2(-50, 10);
             wallbounce2 = new Vector2(50, 10);
 
             this.Add(new SpriteGameObject("level_zonder_raster"));
-            
+
+            tanks = new GameObjectList();
+            for (int i = 0; i < PLAYER_COUNT; i++)
+            {
+                tanks.Add(new Tank(i));
+            }
+            this.Add(tanks);
+
+            bullets_ = new GameObjectList();
+            this.Add(bullets_);
+
             bullets = new GameObjectList();
             this.Add(bullets);
 
             bullets2 = new GameObjectList();    
             this.Add(bullets2);
-
-            firstPlayerTank = new TankFirstPlayer();
-            this.Add(firstPlayerTank);
-
-            secondPlayerTank = new TankSecondPlayer();
-            this.Add(secondPlayerTank);
-
-          
-
+      
             lives = new GameObjectList();
             lives1 = new GameObjectList();
             walls = new GameObjectList();
@@ -100,10 +105,31 @@ namespace BaseProject
         }
         public override void HandleInput(InputHelper inputHelper)
         {
-            base.HandleInput(inputHelper);
+            GamePadCapabilities gamePadCapabilities = GamePad.GetCapabilities(PlayerIndex.One);
+            GamePadState state = GamePad.GetState(PlayerIndex.One);
+
+            wasFiring = isFiring;
+
+            isFiring = state.IsButtonDown(Buttons.B);
+
+            foreach (Tank tank in tanks.Children)
+            {
+                if (tank.IsFiring)
+                    bullets_.Add(new Bullet(tank.Gun.Position + tank.Position, Vector2.Multiply(tank.Gun.AngularDirection, 100)));
+            }
+
+            //if (isFiring)
+            //{
+            //    //bullets_.Add(new Bullet(this.Position, Vector2.Multiply(gun.AngularDirection, 100)));
+            //
+            //    bullets_.Add();
+            //}
+
+            //if (state.IsButtonDown)
+
             if (inputHelper.KeyPressed(Keys.Space))
             {
-                bullets.Add(new Bullet(new Vector2(firstPlayerTank.Position.X, firstPlayerTank.Position.Y), new Vector2(firstPlayerTank.AngularDirection.X * 500, firstPlayerTank.AngularDirection.Y * 500)));
+                //bullets.Add(new Bullet(new Vector2(firstPlayerTank.Position.X, firstPlayerTank.Position.Y), new Vector2(firstPlayerTank.AngularDirection.X * 500, firstPlayerTank.AngularDirection.Y * 500)));
                 ScreenShake();
                 
             }
@@ -115,10 +141,11 @@ namespace BaseProject
                     position.X = 0;
                     frameCounter = 0;
                 }
+
             }
             if (inputHelper.KeyPressed(Keys.L))
             {
-                bullets2.Add(new Bullet(new Vector2(secondPlayerTank.Position.X, secondPlayerTank.Position.Y), new Vector2(secondPlayerTank.AngularDirection.X * 500, secondPlayerTank.AngularDirection.Y * 500)));
+                //bullets2.Add(new Bullet(new Vector2(secondPlayerTank.Position.X, secondPlayerTank.Position.Y), new Vector2(secondPlayerTank.AngularDirection.X * 500, secondPlayerTank.AngularDirection.Y * 500)));
                 ScreenShake();
             }
             else
@@ -131,16 +158,11 @@ namespace BaseProject
                 }
             }
 
+            base.HandleInput(inputHelper);
         }
         public void ScreenShake()
         {
-              velocity.X = 1000; 
-
-            for (int i = 0; i < PLAYER_COUNT; i++)
-            {
-                tanks[i] = new Tank(i);
-                this.Add(tanks[i]);
-            }
+            velocity.X = 1000; 
         }
 
         public override void Update(GameTime gameTime)
@@ -158,28 +180,28 @@ namespace BaseProject
                 velocity.X = +velocity.X;
             }
 
-            if (firstPlayerTank.CollidesWith(theHelicopter))
-            {
-                this.Remove(lives);
-
-                explosion.Add(new Explosion(new Vector2(firstPlayerTank.Position.X, firstPlayerTank.Position.Y)));
-                explosionTimer++;
-                explosion.Visible = true;
-                healthbarFirst -= 90;
-                theHelicopter.Reset();
-                ScreenShake();
-
-            }
-            if (secondPlayerTank.CollidesWith(theHelicopter))
-            {
-                this.Remove(lives1);
-                explosion.Add(new Explosion(new Vector2(secondPlayerTank.Position.X, secondPlayerTank.Position.Y)));
-                explosionTimer++;
-                explosion.Visible = true;
-                healthbarSecond -= 90;
-                theHelicopter.Reset();
-                ScreenShake();
-            }
+            //if (firstPlayerTank.CollidesWith(theHelicopter))
+            //{
+            //    this.Remove(lives);
+            //
+            //    explosion.Add(new Explosion(new Vector2(firstPlayerTank.Position.X, firstPlayerTank.Position.Y)));
+            //    explosionTimer++;
+            //    explosion.Visible = true;
+            //    healthbarFirst -= 90;
+            //    theHelicopter.Reset();
+            //    ScreenShake();
+            //
+            //}
+            //if (secondPlayerTank.CollidesWith(theHelicopter))
+            //{
+            //    this.Remove(lives1);
+            //    explosion.Add(new Explosion(new Vector2(secondPlayerTank.Position.X, secondPlayerTank.Position.Y)));
+            //    explosionTimer++;
+            //    explosion.Visible = true;
+            //    healthbarSecond -= 90;
+            //    theHelicopter.Reset();
+            //    ScreenShake();
+            //}
 
             else if(explosionTimer >= 15 )  
             {
@@ -188,23 +210,23 @@ namespace BaseProject
                 explosion.Visible = false;
             }
 
-            if (firstPlayerTank.CollidesWith(secondPlayerTank))
-            {
-                firstPlayerTank.Reset();
-                secondPlayerTank.Reset();
-                GameEnvironment.GameStateManager.SwitchTo("Tie");
-            }
-            foreach (Bullet bullet in bullets.Children)
-            {
-                if (bullet.CollidesWith(secondPlayerTank))
-                {
-                    secondPlayerTank.Reset();
-                    bullets.Reset();
-                    healthbarSecond -= 60;
-                    this.Remove(lives1);
-                    
-                }
-            }
+            //if (firstPlayerTank.CollidesWith(secondPlayerTank))
+            //{
+            //    firstPlayerTank.Reset();
+            //    secondPlayerTank.Reset();
+            //    GameEnvironment.GameStateManager.SwitchTo("Tie");
+            //}
+            //foreach (Bullet bullet in bullets.Children)
+            //{
+            //    if (bullet.CollidesWith(secondPlayerTank))
+            //    {
+            //        secondPlayerTank.Reset();
+            //        bullets.Reset();
+            //        healthbarSecond -= 60;
+            //        this.Remove(lives1);
+            //        
+            //    }
+            //}
             if(healthbarFirst <= 0)
             {
                 GameEnvironment.GameStateManager.SwitchTo("Dead2");
@@ -217,76 +239,76 @@ namespace BaseProject
                 healthbarSecond = 100;
                 healthbarFirst = 100;
             }
-            foreach (Bullet bullet in bullets2.Children)
-            {
-                if (bullet.CollidesWith(firstPlayerTank))
-                {
-                    firstPlayerTank.Reset();
-                    bullets2.Reset();
-                    healthbarFirst -= 60;
-                    this.Remove(lives);
-                    
-                }
-
-            }
-            foreach (UnbreakableWall wall in walls.Children) 
-            {
-                if (wall.CollidesWith(firstPlayerTank))
-                {
-                   firstPlayerTank.Position = firstPlayerTank.Position + wallbounce;
-                }
-                else if (wall.CollidesWith(secondPlayerTank))
-                {
-                    secondPlayerTank.Position = secondPlayerTank.Position + wallbounce2;
-                }
-            }
-            foreach (UnbreakableWall wall in walls2.Children)
-            {
-                if (wall.CollidesWith(firstPlayerTank) )
-                {
-                    firstPlayerTank.Position = firstPlayerTank.Position + wallbounce;
-                }
-                else if (wall.CollidesWith(secondPlayerTank))
-                {
-                    secondPlayerTank.Position = secondPlayerTank.Position + wallbounce2;
-                }
-            }
-            foreach (UnbreakableWall wall in walls3.Children)
-            {
-                if (wall.CollidesWith(firstPlayerTank) )
-                {
-                    firstPlayerTank.Position = firstPlayerTank.Position + wallbounce;
-
-                }
-                else if (wall.CollidesWith(secondPlayerTank))
-                {
-                    secondPlayerTank.Position = secondPlayerTank.Position + wallbounce2;
-                }
-            }
-            foreach (UnbreakableWall wall in walls4.Children)
-            {
-                if (wall.CollidesWith(firstPlayerTank) )
-                {
-                    firstPlayerTank.Position = firstPlayerTank.Position + wallbounce;
-
-                }
-                else if (wall.CollidesWith(secondPlayerTank))
-                {
-                    secondPlayerTank.Position = secondPlayerTank.Position + wallbounce2;
-                }
-            }
-            foreach (UnbreakableWall wall in walls5.Children)
-            {
-                if (wall.CollidesWith(firstPlayerTank))
-                {
-                    firstPlayerTank.Position = firstPlayerTank.Position + wallbounce;
-
-                }
-                else if (wall.CollidesWith(secondPlayerTank))
-                {
-                    secondPlayerTank.Position = secondPlayerTank.Position + wallbounce2;
-                }
-            }
+            //foreach (Bullet bullet in bullets2.Children)
+            //{
+            //    if (bullet.CollidesWith(firstPlayerTank))
+            //    {
+            //        firstPlayerTank.Reset();
+            //        bullets2.Reset();
+            //        healthbarFirst -= 60;
+            //        this.Remove(lives);
+            //        
+            //    }
+            //
+            //}
+            //foreach (UnbreakableWall wall in walls.Children) 
+            //{
+            //    if (wall.CollidesWith(firstPlayerTank))
+            //    {
+            //       firstPlayerTank.Position = firstPlayerTank.Position + wallbounce;
+            //    }
+            //    else if (wall.CollidesWith(secondPlayerTank))
+            //    {
+            //        secondPlayerTank.Position = secondPlayerTank.Position + wallbounce2;
+            //    }
+            //}
+            //foreach (UnbreakableWall wall in walls2.Children)
+            //{
+            //    if (wall.CollidesWith(firstPlayerTank) )
+            //    {
+            //        firstPlayerTank.Position = firstPlayerTank.Position + wallbounce;
+            //    }
+            //    else if (wall.CollidesWith(secondPlayerTank))
+            //    {
+            //        secondPlayerTank.Position = secondPlayerTank.Position + wallbounce2;
+            //    }
+            //}
+            //foreach (UnbreakableWall wall in walls3.Children)
+            //{
+            //    if (wall.CollidesWith(firstPlayerTank) )
+            //    {
+            //        firstPlayerTank.Position = firstPlayerTank.Position + wallbounce;
+            //
+            //    }
+            //    else if (wall.CollidesWith(secondPlayerTank))
+            //    {
+            //        secondPlayerTank.Position = secondPlayerTank.Position + wallbounce2;
+            //    }
+            //}
+            //foreach (UnbreakableWall wall in walls4.Children)
+            //{
+            //    if (wall.CollidesWith(firstPlayerTank) )
+            //    {
+            //        firstPlayerTank.Position = firstPlayerTank.Position + wallbounce;
+            //
+            //    }
+            //    else if (wall.CollidesWith(secondPlayerTank))
+            //    {
+            //        secondPlayerTank.Position = secondPlayerTank.Position + wallbounce2;
+            //    }
+            //}
+            //foreach (UnbreakableWall wall in walls5.Children)
+            //{
+            //    if (wall.CollidesWith(firstPlayerTank))
+            //    {
+            //        firstPlayerTank.Position = firstPlayerTank.Position + wallbounce;
+            //
+            //    }
+            //    else if (wall.CollidesWith(secondPlayerTank))
+            //    {
+            //        secondPlayerTank.Position = secondPlayerTank.Position + wallbounce2;
+            //    }
+            //}
         }
         
     }
