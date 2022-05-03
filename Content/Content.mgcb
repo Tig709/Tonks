@@ -289,6 +289,18 @@
 /processorParam:TextureFormat=Color
 /build:playTransparent.png
 
+#begin scrollingUpgrade@7x1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:scrollingUpgrade@7x1.png
+
 #begin settings.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -415,7 +427,7 @@
 /processorParam:TextureFormat=Color
 /build:spr_double_lives.png
 
-#begin spr_invisibilty.png
+#begin spr_invisibility.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -425,7 +437,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:spr_invisibilty.png
+/build:spr_invisibility.png
 
 #begin spr_mine.png
 /importer:TextureImporter
