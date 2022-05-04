@@ -7,7 +7,7 @@ using System.Text;
 namespace BaseProject { 
     class UpgradeState : GameObjectList
     {
-        string[] upgradeArray = new string[] {"spr_double_lives", "spr_dash", "spr_invisibility"};
+        string[] upgradeArray = new string[] {"spr_double_lives", "spr_dash", "spr_invisibilty"};
         GameObject upgradeName;
 
         public UpgradeState()

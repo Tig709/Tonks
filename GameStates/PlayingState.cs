@@ -19,7 +19,7 @@ namespace BaseProject
         Helicopter theHelicopter;
         GameObjectList explosion;
         GameObjectList score, walls;
-        Mine minePlayer1, minePlayer2;
+        GameObjectList minePlayer1, minePlayer2;
         Vector2 wallbounce, wallbounce2, positionPrevious;
         Vector2 minePosition1, minePosition2;
         Vector2 offset_heli = new Vector2(5,25);
@@ -100,10 +100,10 @@ namespace BaseProject
             bullets2 = new GameObjectList();
             this.Add(bullets2);
 
-            minePlayer1 = new Mine("spr_mine", firstPlayerTank.position);
+            minePlayer1 = new GameObjectList();
             this.Add(minePlayer1);
 
-            minePlayer2 = new Mine("spr_mine2", secondPlayerTank.position);
+            minePlayer2 = new GameObjectList();
             this.Add(minePlayer2);
 
             firstPlayerTank = new TankFirstPlayer();
@@ -182,13 +182,13 @@ namespace BaseProject
             if (inputHelper.KeyPressed(Keys.X))
             {
                 minePosition1 = this.firstPlayerTank.position;
-                minesPlayer1.Add(new Mine(mineType[0], minePosition1));
+                minePlayer1.Add(new Mine(mineType[0], minePosition1));
                 mine1Placed = true;
             }
             if (inputHelper.KeyPressed(Keys.B))
             {
                 minePosition2 = this.secondPlayerTank.position;
-                minesPlayer2.Add(new Mine(mineType[1], minePosition2));
+                minePlayer2.Add(new Mine(mineType[1], minePosition2));
                 mine2Placed = true;
             }
 
@@ -256,19 +256,21 @@ namespace BaseProject
             if (p1Explosion == true)
             {
                 nextExplosionSpriteCounter++;
-                if (nextExplosionSpriteCounter == 5 &&explosionSprite <= 8) { explosionSprite++; nextExplosionSpriteCounter = 0; }
+                if (nextExplosionSpriteCounter == 5 ) { visible = true;  explosionSprite++; nextExplosionSpriteCounter = 0; }
+                if (explosionSprite >= 8) { explosionSprite = 0; Remove(explosion1); };
 
                 if (explosionSprite <= bombAssets.Length)
                 {
                     explosion1 = new MineExplosion(bombAssets[explosionSprite]);
                     this.Add(explosion1);
+                    explosion1.Reset();
 
                     visible = true;
                     explosion1.position = minePosition1;
-
+                    
                 
                 }
-                else { visible = false; explosionSprite = 0; } ;
+                 
             }
             
             theWarning.position.X = theHelicopter.position.X;
