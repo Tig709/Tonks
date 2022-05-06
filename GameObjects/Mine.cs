@@ -29,7 +29,8 @@ namespace BaseProject
         public override void Reset()
         {
             base.Reset();
-         
+            this.position.X = -1000;
+            this.position.Y = -1000;
 
         }
         public override void Update(GameTime gameTime)
