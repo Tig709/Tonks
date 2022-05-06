@@ -33,6 +33,7 @@ namespace BaseProject
         int healthbarSecond = 100;
         int helipcoterHealth = 600;
         int wallHealth = 180;
+        Boolean explosionDamage1, explosionDamage2;
         Boolean mine1Placed = false;
         Boolean mine2Placed = false;
         Boolean p1Explosion = false;
@@ -544,6 +545,8 @@ namespace BaseProject
                 explosion.Visible = false;
                 p1Explosion = false;
                 mine1Placed = false;
+                explosionDamage1 = true;
+                explosionDamage2 = true;
             }
 
             if (explosionTimer2 >= 60)
@@ -555,10 +558,13 @@ namespace BaseProject
                 explosion.Visible = false;
                 p2Explosion = false;
                 mine2Placed = false;
+                explosionDamage1 = true;
+                explosionDamage2 = true;
             }
             foreach (Explosion explosion in mineExplosion.Children) {
-                if (secondPlayerTank.CollidesWith(explosion)) { healthbarSecond = healthbarSecond - 10; }
-                if (firstPlayerTank.CollidesWith(explosion)) { healthbarFirst = healthbarFirst - 10; }
+                if (firstPlayerTank.CollidesWith(explosion) && explosionDamage1) { healthbarFirst = healthbarFirst - 60; explosionDamage1 = false; }
+                if (secondPlayerTank.CollidesWith(explosion) && explosionDamage2) { healthbarSecond = healthbarSecond - 60; explosionDamage2 = false; }
+                
             }
         }
     }
