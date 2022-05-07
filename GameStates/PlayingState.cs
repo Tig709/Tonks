@@ -13,7 +13,7 @@ namespace BaseProject
         GameObjectList bullets, bullets2;
         TankFirstPlayer firstPlayerTank;
         TankSecondPlayer secondPlayerTank;
-        SpriteGameObject  breakableWall, pit, barrel;
+        SpriteGameObject  breakableWall, pit, barrel, barrel2;
         GameObjectList breakableBarricade;
         RotatingSpriteGameObject propeller;
         Helicopter theHelicopter;
@@ -31,6 +31,7 @@ namespace BaseProject
         int helipcoterHealth = 1000;
         int wallHealth = 180;
         int barrelHealth = 180;
+        int barrelHealth2 = 180;
         public static int roundCounter1, roundCounter2;
         string[] assetNamesScore = { "text_0", "text_1", "text_2", "text_3", "text_dots", };
         string[] mineType = { "spr_mine", "spr_mine2" };
@@ -62,7 +63,10 @@ namespace BaseProject
      
             this.Add(new SpriteGameObject("spr_background1"));
             barrel = new SpriteGameObject("spr_barrel");
+            barrel2 = new SpriteGameObject("spr_barrelGreen");
+
             this.Add(barrel);
+            this.Add(barrel2);
           /*  breakableWall = new SpriteGameObject("spr_barricade_wood");
             this.Add(breakableWall);*/
             /* pit = new SpriteGameObject("spr_pit");
@@ -265,8 +269,19 @@ namespace BaseProject
                     barrel.Visible = false;
                 }
 
+                if (bullet.CollidesWith(barrel2))
+                {
+                    bullet.Reset();
+                    barrelHealth2 -= 60;
+                }
+                if (barrelHealth2 <= 0)
+                {
+                    barrel2.Visible = false;
+                }
 
-                    if (bullet.CollidesWith(secondPlayerTank))
+
+
+                if (bullet.CollidesWith(secondPlayerTank))
                     {
                         /* secondPlayerTank.Reset();*/
                         bullet.Reset();
@@ -310,6 +325,16 @@ namespace BaseProject
                 if (barrelHealth <= 0)
                 {
                     barrel.Visible = false;
+                }
+
+                if (bullet2.CollidesWith(barrel2))
+                {
+                    bullet2.Reset();
+                    barrelHealth2 -= 60;
+                }
+                if (barrelHealth2 <= 0)
+                {
+                    barrel2.Visible = false;
                 }
             }
 
@@ -424,6 +449,21 @@ namespace BaseProject
                 }
             }
             if (barrel.CollidesWith(secondPlayerTank))
+            {
+                if (secondPlayerTank.Position.X <= barrel.Position.X || secondPlayerTank.Position.X >= barrel.Position.X)
+                {
+                    secondPlayerTank.WallCorrect();
+                }
+            }
+
+            if (barrel2.CollidesWith(firstPlayerTank))
+            {
+                if (firstPlayerTank.Position.X <= barrel.Position.X || firstPlayerTank.Position.X >= barrel.Position.X)
+                {
+                    firstPlayerTank.WallCorrect();
+                }
+            }
+            if (barrel2.CollidesWith(secondPlayerTank))
             {
                 if (secondPlayerTank.Position.X <= barrel.Position.X || secondPlayerTank.Position.X >= barrel.Position.X)
                 {
