@@ -13,9 +13,9 @@ namespace BaseProject
         GameObjectList bullets, bullets2;
         TankFirstPlayer firstPlayerTank;
         TankSecondPlayer secondPlayerTank;
-        SpriteGameObject  breakableWall, pit, barrel, barrel2;
+        SpriteGameObject  breakableWall, barrel, barrel2;
         GameObjectList breakableBarricade;
-        SpriteGameObject wall, breakableWall, pit;
+        /*SpriteGameObject wall, breakableWall, pit;*/
         Warning theWarning;
         RotatingSpriteGameObject propeller;
         Helicopter theHelicopter;
@@ -83,18 +83,18 @@ namespace BaseProject
             /*positionPrevious = new Vector2();*/
 
 
-            this.Add(new SpriteGameObject("spr_dirt"));
-           /* wall = new SpriteGameObject("spr_walls");
-            this.Add(wall);*/
+        /*    this.Add(new SpriteGameObject("spr_dirt"));
+           *//* wall = new SpriteGameObject("spr_walls");
+            this.Add(wall);*//*
             breakableWall = new SpriteGameObject("spr_breakable_wall");
-            this.Add(breakableWall);
+            this.Add(breakableWall);*/
 
            // explosion1 = new MineExplosion(bombAssets[0]);
            // this.Add(explosion1);
 
          
-            pit = new SpriteGameObject("spr_pit");
-            this.Add(pit);
+            /*pit = new SpriteGameObject("spr_pit");
+            this.Add(pit);*/
 
             this.Add(barrel);
             this.Add(barrel2);
@@ -138,17 +138,17 @@ namespace BaseProject
             this.Add(score1);
             this.Add(scoreText);
             this.Add(score2);
-            walls.Add(new UnbreakableWall("unbreakable_wall",new Vector2(265, 128)));
+          /*  walls.Add(new UnbreakableWall("unbreakable_wall",new Vector2(265, 128)));
             walls.Add(new UnbreakableWall("unbreakable_wall", new Vector2(1715, 128)));
             walls.Add(new UnbreakableWall("unbreakable_wall", new Vector2(265, 928)));
-            walls.Add(new UnbreakableWall("unbreakable_wall", new Vector2(1715, 928)));
+            walls.Add(new UnbreakableWall("unbreakable_wall", new Vector2(1715, 928)));*/
 
-            walls.Add(new UnbreakableWall("spr_barricade",new Vector2(235,20)));
-            walls.Add(new UnbreakableWall("spr_barricade", new Vector2(1585, 20)));
-            walls.Add(new UnbreakableWall("spr_barricade", new Vector2(235, 965)));
-            walls.Add(new UnbreakableWall("spr_barricade", new Vector2(235, 485)));
-            walls.Add(new UnbreakableWall("spr_barricade", new Vector2(1585, 965)));
-            walls.Add(new UnbreakableWall("spr_barricade", new Vector2(1585, 485)));
+            walls.Add(new UnbreakableWall("spr_barricade",new Vector2(235,70)));
+            walls.Add(new UnbreakableWall("spr_barricade", new Vector2(1585, 70)));
+            walls.Add(new UnbreakableWall("spr_barricade", new Vector2(235, 1015)));
+            walls.Add(new UnbreakableWall("spr_barricade", new Vector2(235, 535)));
+            walls.Add(new UnbreakableWall("spr_barricade", new Vector2(1585, 1015)));
+            walls.Add(new UnbreakableWall("spr_barricade", new Vector2(1585, 535)));
 
             breakableBarricade = new GameObjectList();
             this.Add(breakableBarricade);
@@ -182,7 +182,6 @@ namespace BaseProject
                 ScreenShake();
                 bulletTimer = 0;
                 generateSound("monoShoot", 1.0f, -0.2f, firstPlayerTank.position.X, true);
-
             }
             else
             {
@@ -198,14 +197,6 @@ namespace BaseProject
                 bullets2.Add(new Bullet("tank_bullet1", new Vector2(secondPlayerTank.Position.X, secondPlayerTank.Position.Y), new Vector2(secondPlayerTank.AngularDirection.X * 500, secondPlayerTank.AngularDirection.Y * 500)));
                 ScreenShake();
                 bulletTimer2 = 0;
-                generateSound("monoShoot", 1.0f, -0.2f, secondPlayerTank.position.X, true);
-            }
-
-            if (inputHelper.KeyPressed(Keys.Space) && bulletTimer >= 100 && doubleBulletsEquipped)
-            {
-                bullets2.Add(new Bullet("tank_bullet1", new Vector2(secondPlayerTank.Position.X, secondPlayerTank.Position.Y), new Vector2(secondPlayerTank.AngularDirection.X * 500, secondPlayerTank.AngularDirection.Y * 500)));
-                ScreenShake();
-                bulletTimer = 0;
                 generateSound("monoShoot", 1.0f, -0.2f, secondPlayerTank.position.X, true);
             }
 
@@ -500,7 +491,6 @@ namespace BaseProject
                 {
                     barrel2.Visible = false;
                 }
-            }
                 foreach (UnbreakableWall wall in walls.Children)
                 {
                     if (bullet2.CollidesWith(wall))
@@ -509,6 +499,8 @@ namespace BaseProject
                     }
                 }
             }
+                
+            
 
             if (healthbarFirst <= 0)
             {
