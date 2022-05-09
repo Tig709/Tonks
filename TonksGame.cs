@@ -17,12 +17,13 @@ namespace BaseProject
 
             // TODO: use this.Content to load your game content here
             GameStateManager.AddGameState("Play", new PlayingState());
-         
+            GameStateManager.AddGameState("Settings", new SettingsState());
             GameStateManager.AddGameState("Begin", new MainState());
             GameStateManager.AddGameState("Tie", new TieState());
             GameStateManager.AddGameState("winState_player_1", new WinState1());
             GameStateManager.AddGameState("winState_player_2", new WinState2());
             GameStateManager.AddGameState("End", new EndOfRoundState());
+            GameStateManager.AddGameState("Upgrade", new UpgradeState());
             GameStateManager.SwitchTo("Begin");
             
         }

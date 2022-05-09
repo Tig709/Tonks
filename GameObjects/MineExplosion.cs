@@ -8,19 +8,25 @@ namespace BaseProject
     class MineExplosion : SpriteGameObject
     {
         Vector2 startPosition;
-        public MineExplosion(String assetNames, Vector2 startPosition) : base(assetNames)
+        public MineExplosion(String assetNames) : base(assetNames)
         {
             Origin = Center;
-            this.position = startPosition;
-            this.startPosition = startPosition;
+            visible = true;
+           
         }
 
         public override void Reset()
         {
             base.Reset();
-            this.position.X = -1000;
-            this.position.Y = -1000;
+         
         }
+        public void Detonate(String bombNames, Vector2 explosionPosition)
+        {//Zorg dat de methode een positie als argument accepteert
+            this.position = explosionPosition; //Zet de positie van het object op de meegegeven positie
 
+            
+            visible = true;
+
+        }
     }
 }

@@ -6,6 +6,8 @@ using System;
 
 public class AssetManager
 {
+    public float mainVolume;
+
     protected ContentManager contentManager;
 
     public AssetManager(ContentManager content)
@@ -22,10 +24,12 @@ public class AssetManager
         return contentManager.Load<Texture2D>(assetName);
     }
 
-    public void PlaySound(string assetName)
+    public void PlaySound(string assetName, float volume, float pitch, float pan)
     {
         SoundEffect snd = contentManager.Load<SoundEffect>(assetName);
-        snd.Play();
+        snd.Play(volume * mainVolume, pitch, pan);
+        Console.WriteLine(mainVolume);
+        Console.WriteLine(volume);
     }
 
     public void PlayMusic(string assetName, bool repeat = true)

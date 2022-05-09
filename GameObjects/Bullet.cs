@@ -11,20 +11,25 @@ namespace BaseProject
 
     class Bullet : RotatingSpriteGameObject
     {
+        GameObjectList wall;
         int frameCounter;
+        Vector2 positionPrevious;
         Vector2 startPosition;
         Vector2 startSnelheid;
+        Vector2 positionWall;
         float turningspeed = 1.57f;
+        float distanceY, distanceX;
 
         public Bullet(String assetName,Vector2 startPosition, Vector2 startSnelheid) : base(assetName)
         {
-
+            this.wall = wall;
             origin = Center;
             this.position = startPosition;
             this.startPosition = startPosition;
             this.startSnelheid = startSnelheid;
             velocity += startSnelheid;
             AngularDirection = velocity;
+            positionPrevious = new Vector2();
 
         }
         public override void HandleInput(InputHelper inputHelper)
@@ -42,6 +47,7 @@ namespace BaseProject
         }
         public override void Update(GameTime gameTime)
         {
+            positionPrevious = position;
             base.Update(gameTime);
             WrapBullet();
             frameCounter++;
@@ -66,7 +72,24 @@ namespace BaseProject
                 velocity.Y *= -1;
             }
         }
-      
 
+        public void WrapWallBullet(Vector2 positionWall, int heightWall, int widthWall)
+        {
+            distanceX = Convert.ToSingle(Math.Sqrt(Math.Pow(position.X - positionWall.X, 2))) / widthWall;
+            distanceY = Convert.ToSingle(Math.Sqrt(Math.Pow(position.Y - positionWall.Y, 2))) / heightWall;
+
+            if (position.X - Width / 2 < positionWall.X - widthWall / 2 || position.X + Width / 2 > positionWall.X + widthWall / 2 && distanceX > distanceY)
+            {
+                velocity.X *= -1;
+            }
+            if (position.Y - Height / 2 < positionWall.Y - heightWall / 2 || position.Y + Height / 2 > positionWall.Y + heightWall / 2 && distanceY > distanceX)
+            {
+                velocity.Y *= -1;
+            }
+            if (distanceY == distanceX)
+            {
+                velocity *= new Vector2(-1, -1);
+            }
+        }
     }
 }
