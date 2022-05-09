@@ -17,9 +17,9 @@ namespace BaseProject
         {
             Random rnd = new Random();
             int index = rnd.Next(upgradeArray.Length);
-            upgradeName = new chosenUpgrade(upgradeArray[index], new Vector2(GameEnvironment.Screen.X / 2, 550));
+            upgradeName = new chosenUpgrade(upgradeArray[index], new Vector2(GameEnvironment.Screen.X / 2, GameEnvironment.Screen.Y / 2));
             scrollingUpgrade = new AnimatedGameObject();
-            scrollingUpgrade.LoadAnimation("scrollingUpgrade@7x1", "upgradeStates", true, 0.10f);
+            scrollingUpgrade.LoadAnimation("scrollingUpgrade@3x1", "upgradeStates", true, 0.10f);
 
             this.Add(scrollingUpgrade);
 
