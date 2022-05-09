@@ -12,9 +12,16 @@ namespace BaseProject
         string[] upgradeArray = new string[] { "spr_double_lives", "spr_dash", "spr_invisibility" };
         GameObject upgradeName;
         AnimatedGameObject scrollingUpgrade;
+        
 
         public UpgradeState()
         {
+            ChosenUpgrade(new Vector2(GameEnvironment.Screen.X / 2, GameEnvironment.Screen.Y / 2));
+        }
+
+        public void ChosenUpgrade(Vector2 position)
+        {
+            this.position = position; 
             Random rnd = new Random();
             int index = rnd.Next(upgradeArray.Length);
             upgradeName = new chosenUpgrade(upgradeArray[index], new Vector2(GameEnvironment.Screen.X / 2, GameEnvironment.Screen.Y / 2));
@@ -24,17 +31,16 @@ namespace BaseProject
             this.Add(scrollingUpgrade);
 
             scrollingUpgrade.PlayAnimation("upgradeStates");
-            //this.Add(new SpriteGameObject("upgradeState"));
         }
 
         public override void HandleInput(InputHelper inputHelper)
         {
             base.HandleInput(inputHelper);
-            if (inputHelper.KeyPressed(Keys.E))
+            if (inputHelper.KeyPressed(Keys.Enter))
                 this.Add(upgradeName);
 
-            if (inputHelper.KeyPressed(Keys.Enter))
-                GameEnvironment.GameStateManager.SwitchTo("Play");
+            //if (inputHelper.KeyPressed(Keys.Enter))
+            //    GameEnvironment.GameStateManager.SwitchTo("Play");
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
