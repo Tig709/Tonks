@@ -98,11 +98,12 @@ namespace BaseProject
 
             this.Add(barrel);
             this.Add(barrel2);
-          /*  breakableWall = new SpriteGameObject("spr_barricade_wood");
+
+            /*breakableWall = new SpriteGameObject("spr_barricade_wood");
             this.Add(breakableWall);*/
             /* pit = new SpriteGameObject("spr_pit");
              this.Add(pit);*/
-           
+
             upgrade = new Upgrades();
             this.Add(upgrade);
 
@@ -406,17 +407,17 @@ namespace BaseProject
                         bullet.Reset();
                         healthbarSecond -= 60;
                     }
-
-                if (bullet.CollidesWith(breakableWall))
+                //breakablebarricde collision is er al.
+/*                if (bullet.CollidesWith(breakableWall))
                 {
                     bullet.Reset();
                     wallHealth -= 60;
-                }
+                }*/
 
-                if (wallHealth <= 0)
+               /* if (wallHealth <= 0)
                 {
                     breakableWall.Visible = false;
-                }
+                }*/
                 if (bullet.CollidesWith(secondPlayerTank))
                 {
                     /* secondPlayerTank.Reset();*/
