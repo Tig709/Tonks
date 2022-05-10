@@ -16,7 +16,7 @@ namespace BaseProject
 
         public MainState()
         {
-            GameEnvironment.AssetManager.mainVolume = 1;
+            GameEnvironment.AssetManager.mainVolume = 1.0f;
 
             Add(new SpriteGameObject("mainBackground"));
 
