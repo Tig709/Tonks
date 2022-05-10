@@ -28,7 +28,9 @@ public class SpriteSheet
         for (int i = 0; i < colorData.Length; ++i)
         {
             collisionMask[i] = colorData[i].A != 0;
+           // colorData[i] = new Color(colorData[i].R, colorData[i].G, colorData[i].B, Color.Transparent.A);
         }
+      //  sprite.SetData(colorData);
 
         sheetColumns = 1;
         sheetRows = 1;

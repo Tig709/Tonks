@@ -13,6 +13,7 @@ namespace BaseProject
             base.LoadContent();
             /*GraphicsDebug.*/
             screen = new Point(1920, 1080);
+            //this.FullScreen = true;
             ApplyResolutionSettings();
 
             // TODO: use this.Content to load your game content here
