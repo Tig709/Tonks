@@ -12,19 +12,25 @@ namespace BaseProject
         string[] upgradeArray = new string[] { "spr_double_lives", "spr_dash", "spr_invisibility" };
         GameObject upgradeName;
         AnimatedGameObject scrollingUpgrade;
-        
+        Vector2 upgradeOffset = new Vector2(80, 120);
+
 
         public UpgradeState()
         {
-            ChosenUpgrade(new Vector2(GameEnvironment.Screen.X / 2, GameEnvironment.Screen.Y / 2));
+            ChosenUpgrade();
+            stylesheetUpgrade(new Vector2(GameEnvironment.Screen.X / 2, GameEnvironment.Screen.Y / 2));
         }
 
-        public void ChosenUpgrade(Vector2 position)
+        public void ChosenUpgrade()
         {
-            this.position = position; 
             Random rnd = new Random();
             int index = rnd.Next(upgradeArray.Length);
-            upgradeName = new chosenUpgrade(upgradeArray[index], new Vector2(GameEnvironment.Screen.X / 2, GameEnvironment.Screen.Y / 2));
+            upgradeName = new chosenUpgrade(upgradeArray[index], new Vector2(0, 0));
+        }
+
+        public void stylesheetUpgrade(Vector2 position)
+        {
+            this.position = position - upgradeOffset;
             scrollingUpgrade = new AnimatedGameObject();
             scrollingUpgrade.LoadAnimation("scrollingUpgrade@3x1", "upgradeStates", true, 0.10f);
 
