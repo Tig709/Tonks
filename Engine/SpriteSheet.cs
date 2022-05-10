@@ -64,6 +64,23 @@ public class SpriteSheet
             radians, origin, scale, spriteEffects, 0.0f);
     }
 
+    public void Draw(SpriteBatch spriteBatch, Vector2 position, Vector2 origin, Rectangle scaleDestination, Color color)
+    {
+        SpriteEffects spriteEffects = SpriteEffects.None;
+        if (mirror)
+        {
+            spriteEffects = SpriteEffects.FlipHorizontally;
+        }
+        spriteBatch.Draw(sprite,
+            scaleDestination,
+            spriteRectangle,
+            color,
+            radians,
+            origin,
+            spriteEffects,
+            0.0f);
+    }
+
     public bool IsTranslucent(int x, int y)
     {
         int column_index = sheetIndex % sheetColumns;
