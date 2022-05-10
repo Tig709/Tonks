@@ -553,7 +553,7 @@ namespace BaseProject
             {
                 explosionTimer2 = 0;
                 mineExplosion.Reset();
-                minePlayer1.Reset();
+                minePlayer2.Reset();
                 maxMines2 = maxMines2 + 1;
                 explosion.Visible = false;
                 p2Explosion = false;
