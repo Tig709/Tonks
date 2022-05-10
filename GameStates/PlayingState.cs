@@ -69,6 +69,15 @@ namespace BaseProject
         {
             wallbounce = new Vector2(-50, 10);
             wallbounce2 = new Vector2(50, 10);
+/*<<<<<<< Updated upstream
+=======
+            /*positionPrevious = new Vector2();*/
+
+     /*
+            this.Add(new SpriteGameObject("spr_background1"));
+            barrel = new SpriteGameObject("spr_barrel");
+            barrel2 = new SpriteGameObject("spr_barrelGreen");
+>>>>>>> Stashed changes*/
             
             /*positionPrevious = new Vector2();*/
 
