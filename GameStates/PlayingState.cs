@@ -69,6 +69,15 @@ namespace BaseProject
         {
             wallbounce = new Vector2(-50, 10);
             wallbounce2 = new Vector2(50, 10);
+/*<<<<<<< Updated upstream
+=======
+            /*positionPrevious = new Vector2();*/
+
+     /*
+            this.Add(new SpriteGameObject("spr_background1"));
+            barrel = new SpriteGameObject("spr_barrel");
+            barrel2 = new SpriteGameObject("spr_barrelGreen");
+>>>>>>> Stashed changes*/
             
             /*positionPrevious = new Vector2();*/
 
@@ -169,6 +178,13 @@ namespace BaseProject
                 bullets2.Add(new Bullet("tank_bullet1", new Vector2(secondPlayerTank.Position.X, secondPlayerTank.Position.Y), new Vector2(secondPlayerTank.AngularDirection.X * 500, secondPlayerTank.AngularDirection.Y * 500)));
                 ScreenShake();
                 bulletTimer2 = 0;
+                generateSound("monoShoot", 1.0f, -0.2f, secondPlayerTank.position.X, true);
+            }
+            if (inputHelper.KeyPressed(Keys.Space) && bulletTimer >= 100 && doubleBulletsEquipped)
+            {
+                bullets2.Add(new Bullet("tank_bullet1", new Vector2(secondPlayerTank.Position.X, secondPlayerTank.Position.Y), new Vector2(secondPlayerTank.AngularDirection.X * 500, secondPlayerTank.AngularDirection.Y * 500)));
+                ScreenShake();
+                bulletTimer = 0;
                 generateSound("monoShoot", 1.0f, -0.2f, secondPlayerTank.position.X, true);
             }
 
