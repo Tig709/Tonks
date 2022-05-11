@@ -5,11 +5,16 @@ using Microsoft.Xna.Framework.Graphics;
 public class GameObjectList : GameObject
 {
     protected List<GameObject> children;
-
+    private string v;
 
     public GameObjectList(int layer = 0, string id = "") : base(layer, id)
     {
         children = new List<GameObject>();
+    }
+
+    public GameObjectList(string v)
+    {
+        this.v = v;
     }
 
     public List<GameObject> Children
