@@ -287,7 +287,6 @@ namespace BaseProject
             explosionTimer++;
             bulletTimer++;
             bulletTimer2++;
-            hpBar1.Width = hpBar1.Width - 1;
            
             MineDetonate();
             
