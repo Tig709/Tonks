@@ -22,8 +22,8 @@ namespace BaseProject
             this.Add(buttons);
 
             buttons.Add(new Button("buttonSelected", buttonStandardPositionX, buttonOffScreenPositionX, 320, 0, true));
-            buttons.Add(new Button("buttonSelected", buttonStandardPositionX, buttonOffScreenPositionX, 550, 1, false));
-            buttons.Add(new Button("buttonTransparent", buttonStandardPositionX, buttonOffScreenPositionX, 550, 2, true));
+            buttons.Add(new Button("buttonSelected", buttonStandardPositionX, buttonOffScreenPositionX, 570, 1, false));
+            buttons.Add(new Button("buttonTransparent", buttonStandardPositionX, buttonOffScreenPositionX, 570, 2, true));
             buttons.Add(new Button("buttonTransparent", buttonStandardPositionX, buttonOffScreenPositionX, 320, 3, false));
 
             texts = new GameObjectList();
