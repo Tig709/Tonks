@@ -11,32 +11,17 @@ namespace BaseProject
     {
         string[] upgradeArray = new string[] { "spr_double_lives", "spr_dash", "spr_invisibility" };
         GameObject upgradeName;
-        AnimatedGameObject scrollingUpgrade;
+        GameObject sheetUpgrade;
         Vector2 upgradeOffset = new Vector2(80, 120);
 
-
-        public UpgradeState()
-        {
-            ChosenUpgrade();
-            stylesheetUpgrade(new Vector2(GameEnvironment.Screen.X / 2, GameEnvironment.Screen.Y / 2));
-        }
-
-        public void ChosenUpgrade()
+        public UpgradeState() : base("")
         {
             Random rnd = new Random();
             int index = rnd.Next(upgradeArray.Length);
-            upgradeName = new chosenUpgrade(upgradeArray[index], new Vector2(0, 0));
-        }
-
-        public void stylesheetUpgrade(Vector2 position)
-        {
-            this.position = position - upgradeOffset;
-            scrollingUpgrade = new AnimatedGameObject();
-            scrollingUpgrade.LoadAnimation("scrollingUpgrade@3x1", "upgradeStates", true, 0.10f);
-
-            this.Add(scrollingUpgrade);
-
-            scrollingUpgrade.PlayAnimation("upgradeStates");
+            upgradeName = new ChosenUpgrade(upgradeArray[index], new Vector2(GameEnvironment.Screen.X / 2, GameEnvironment.Screen.Y / 2));
+            sheetUpgrade = new StylesheetUpgrade(new Vector2(GameEnvironment.Screen.X / 2, GameEnvironment.Screen.Y / 2));
+            
+            this.Add(sheetUpgrade);
         }
 
         public override void HandleInput(InputHelper inputHelper)
