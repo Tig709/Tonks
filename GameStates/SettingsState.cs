@@ -9,6 +9,7 @@ namespace BaseProject
     class SettingsState : GameObjectList
     {
         GameObjectList buttons;
+        GameObjectList texts;
         int buttonStandardPositionX = 480;
         int buttonOffScreenPositionX = 4000;
         int optionIndex;
@@ -24,6 +25,14 @@ namespace BaseProject
             buttons.Add(new Button("buttonSelected", buttonStandardPositionX, buttonOffScreenPositionX, 550, 1, false));
             buttons.Add(new Button("buttonTransparent", buttonStandardPositionX, buttonOffScreenPositionX, 550, 2, true));
             buttons.Add(new Button("buttonTransparent", buttonStandardPositionX, buttonOffScreenPositionX, 320, 3, false));
+
+            texts = new GameObjectList();
+            this.Add(texts);
+
+            texts.Add(new Text("sound", 0));
+            texts.Add(new Text("controls", 1));
+            texts.Add(new Text("controlsTransparent", 2));
+            texts.Add(new Text("soundTransparent", 3));
 
             optionIndex = 0;
         }
@@ -69,6 +78,22 @@ namespace BaseProject
             if (inputHelper.KeyPressed(Keys.Back))
             {
                 GameEnvironment.GameStateManager.SwitchTo("Begin");
+            }
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+
+            foreach (Button button in buttons.Children)
+            {
+                foreach (Text text in texts.Children)
+                {
+                    if (button.buttonIndex == text.textIndex)
+                    {
+                        text.position = button.position;
+                    }
+                }
             }
         }
     }
