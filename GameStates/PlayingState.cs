@@ -34,8 +34,11 @@ namespace BaseProject
         int bulletTimer2 = 0;
         int explosionTimer = 0;
         int healthbarFirst = 100;
+        int totalHealthFirst = 100;
         int healthbarSecond = 100;
-        int helipcoterHealth = 600;
+        int totalHealthSecond = 100;
+        float helicopterHealth = 600;
+        float helicopterTotalHealth = 600;
         int wallHealth = 180;
         Boolean explosionDamage1, explosionDamage2;
         Boolean mine1Placed = false;
@@ -157,6 +160,12 @@ namespace BaseProject
             bars = new GameObjectList();
 
             //FirstPlayerTank
+            for (int i = 0; i < helicopterHealth / 2; i++)
+            {
+                bars.Add(new Bar("healthBar", i, 0));
+            }
+            this.Add(bars);
+
             for (int i = 0; i < healthbarFirst; i++)
             {
                 bars.Add(new Bar("healthBar", i, 1));
@@ -413,7 +422,7 @@ namespace BaseProject
                 if (bullet.CollidesWith(theHelicopter))
                 {
                     bullet.Reset();
-                    helipcoterHealth -= 60;
+                    helicopterHealth -= 60;
                     theHelicopter.Scale -= 0.5f;
                 }
                 else
@@ -469,9 +478,9 @@ namespace BaseProject
                 healthbarFirst = 100;
                 Reset();
             }
-            if (helipcoterHealth <= 0)
+            if (helicopterHealth <= 0)
             {
-                helipcoterHealth = 600;
+                helicopterHealth = 600;
                 /* theHelicopter.Velocity = new Vector2(0, 0);*/
                 theHelicopter.Reset();
             }
@@ -488,7 +497,7 @@ namespace BaseProject
                 if (bullet.CollidesWith(theHelicopter))
                 {
                     bullet.Reset();
-                    helipcoterHealth -= 60;
+                    helicopterHealth -= 60;
                     theHelicopter.Scale -= 0.5f;
                 }
                 else
@@ -547,11 +556,35 @@ namespace BaseProject
 
             foreach (Bar bar in bars.Children)
             {
+                if (bar.dedicatedObject == 0)
+                {
+                    if (bar.barIndex <= helicopterHealth / 2)
+                    {
+                        bar.position = new Vector2(theHelicopter.position.X - helicopterTotalHealth / 2 + bar.barIndex + theHelicopter.Width / 2, theHelicopter.position.Y + theHelicopter.Height / 2);
+                    }
+                    else
+                    {
+                        bar.position = new Vector2(10000, 10000);
+                    }
+                }
+
                 if (bar.dedicatedObject == 1)
                 {
                     if (bar.barIndex <= healthbarFirst)
                     {
-                        bar.position = new Vector2(firstPlayerTank.position.X - (healthbarFirst / 2) + bar.barIndex, firstPlayerTank.position.Y + firstPlayerTank.Width / 2);
+                        bar.position = new Vector2(firstPlayerTank.position.X - totalHealthFirst / 2 + bar.barIndex, firstPlayerTank.position.Y + firstPlayerTank.Height / 2);
+                    }
+                    else
+                    {
+                        bar.position = new Vector2(10000, 10000);
+                    }
+                }
+
+                if (bar.dedicatedObject == 2)
+                {
+                    if (bar.barIndex <= healthbarSecond)
+                    {
+                        bar.position = new Vector2(secondPlayerTank.position.X - totalHealthSecond / 2 + bar.barIndex, secondPlayerTank.position.Y + secondPlayerTank.Height / 2);
                     }
                     else
                     {
@@ -559,7 +592,6 @@ namespace BaseProject
                     }
                 }
             }
-
         }
 
         public void generateSound(string assetName, float volume, float pitch, float positionX, bool stereoPanning)
