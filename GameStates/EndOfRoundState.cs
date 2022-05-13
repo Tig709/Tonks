@@ -12,6 +12,7 @@ namespace BaseProject
         GameObject score1, score2, scoreText;
 
 
+        
         public EndOfRoundState()
         {
             this.Add(new SpriteGameObject("EndOfRoundStateTest"));
@@ -26,13 +27,10 @@ namespace BaseProject
             scoreText = new Score(assetNamesScore[4], new Vector2(GameEnvironment.Screen.X / 2, 50));
             score2 = new Score(assetNamesScore[roundCounter2], new Vector2(GameEnvironment.Screen.X / 2 + 50, 50));
 
-
-
             this.Add(score1);
             this.Add(scoreText);
             this.Add(score2);
         }
-
 
         public override void Update(GameTime gameTime)
         {
@@ -41,7 +39,6 @@ namespace BaseProject
         }
         public override void HandleInput(InputHelper inputHelper)
         {
-
             base.HandleInput(inputHelper);
             if (inputHelper.KeyPressed(Keys.Enter))
                 GameEnvironment.GameStateManager.SwitchTo("Upgrade");

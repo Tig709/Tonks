@@ -4,6 +4,9 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Drawing;
+using Microsoft.Xna.Framework.Graphics;
+using BaseProject.GameObjects;
 
 namespace BaseProject
 {
@@ -20,6 +23,7 @@ namespace BaseProject
         GameObjectList mineExplosion, explosion;
         GameObjectList score, walls;
         GameObjectList minePlayer1, minePlayer2;
+        Bar hpBar1; 
         Vector2 wallbounce, wallbounce2, positionPrevious;
         Vector2 minePosition1, minePosition2;
         Vector2 offset_heli = new Vector2(5,25);
@@ -51,7 +55,6 @@ namespace BaseProject
         float soundPanning;
         float volumePan;
 
-
         public static int RoundCounterP1
         {
             get { return roundCounter1; }
@@ -69,9 +72,8 @@ namespace BaseProject
         {
             wallbounce = new Vector2(-50, 10);
             wallbounce2 = new Vector2(50, 10);
-            
-            /*positionPrevious = new Vector2();*/
 
+            /*positionPrevious = new Vector2();*/
 
             this.Add(new SpriteGameObject("spr_dirt"));
            /* wall = new SpriteGameObject("spr_walls");
@@ -79,9 +81,11 @@ namespace BaseProject
             breakableWall = new SpriteGameObject("spr_breakable_wall");
             this.Add(breakableWall);
 
-           // explosion1 = new MineExplosion(bombAssets[0]);
-           // this.Add(explosion1);
+            // explosion1 = new MineExplosion(bombAssets[0]);
+            // this.Add(explosion1);
 
+            hpBar1 = new Bar("bullet1filled", new Vector2(500, 500));
+            this.Add(hpBar1);   
          
             pit = new SpriteGameObject("spr_pit");
             this.Add(pit);
@@ -143,6 +147,7 @@ namespace BaseProject
         }
 
 
+       
 
         public override void HandleInput(InputHelper inputHelper)
         {
@@ -259,11 +264,14 @@ namespace BaseProject
 
         public override void Update(GameTime gameTime)
         {
+
+
             base.Update(gameTime);
             frameCounter++;
             explosionTimer++;
             bulletTimer++;
             bulletTimer2++;
+            hpBar1.Width = hpBar1.Width - 1;
            
             MineDetonate();
             
@@ -401,6 +409,8 @@ namespace BaseProject
                     }
                 }
             }
+
+           
 
             if (healthbarFirst <= 0)
             {
@@ -567,6 +577,7 @@ namespace BaseProject
                 
             }
         }
+        
     }
 }
     
