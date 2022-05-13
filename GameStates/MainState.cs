@@ -55,6 +55,9 @@ namespace BaseProject
             if (inputHelper.KeyPressed(Keys.Enter) && selectedButton == 1)
                 GameEnvironment.GameStateManager.SwitchTo("Settings");
 
+            if (inputHelper.KeyPressed(Keys.Enter) && selectedButton == 2)
+                GameEnvironment.GameStateManager.SwitchTo("Map");
+
             if (inputHelper.KeyPressed(Keys.Enter) && selectedButton == 3)
                 Environment.Exit(0);
 

@@ -19,6 +19,9 @@ namespace BaseProject
             // TODO: use this.Content to load your game content here
             GameStateManager.AddGameState("Play", new PlayingState());
             GameStateManager.AddGameState("Settings", new SettingsState());
+            GameStateManager.AddGameState("Sound", new SoundState());
+            GameStateManager.AddGameState("Controls", new ControlState());
+            GameStateManager.AddGameState("Map", new MapState());
             GameStateManager.AddGameState("Begin", new MainState());
             GameStateManager.AddGameState("Tie", new TieState());
             GameStateManager.AddGameState("winState_player_1", new WinState1());

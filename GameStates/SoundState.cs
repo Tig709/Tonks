@@ -58,7 +58,7 @@ namespace BaseProject
 
                 if (inputHelper.KeyPressed(Keys.Back))
                 {
-                    GameEnvironment.GameStateManager.SwitchTo("Begin");
+                    GameEnvironment.GameStateManager.SwitchTo("Settings");
                 }
             }
         }
