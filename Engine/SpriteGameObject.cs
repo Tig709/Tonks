@@ -8,6 +8,8 @@ public class SpriteGameObject : GameObject
     protected Vector2 origin;
     protected float scale = 1f;
     public bool PerPixelCollisionDetection = true;
+    public bool bUseScale = false;
+    public Rectangle scaleRect;
 
     public SpriteGameObject(string assetName, int layer = 0, string id = "", int sheetIndex = 0)
         : base(layer, id)
@@ -30,8 +32,14 @@ public class SpriteGameObject : GameObject
         }
 
         //spriteBatch.Draw(sprite.Sprite, GlobalPosition, null, shade, 0, Origin, scale, SpriteEffects.None, 0);
-        
-       sprite.Draw(spriteBatch, GlobalPosition, Origin, scale, shade);
+        if (!bUseScale)
+        {
+            sprite.Draw(spriteBatch, GlobalPosition, Origin, scale, shade);
+        }
+        else
+        {
+            sprite.Draw(spriteBatch, GlobalPosition, Origin, scaleRect, shade);
+        }
     }
 
     public SpriteSheet Sprite
