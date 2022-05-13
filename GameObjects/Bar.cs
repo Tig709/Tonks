@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 
-namespace BaseProject.GameObjects
+namespace BaseProject
 {
-    internal class Bar : SpriteGameObject
+    class Bar : SpriteGameObject
     {
-        public Bar(String assetName, Vector2 position) : base(assetName) { 
-        
+        public int barIndex;
+        public bool active;
+        public int dedicatedObject;
+        public Bar(String assetName, int barId, int assignedObject) : base(assetName) 
+        { 
+            barIndex = barId;
+            dedicatedObject = assignedObject;
         }
     }
 }
