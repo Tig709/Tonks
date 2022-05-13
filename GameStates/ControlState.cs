@@ -9,7 +9,7 @@ namespace BaseProject
     {
         public ControlState()
         {
-
+            Add(new SpriteGameObject("controlsBackground"));
         }
 
         public override void HandleInput(InputHelper inputHelper)
