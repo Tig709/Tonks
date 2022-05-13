@@ -19,7 +19,7 @@ namespace BaseProject
 
         public SoundState()
         {
-            Add(new SpriteGameObject("settingsBackground"));
+            Add(new SpriteGameObject("soundBackground"));
 
             buttons = new GameObjectList();
             this.Add(buttons);
