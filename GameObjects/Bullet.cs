@@ -20,7 +20,7 @@ namespace BaseProject
         float turningspeed = 1.57f;
         float distanceY, distanceX;
 
-        public Bullet(String assetName,Vector2 startPosition, Vector2 startSnelheid) : base(assetName)
+        public Bullet(String assetName, Vector2 startPosition, Vector2 startSnelheid) : base(assetName)
         {
             this.wall = wall;
             origin = Center;
@@ -43,7 +43,7 @@ namespace BaseProject
             this.position.Y = -1000;
             this.velocity.X = 0;
             this.velocity.Y = 0;
-            
+
         }
         public override void Update(GameTime gameTime)
         {
@@ -55,21 +55,25 @@ namespace BaseProject
         }
         public void WrapBullet()
         {
-            if (position.X < 0+Width/2)
+            if (position.X < 0 + Width / 2)
             {
                 velocity.X *= -1;
+                position.X = 0 + Width / 2;
             }
-            else if (position.X > GameEnvironment.Screen.ToVector2().X-Width/2)
+            else if (position.X > GameEnvironment.Screen.X - Width / 2)
             {
                 velocity.X *= -1;
+                position.X = GameEnvironment.Screen.X - Width / 2;
             }
             if (position.Y < 0)
             {
                 velocity.Y *= -1;
+                position.Y = 0 + Height / 2;
             }
-            else if (position.Y > GameEnvironment.Screen.ToVector2().Y-Height/2)
+            else if (position.Y > GameEnvironment.Screen.Y - Height / 2)
             {
                 velocity.Y *= -1;
+                position.Y = GameEnvironment.Screen.Y - Height / 2;
             }
         }
 
@@ -81,10 +85,28 @@ namespace BaseProject
             if (position.X - Width / 2 < positionWall.X - widthWall / 2 || position.X + Width / 2 > positionWall.X + widthWall / 2 && distanceX > distanceY)
             {
                 velocity.X *= -1;
+
+                if (position.X < positionWall.X)
+                {
+                    position.X = positionWall.X - widthWall / 2;
+                }
+                else
+                {
+                    position.X = positionWall.X + widthWall / 2;
+                }
             }
             if (position.Y - Height / 2 < positionWall.Y - heightWall / 2 || position.Y + Height / 2 > positionWall.Y + heightWall / 2 && distanceY > distanceX)
             {
                 velocity.Y *= -1;
+
+                if (position.Y < positionWall.Y)
+                {
+                    position.Y = positionWall.Y - heightWall / 2;
+                }
+                else
+                {
+                    position.Y = positionWall.Y + heightWall / 2;
+                }
             }
             if (distanceY == distanceX)
             {
