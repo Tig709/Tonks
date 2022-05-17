@@ -88,11 +88,11 @@ namespace BaseProject
 
                 if (position.X < positionWall.X)
                 {
-                    position.X = positionWall.X - widthWall / 2;
+                    position.X = positionWall.X - widthWall / 2 - Width / 2;
                 }
                 else
                 {
-                    position.X = positionWall.X + widthWall / 2;
+                    position.X = positionWall.X + widthWall / 2 + Width / 2;
                 }
             }
             if (position.Y - Height / 2 < positionWall.Y - heightWall / 2 || position.Y + Height / 2 > positionWall.Y + heightWall / 2 && distanceY > distanceX)
@@ -101,11 +101,11 @@ namespace BaseProject
 
                 if (position.Y < positionWall.Y)
                 {
-                    position.Y = positionWall.Y - heightWall / 2;
+                    position.Y = positionWall.Y - heightWall / 2 - Width / 2;
                 }
                 else
                 {
-                    position.Y = positionWall.Y + heightWall / 2;
+                    position.Y = positionWall.Y + heightWall / 2 + Width / 2;
                 }
             }
             if (distanceY == distanceX)
