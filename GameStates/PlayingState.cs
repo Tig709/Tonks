@@ -15,7 +15,9 @@ namespace BaseProject
         Upgrades upgrade;
         GameObjectList bullets, bullets2;
         TankFirstPlayer firstPlayerTank;
+        FirstPlayerShaft firstPlayerShaft;
         TankSecondPlayer secondPlayerTank;
+        SecondPlayerShaft secondPlayerShaft;
         SpriteGameObject wall, breakableWall, pit;
         Warning theWarning;
         RotatingSpriteGameObject propeller;
@@ -123,8 +125,14 @@ namespace BaseProject
             firstPlayerTank = new TankFirstPlayer();
             this.Add(firstPlayerTank);
 
+            firstPlayerShaft = new FirstPlayerShaft();
+            this.Add(firstPlayerShaft);
+
             secondPlayerTank = new TankSecondPlayer();
             this.Add(secondPlayerTank);
+
+            secondPlayerShaft = new SecondPlayerShaft();
+            this.Add(secondPlayerShaft);
 
             score = new GameObjectList();
             this.Add(score);
@@ -592,6 +600,9 @@ namespace BaseProject
                     }
                 }
             }
+
+            firstPlayerShaft.position = firstPlayerTank.position;
+            secondPlayerShaft.position = secondPlayerTank.position;
         }
 
         public void generateSound(string assetName, float volume, float pitch, float positionX, bool stereoPanning)
