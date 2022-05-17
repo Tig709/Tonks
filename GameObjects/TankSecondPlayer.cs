@@ -132,7 +132,6 @@ namespace BaseProject
             //diagonal movement
             if (inputHelper.IsKeyDown(Keys.W) && inputHelper.IsKeyDown(Keys.D) && !inputHelper.IsKeyDown(Keys.A))
             {
-                Console.WriteLine(Degrees);
                 if (Degrees >= 310 && Degrees <= 320)
                 {
                     Degrees = 315;
@@ -261,10 +260,10 @@ namespace BaseProject
         {
             base.HandleInput(inputHelper);
             {
-                if (inputHelper.IsKeyDown(Keys.RightShift))
-                    Degrees += 6;
-                if (inputHelper.IsKeyDown(Keys.RightControl))
-                    Degrees -= 6;
+                if (inputHelper.IsKeyDown(Keys.E))
+                    Degrees += 2;
+                if (inputHelper.IsKeyDown(Keys.Q))
+                    Degrees -= 2;
             }
         }
     }
