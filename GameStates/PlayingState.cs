@@ -16,7 +16,9 @@ namespace BaseProject
         Upgrades upgrade;
         GameObjectList bullets, bullets2;
         TankFirstPlayer firstPlayerTank;
+        FirstPlayerShaft firstPlayerShaft;
         TankSecondPlayer secondPlayerTank;
+        SecondPlayerShaft secondPlayerShaft;
         SpriteGameObject wall, breakableWall;
         GameObjectList pit;
         Warning theWarning;
@@ -117,8 +119,14 @@ namespace BaseProject
             firstPlayerTank = new TankFirstPlayer();
             this.Add(firstPlayerTank);
 
+            firstPlayerShaft = new FirstPlayerShaft();
+            this.Add(firstPlayerShaft);
+
             secondPlayerTank = new TankSecondPlayer();
             this.Add(secondPlayerTank);
+
+            secondPlayerShaft = new SecondPlayerShaft();
+            this.Add(secondPlayerShaft);
 
             score = new GameObjectList();
             this.Add(score);
@@ -196,7 +204,7 @@ namespace BaseProject
             base.HandleInput(inputHelper);
             if (inputHelper.KeyPressed(Keys.L) && bulletTimer >= 100)
             {
-                bullets.Add(new Bullet("tank_bullet", new Vector2(firstPlayerTank.Position.X, firstPlayerTank.Position.Y), new Vector2(firstPlayerTank.AngularDirection.X * 500, firstPlayerTank.AngularDirection.Y * 500)));
+                bullets.Add(new Bullet("tank_bullet", new Vector2(firstPlayerShaft.Position.X, firstPlayerShaft.Position.Y), new Vector2(firstPlayerShaft.AngularDirection.X * 500, firstPlayerShaft.AngularDirection.Y * 500)));
                 ScreenShake();
                 bulletTimer = 0;
                 generateSound("monoShoot", 1.0f, -0.2f, firstPlayerTank.position.X, true);
@@ -215,7 +223,7 @@ namespace BaseProject
             }
             if (inputHelper.KeyPressed(Keys.Space) && bulletTimer2 >= 100)
             {
-                bullets2.Add(new Bullet("tank_bullet1", new Vector2(secondPlayerTank.Position.X, secondPlayerTank.Position.Y), new Vector2(secondPlayerTank.AngularDirection.X * 500, secondPlayerTank.AngularDirection.Y * 500)));
+                bullets2.Add(new Bullet("tank_bullet1", new Vector2(secondPlayerShaft.Position.X, secondPlayerShaft.Position.Y), new Vector2(secondPlayerShaft.AngularDirection.X * 500, secondPlayerShaft.AngularDirection.Y * 500)));
                 ScreenShake();
                 bulletTimer2 = 0;
                 generateSound("monoShoot", 1.0f, -0.2f, secondPlayerTank.position.X, true);
@@ -223,7 +231,7 @@ namespace BaseProject
             }
             if (inputHelper.KeyPressed(Keys.Space) && bulletTimer2 >= 100 && doubleBulletsEquipped)
             {
-                bullets2.Add(new Bullet("tank_bullet1", new Vector2(secondPlayerTank.Position.X, secondPlayerTank.Position.Y), new Vector2(secondPlayerTank.AngularDirection.X * 500, secondPlayerTank.AngularDirection.Y * 500)));
+                bullets2.Add(new Bullet("tank_bullet1", new Vector2(secondPlayerShaft.Position.X, secondPlayerShaft.Position.Y), new Vector2(secondPlayerShaft.AngularDirection.X * 500, secondPlayerShaft.AngularDirection.Y * 500)));
                 ScreenShake();
                 bulletTimer2 = 0;
                 generateSound("monoShoot", 1.0f, -0.2f, secondPlayerTank.position.X, true);
@@ -232,7 +240,7 @@ namespace BaseProject
 
             if (inputHelper.KeyPressed(Keys.Space) && bulletTimer2 >= 100 && doubleBulletsEquipped)
             {
-                bullets2.Add(new Bullet("tank_bullet1", new Vector2(secondPlayerTank.Position.X, secondPlayerTank.Position.Y), new Vector2(secondPlayerTank.AngularDirection.X * 500, secondPlayerTank.AngularDirection.Y * 500)));
+                bullets2.Add(new Bullet("tank_bullet1", new Vector2(secondPlayerShaft.Position.X, secondPlayerShaft.Position.Y), new Vector2(secondPlayerShaft.AngularDirection.X * 500, secondPlayerShaft.AngularDirection.Y * 500)));
                 ScreenShake();
                 bulletTimer2 = 0;
                 generateSound("monoShoot", 1.0f, -0.2f, secondPlayerTank.position.X, true);
@@ -646,6 +654,9 @@ namespace BaseProject
                 }
 
             }
+
+            firstPlayerShaft.position = firstPlayerTank.position;
+            secondPlayerShaft.position = secondPlayerTank.position;
         }
 
         public void generateSound(string assetName, float volume, float pitch, float positionX, bool stereoPanning)
