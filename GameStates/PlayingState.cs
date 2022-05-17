@@ -131,11 +131,15 @@ namespace BaseProject
             this.Add(score1);
             this.Add(scoreText);
             this.Add(score2);
-            walls.Add(new UnbreakableWall("unbreakable_wall", new Vector2(265, 128)));
-            walls.Add(new UnbreakableWall("unbreakable_wall", new Vector2(1715, 128)));
-            walls.Add(new UnbreakableWall("unbreakable_wall", new Vector2(265, 928)));
-            walls.Add(new UnbreakableWall("unbreakable_wall", new Vector2(1715, 928)));
 
+            for (int i = 128; i <= 928; i = i + 800)
+            {
+                for (int j = 265; j <= 1715; j = j + 1450)
+                {
+                    walls.Add(new UnbreakableWall("unbreakable_wall", new Vector2(j, i)));
+
+                }
+            }
             theHelicopter = new Helicopter();
             this.Add(theHelicopter);
 
@@ -181,7 +185,7 @@ namespace BaseProject
             }
             this.Add(hpBar);
             this.Add(bulletBar);
-            //  bulletTimer = 0; bulletTimer2 = 0;
+            
         }
 
 
@@ -566,10 +570,12 @@ namespace BaseProject
             }
 
 
-            foreach (Pit pit in pit.Children) {
+            foreach (Pit pit in pit.Children)
+            {
 
-                if (pit.CollidesWith(firstPlayerTank)) {
-                    
+                if (pit.CollidesWith(firstPlayerTank))
+                {
+
                 }
             }
 
