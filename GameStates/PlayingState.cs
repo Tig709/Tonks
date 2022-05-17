@@ -17,7 +17,8 @@ namespace BaseProject
         GameObjectList bullets, bullets2;
         TankFirstPlayer firstPlayerTank;
         TankSecondPlayer secondPlayerTank;
-        SpriteGameObject wall, breakableWall, pit;
+        SpriteGameObject wall, breakableWall;
+        GameObjectList pit;
         Warning theWarning;
         RotatingSpriteGameObject propeller;
         Helicopter theHelicopter;
@@ -54,6 +55,7 @@ namespace BaseProject
 
         const int BULLET_BAR_OFFSET_X = 50;
         const int BULLET_BAR_OFFSET_Y = 10;
+        const int WALL_TO_PIT_DIST = 300;
 
         GameObject score1, score2, scoreText;
         bool wasHelicopterOnScreen;
@@ -80,14 +82,16 @@ namespace BaseProject
         {
             wallbounce = new Vector2(-50, 10);
             wallbounce2 = new Vector2(50, 10);
-      
+
             this.Add(new SpriteGameObject("spr_dirt"));
-       
+
             breakableWall = new SpriteGameObject("spr_breakable_wall");
             this.Add(breakableWall);
 
-            pit = new SpriteGameObject("spr_pit");
+            pit = new GameObjectList();
             this.Add(pit);
+            pit.Add(new Pit("spr_pit", new Vector2(GameEnvironment.Screen.X / 2 - WALL_TO_PIT_DIST, GameEnvironment.Screen.Y / 2)));
+            pit.Add(new Pit("spr_pit", new Vector2(GameEnvironment.Screen.X / 2 + WALL_TO_PIT_DIST, GameEnvironment.Screen.Y / 2)));
 
             upgrade = new Upgrades();
             this.Add(upgrade);
@@ -561,11 +565,19 @@ namespace BaseProject
                 }
             }
 
+
+            foreach (Pit pit in pit.Children) {
+
+                if (pit.CollidesWith(firstPlayerTank)) {
+                    
+                }
+            }
+
             foreach (Bar bar in bulletBar.Children)
             {
                 if (bar.dedicatedObject == 3)
                 {
-                  
+
                     if (bar.barIndex <= bulletTimer)
                     {
                         bar.position = new Vector2(firstPlayerTank.position.X + bar.barIndex - BULLET_BAR_OFFSET_X, firstPlayerTank.position.Y + firstPlayerTank.Height / 2 + BULLET_BAR_OFFSET_Y);
