@@ -19,6 +19,7 @@ namespace BaseProject
         Vector2 positionWall;
         float turningspeed = 1.57f;
         float distanceY, distanceX;
+        bool active = false;
 
         public Bullet(String assetName, Vector2 startPosition, Vector2 startSnelheid) : base(assetName)
         {
@@ -30,7 +31,7 @@ namespace BaseProject
             velocity += startSnelheid;
             AngularDirection = velocity;
             positionPrevious = new Vector2();
-
+            active = true;
         }
         public override void HandleInput(InputHelper inputHelper)
         {
@@ -43,15 +44,19 @@ namespace BaseProject
             this.position.Y = -1000;
             this.velocity.X = 0;
             this.velocity.Y = 0;
+            active = false;
 
         }
         public override void Update(GameTime gameTime)
         {
+            if (active)
+            {
             positionPrevious = position;
             base.Update(gameTime);
             WrapBullet();
             frameCounter++;
             AngularDirection = velocity;
+            }
         }
         public void WrapBullet()
         {

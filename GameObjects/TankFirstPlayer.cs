@@ -45,7 +45,6 @@ namespace BaseProject
             positionPrevious = position;
             base.Update(gameTime);
             WrapScreen();
-            Console.WriteLine(Degrees);
             DegreeCorrect();
 
         }
