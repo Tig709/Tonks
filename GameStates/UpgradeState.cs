@@ -9,11 +9,13 @@ namespace BaseProject
 {
     class UpgradeState : GameObjectList
     {
-        string[] upgradeArray = new string[] { "spr_double_lives", "spr_dash", "spr_invisibility" };
+        string[] upgradeArray = new string[] { "spr_double_lives", "spr_dash", "spr_invisibility" }; 
         GameObject upgradeName;
         AnimatedGameObject scrollingUpgrade;
         Vector2 upgradeOffset = new Vector2(80, 120);
-
+        
+        public static bool dashingP1;
+        public static bool dashingP2;
 
         public UpgradeState()
         {
@@ -25,7 +27,8 @@ namespace BaseProject
         {
             Random rnd = new Random();
             int index = rnd.Next(upgradeArray.Length);
-            upgradeName = new chosenUpgrade(upgradeArray[index], new Vector2(0, 0));
+            upgradeName = new chosenUpgrade(upgradeArray[index], new Vector2(0, 0));           
+
         }
 
         public void stylesheetUpgrade(Vector2 position)
@@ -45,8 +48,45 @@ namespace BaseProject
             if (inputHelper.KeyPressed(Keys.Enter))
                 this.Add(upgradeName);
 
-            //if (inputHelper.KeyPressed(Keys.Enter))
-            //    GameEnvironment.GameStateManager.SwitchTo("Play");
+
+            if (inputHelper.KeyPressed(Keys.E))
+               GameEnvironment.GameStateManager.SwitchTo("Play");
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+            //Console.WriteLine(PlayingState.firstPlayerTankWon);
+            //Console.WriteLine(dashingP1);
+
+            
+            //if (index == 0)
+            //{
+                if (PlayingState.firstPlayerTankWon)
+                    dashingP1 = true;
+                
+                if (PlayingState.secondPlayerTankWon)
+                    dashingP2 = true;
+            //}
+            /*if (index == 1)
+            {
+                if (PlayingState.firstPlayerTankWon)
+                    dashingP1 = true;
+                if (PlayingState.secondPlayerTankWon)
+                    dashingP2 = true;
+            //}
+
+            if (index == 2)
+            {
+                if (PlayingState.firstPlayerTankWon)
+                    dashingP1 = true;
+                if (PlayingState.secondPlayerTankWon)
+                    dashingP2 = true;
+            }*/
+
+            //Console.WriteLine(PlayingState.secondPlayerTankWon);
+
+
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
