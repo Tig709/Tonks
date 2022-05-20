@@ -15,7 +15,7 @@ namespace BaseProject
         {
             base.HandleInput(inputHelper);
             if (inputHelper.KeyPressed(Keys.Enter))
-                GameEnvironment.GameStateManager.SwitchTo("Play");
+                GameEnvironment.GameStateManager.SwitchTo("Begin");
         }
     }
 }

@@ -9,13 +9,14 @@ namespace BaseProject
     {
         public WinState1() : base("winState_player_1")
         {
-
+            
         }
         public override void HandleInput(InputHelper inputHelper)
         {
             base.HandleInput(inputHelper);
             if (inputHelper.KeyPressed(Keys.Enter))
-                GameEnvironment.GameStateManager.SwitchTo("Play");
+                GameEnvironment.GameStateManager.SwitchTo("Begin");
+            
         }
     }
 }

@@ -193,7 +193,7 @@ namespace BaseProject
             }
             this.Add(hpBar);
             this.Add(bulletBar);
-            
+
         }
 
 
@@ -475,7 +475,16 @@ namespace BaseProject
             }
 
 
-
+            if (roundCounter1 >= 3 || roundCounter2 >= 3)
+            {
+                this.Remove(score1);
+                this.Remove(score2);
+                roundCounter1 = 0;
+                roundCounter2 = 0; 
+                score.Add(new Score(assetNamesScore[roundCounter1], new Vector2(GameEnvironment.Screen.X / 2 - 50, 50))); 
+                score.Add(new Score(assetNamesScore[roundCounter2], new Vector2(GameEnvironment.Screen.X / 2 + 50, 50)));
+                this.Add(score);
+            }
             if (healthbarFirst <= 0)
             {
                 GameEnvironment.GameStateManager.SwitchTo("End");
@@ -542,6 +551,7 @@ namespace BaseProject
                 //MOET NOG GEMAAKT WORDEN : WINSTATE VOOR PLAYER1, SPEL IS OVER ETC.
                 GameEnvironment.GameStateManager.SwitchTo("winState_player_1");
             }
+
             foreach (UnbreakableWall wall in walls.Children)
             {
 

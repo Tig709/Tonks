@@ -57,6 +57,8 @@ namespace BaseProject
 
             this.Add(score1);
             this.Add(score2);
+
+            if (roundCounter1 >= 3 || roundCounter2 >= 3) { Remove(score1); Remove(score2); }
         }
 
     }
