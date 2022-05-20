@@ -51,6 +51,7 @@ namespace BaseProject
         Boolean p1Explosion = false;
         Boolean p2Explosion = false;
         public static int roundCounter1, roundCounter2;
+        public static bool firstPlayerTankWon, secondPlayerTankWon;
         int maxMines1 = 1, maxMines2 = 1;
         string[] assetNamesScore = { "text_0", "text_1", "text_2", "text_3", "text_dots", };
         string[] mineType = { "spr_mine", "spr_mine2" };
@@ -61,7 +62,6 @@ namespace BaseProject
 
         GameObject score1, score2, scoreText;
         bool wasHelicopterOnScreen;
-        bool isDashing;
         bool doubleBulletsEquipped;
 
         float soundPanning;
@@ -72,12 +72,16 @@ namespace BaseProject
             get { return roundCounter1; }
             set { RoundCounterP1 = roundCounter1; }
         }
+
+
         public static int RoundCounterP2
         {
             get { return roundCounter2; }
 
             set { RoundCounterP2 = roundCounter2; }
         }
+
+
 
 
         public PlayingState()
@@ -284,12 +288,7 @@ namespace BaseProject
             }
 
             //Dashing
-            if (inputHelper.KeyPressed(Keys.M))
-            {
-                isDashing = true;
-            }
-
-            if (isDashing)
+            if (inputHelper.KeyPressed(Keys.M) && firstPlayerTankWon && UpgradeState.dashingP1)
             {
                 firstPlayerTank.position += firstPlayerTank.AngularDirection * 150;
                 foreach (UnbreakableWall wall in walls.Children)
@@ -299,9 +298,19 @@ namespace BaseProject
                         Bounce();
                     }
                 }
-                isDashing = false;
             }
-
+            
+            if (inputHelper.KeyPressed(Keys.M) && secondPlayerTankWon && UpgradeState.dashingP2)
+            {
+                secondPlayerTank.position += secondPlayerTank.AngularDirection * 150;
+                foreach (UnbreakableWall wall in walls.Children)
+                {
+                    if (secondPlayerTank.CollidesWith(wall))
+                    {
+                        Bounce();
+                    }
+                }
+            }
 
         }
 
@@ -322,7 +331,7 @@ namespace BaseProject
             firstPlayerTank.position -= firstPlayerTank.AngularDirection * 100;
         }
         public void ScreenShake()
-        {
+         {
             velocity.X = 1000;
         }
 

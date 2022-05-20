@@ -7,10 +7,11 @@ namespace BaseProject
 {
     class chosenUpgrade : SpriteGameObject
     {
+        Vector2 upgradeOffset = new Vector2(67, 67);
         public chosenUpgrade(string assetnames, Vector2 position) : base(assetnames)
         {
-            this.position = position;
             origin = Center;
+            this.position = position + upgradeOffset;
 
         }
     }
