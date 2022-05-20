@@ -8,49 +8,33 @@ namespace BaseProject
 {
     class TankFirstPlayer : RotatingSpriteGameObject
     {
-        Vector2 wheels;
-        Vector2 gun;
         Vector2 startPosition;
-        Vector2 accelerationLeft;
-        Vector2 accelerationRight;
-        Vector2 accelerationTop;
-        Vector2 accelerationBottom;
         Vector2 positionPrevious;
-        int acceleration = 500;
-        float turningspeed = 1.57f;
+        int acceleration = 75;
+        float friction = 0.15f;
 
         public TankFirstPlayer() : base("redTankBase")
         {
-
             startPosition = new Vector2(100, 100);
-            accelerationLeft = new Vector2(-10, 0);
-            accelerationRight = new Vector2(10, 0);
-            accelerationTop = new Vector2(0, -10);
-            accelerationBottom = new Vector2(0, 10);
             positionPrevious = new Vector2();
-
-
             Reset();
         }
         public override void Reset()
         {
             base.Reset();
             position = startPosition;
-            velocity = Vector2.One;
-
         }
 
         public override void Update(GameTime gameTime)
         {
+            velocity -= velocity * friction;
             positionPrevious = position;
             base.Update(gameTime);
             WrapScreen();
             DegreeCorrect();
-
         }
         public override void HandleInput(InputHelper inputHelper)
         {
-            velocity = new Vector2(0, 0);
             base.HandleInput(inputHelper);
             Origin = Center;
 
@@ -72,7 +56,7 @@ namespace BaseProject
                         Degrees -= 6;
                     }
                 }
-                velocity = AngularDirection * acceleration;
+                velocity += AngularDirection * acceleration;
             }
 
             if (inputHelper.IsKeyDown(Keys.Right) && !inputHelper.IsKeyDown(Keys.Up) && !inputHelper.IsKeyDown(Keys.Down))
@@ -92,7 +76,7 @@ namespace BaseProject
                         Degrees -= 6;
                     }
                 }
-                velocity = AngularDirection * acceleration;
+                velocity += AngularDirection * acceleration;
             }
 
             if (inputHelper.IsKeyDown(Keys.Down) && !inputHelper.IsKeyDown(Keys.Left) && !inputHelper.IsKeyDown(Keys.Right))
@@ -112,7 +96,7 @@ namespace BaseProject
                         Degrees -= 6;
                     }
                 }
-                velocity = AngularDirection * acceleration;
+                velocity += AngularDirection * acceleration;
             }
 
             if (inputHelper.IsKeyDown(Keys.Up) && !inputHelper.IsKeyDown(Keys.Left) && !inputHelper.IsKeyDown(Keys.Right))
@@ -132,7 +116,7 @@ namespace BaseProject
                         Degrees -= 6;
                     }
                 }
-                velocity = AngularDirection * acceleration;
+                velocity += AngularDirection * acceleration;
             }
 
             //diagonal movement
@@ -153,7 +137,7 @@ namespace BaseProject
                         Degrees -= 6;
                     }
                 }
-                velocity = AngularDirection * acceleration;
+                velocity += AngularDirection * acceleration;
             }
 
             if (inputHelper.IsKeyDown(Keys.Up) && inputHelper.IsKeyDown(Keys.Left) && !inputHelper.IsKeyDown(Keys.Right))
@@ -173,7 +157,7 @@ namespace BaseProject
                         Degrees -= 6;
                     }
                 }
-                velocity = AngularDirection * acceleration;
+                velocity += AngularDirection * acceleration;
             }
 
             if (inputHelper.IsKeyDown(Keys.Down) && inputHelper.IsKeyDown(Keys.Left) && !inputHelper.IsKeyDown(Keys.Right))
@@ -193,7 +177,7 @@ namespace BaseProject
                         Degrees -= 6;
                     }
                 }
-                velocity = AngularDirection * acceleration;
+                velocity += AngularDirection * acceleration;
             }
 
             if (inputHelper.IsKeyDown(Keys.Down) && inputHelper.IsKeyDown(Keys.Right) && !inputHelper.IsKeyDown(Keys.Left))
@@ -213,7 +197,7 @@ namespace BaseProject
                         Degrees -= 6;
                     }
                 }
-                velocity = AngularDirection * acceleration;
+                velocity += AngularDirection * acceleration;
             }
         }
         public void WrapScreen()
@@ -256,6 +240,8 @@ namespace BaseProject
     class FirstPlayerShaft : RotatingSpriteGameObject
     {
         Vector2 centerOffset = new Vector2(24, 0);
+        float turningSpeed;
+        float turningFriction = 0.28f;
         public FirstPlayerShaft() : base("redTankShaft")
         {
             origin = Center - centerOffset;
@@ -266,10 +252,17 @@ namespace BaseProject
             base.HandleInput(inputHelper);
             {
                 if (inputHelper.IsKeyDown(Keys.RightShift))
-                    Degrees += 2;
+                    turningSpeed += 2;
                 if (inputHelper.IsKeyDown(Keys.RightControl))
-                    Degrees -= 2;
+                    turningSpeed -= 2;
             }
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+            turningSpeed -= turningSpeed * turningFriction;
+            Degrees += turningSpeed;
         }
     }
 }
