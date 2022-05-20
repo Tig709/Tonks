@@ -325,18 +325,6 @@
 /processorParam:TextureFormat=Color
 /build:redTankBase.png
 
-#begin redTankBase.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:redTankBase.png
-
 #begin redTankShaft.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -348,6 +336,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:redTankShaft.png
+
+#begin scrollingUpgrade@3x1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:scrollingUpgrade@3x1.png
 
 #begin settings.png
 /importer:TextureImporter
@@ -523,7 +523,7 @@
 /processorParam:TextureFormat=Color
 /build:spr_double_lives.png
 
-#begin spr_invisibilty.png
+#begin spr_invisibility.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -533,7 +533,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:spr_invisibilty.png
+/build:spr_invisibility.png
 
 #begin spr_mine.png
 /importer:TextureImporter
@@ -798,18 +798,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:winState_player_2.png
-
-#begin yellowTankBase.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:yellowTankBase.png
 
 #begin yellowTankBase.png
 /importer:TextureImporter

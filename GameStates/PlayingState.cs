@@ -499,7 +499,7 @@ namespace BaseProject
                 GameEnvironment.GameStateManager.SwitchTo("End");
                 this.Remove(score2);
                 roundCounter2++;
-
+                secondPlayerTankWon = true;
                 score.Add(new Score(assetNamesScore[roundCounter2], new Vector2(GameEnvironment.Screen.X / 2 + 50, 50)));
                 this.Add(score);
                 healthbarFirst = 100;
@@ -512,7 +512,7 @@ namespace BaseProject
                 GameEnvironment.GameStateManager.SwitchTo("End");
                 this.Remove(score1);
                 roundCounter1++;
-
+                firstPlayerTankWon = true;
                 score.Add(new Score(assetNamesScore[roundCounter1], new Vector2(GameEnvironment.Screen.X / 2 - 50, 50)));
                 this.Add(score);
                 healthbarSecond = 100;
