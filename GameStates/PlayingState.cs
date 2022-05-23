@@ -94,7 +94,7 @@ namespace BaseProject
             this.Add(new SpriteGameObject("spr_dirt"));
 
             breakableWall = new SpriteGameObject("spr_breakable_wall");
-            this.Add(breakableWall);*/
+            this.Add(breakableWall);
 
             pit = new GameObjectList();
             this.Add(pit);
@@ -426,139 +426,8 @@ namespace BaseProject
                 bullets2.Reset();
             }
 
-            foreach (Bullet bullet in bullets.Children)
-            {
-                foreach (BreakableBarricade barricade in breakableBarricade.Children)
-                {
-                    if (bullet.CollidesWith(barricade))
-                    {
-                        bullet.Reset();
-                        wallHealth -= 60;
-                    }
-
-                    if (wallHealth <= 0)
-                    {
-                        barricade.Reset();
-                    }
-                }
-                if (bullet.CollidesWith(barrel))
-                {
-                    bullet.Reset();
-                    barrelHealth -= 60;
-                }
-                if(barrelHealth <= 0)
-                {
-                    barrel.Visible = false;
-                }
-
-                if (bullet.CollidesWith(barrel2))
-                {
-                    bullet.Reset();
-                    barrelHealth2 -= 60;
-                }
-                if (barrelHealth2 <= 0)
-                {
-                    barrel2.Visible = false;
-                }
-
-
-
-                if (bullet.CollidesWith(secondPlayerTank))
-                    {
-                        /* secondPlayerTank.Reset();*/
-                        bullet.Reset();
-                        healthbarSecond -= 60;
-                    }
-                //breakablebarricde collision is er al.
-/*                if (bullet.CollidesWith(breakableWall))
-                {
-                    bullet.Reset();
-                    wallHealth -= 60;
-                }*/
-
-               /* if (wallHealth <= 0)
-                {
-                    breakableWall.Visible = false;
-                }*/
-                if (bullet.CollidesWith(secondPlayerTank))
-                {
-                    /* secondPlayerTank.Reset();*/
-                    bullet.Reset();
-                    healthbarSecond -= 60;
-                }
-
-                foreach (UnbreakableWall wall in walls.Children)
-                {
-                    if (bullet.CollidesWith(wall))
-                    {
-                        bullet.WrapWallBullet(wall.position, wall.Height, wall.Width);
-                    }
-                }
-
-                if (bullet.CollidesWith(theHelicopter))
-                {
-                    bullet.Reset();
-                    helipcoterHealth -= 60;
-                    theHelicopter.Scale -= 0.5f;
-                }
-                else
-                {
-                    theHelicopter.Scale = 1;
-                }
-
-                if (bullet.CollidesWith(theHelicopter))
-                {
-                    bullet.Reset();
-                    helicopterHealth -= 60;
-                    theHelicopter.Scale -= 0.5f;
-                }
-                else
-                {
-                    theHelicopter.Scale = 1;
-                }
-
-            }
-            foreach (Bullet bullet2 in bullets2.Children)
-            {
-                foreach (BreakableBarricade barricade in breakableBarricade.Children)
-                {
-                    if (bullet2.CollidesWith(barricade))
-                    {
-                        bullet2.Reset();
-                        wallHealth -= 60;
-                    }
-                    if (wallHealth <= 0)
-                    {
-                        barricade.Reset();
-                    }
-                }
-                if (bullet2.CollidesWith(barrel))
-                {
-                    bullet2.Reset();
-                    barrelHealth -= 60;
-                }
-                if (barrelHealth <= 0)
-                {
-                    barrel.Visible = false;
-                }
-
-                if (bullet2.CollidesWith(barrel2))
-                {
-                    bullet2.Reset();
-                    barrelHealth2 -= 60;
-                }
-                if (barrelHealth2 <= 0)
-                {
-                    barrel2.Visible = false;
-                }
-                foreach (UnbreakableWall wall in walls.Children)
-                {
-                    if (bullet2.CollidesWith(wall))
-                    {
-                        bullet2.WrapWallBullet(wall.position, wall.Height, wall.Width);
-                    }
-                }
-            }
+              
+            
 
 
             if (roundCounter1 >= 3 || roundCounter2 >= 3)
@@ -653,52 +522,6 @@ namespace BaseProject
                         secondPlayerTank.WallCorrect();
                     }
 
-                }
-            }
-            foreach (BreakableBarricade barricade in breakableBarricade.Children)
-            {
-                if (barricade.CollidesWith(firstPlayerTank))
-                {
-                    if (firstPlayerTank.Position.X <= barricade.Position.X || firstPlayerTank.Position.X >= barricade.Position.X)
-                    {
-                        firstPlayerTank.WallCorrect();
-                    }
-                }
-                if (barricade.CollidesWith(secondPlayerTank))
-                {
-                    if (secondPlayerTank.Position.X <= barricade.Position.X || secondPlayerTank.Position.X >= barricade.Position.X)
-                    {
-                        secondPlayerTank.WallCorrect();
-                    }
-                }
-            }
-            if (barrel.CollidesWith(firstPlayerTank))
-            {
-                if (firstPlayerTank.Position.X <= barrel.Position.X || firstPlayerTank.Position.X >= barrel.Position.X)
-                {
-                    firstPlayerTank.WallCorrect();
-                }
-            }
-            if (barrel.CollidesWith(secondPlayerTank))
-            {
-                if (secondPlayerTank.Position.X <= barrel.Position.X || secondPlayerTank.Position.X >= barrel.Position.X)
-                {
-                    secondPlayerTank.WallCorrect();
-                }
-            }
-
-            if (barrel2.CollidesWith(firstPlayerTank))
-            {
-                if (firstPlayerTank.Position.X <= barrel.Position.X || firstPlayerTank.Position.X >= barrel.Position.X)
-                {
-                    firstPlayerTank.WallCorrect();
-                }
-            }
-            if (barrel2.CollidesWith(secondPlayerTank))
-            {
-                if (secondPlayerTank.Position.X <= barrel.Position.X || secondPlayerTank.Position.X >= barrel.Position.X)
-                {
-                    secondPlayerTank.WallCorrect();
                 }
             }
 
