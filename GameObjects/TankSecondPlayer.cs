@@ -15,9 +15,10 @@ namespace BaseProject
         Vector2 accelerationTop;
         Vector2 accelerationBottom;
         Vector2 positionPrevious;
-        int acceleration = 500;
+        int acceleration = 75;
+        float friction = 0.15f;
      
-        public TankSecondPlayer() : base("tanksprites") 
+        public TankSecondPlayer() : base("yellowTankBase") 
         {
             startPosition = new Vector2(1820,980);
             accelerationLeft = new Vector2(-10, 0);
@@ -38,24 +39,178 @@ namespace BaseProject
         }
         public override void Update(GameTime gameTime)
         {
+            velocity -= velocity * friction;
             positionPrevious = position;
             base.Update(gameTime);
             WrapScreen();
+            DegreeCorrect();
         }
         public override void HandleInput(InputHelper inputHelper)
         {
-            velocity = new Vector2(0, 0);
             base.HandleInput(inputHelper);
             Origin = Center;
-            if (inputHelper.IsKeyDown(Keys.A))
-                Degrees -= 6;
-            if (inputHelper.IsKeyDown(Keys.D))
-                Degrees += 6;
-            if (inputHelper.IsKeyDown(Keys.W))
-                velocity = AngularDirection * acceleration;
-            if (inputHelper.IsKeyDown(Keys.S))
-                velocity = -AngularDirection * acceleration;
-        
+            //regular movement
+            if (inputHelper.IsKeyDown(Keys.A) && !inputHelper.IsKeyDown(Keys.W) && !inputHelper.IsKeyDown(Keys.S))
+            {
+                if (Degrees >= 175 && Degrees <= 185)
+                {
+                    Degrees = 180;
+                }
+                else
+                {
+                    if (Degrees >= 0 && Degrees < 180)
+                    {
+                        Degrees += 6;
+                    }
+                    else
+                    {
+                        Degrees -= 6;
+                    }
+                }
+                velocity += AngularDirection * acceleration;
+            }
+
+            if (inputHelper.IsKeyDown(Keys.D) && !inputHelper.IsKeyDown(Keys.W) && !inputHelper.IsKeyDown(Keys.S))
+            {
+                if (Degrees >= 355 || Degrees <= 5)
+                {
+                    Degrees = 0;
+                }
+                else
+                {
+                    if (Degrees >= 180)
+                    {
+                        Degrees += 6;
+                    }
+                    else
+                    {
+                        Degrees -= 6;
+                    }
+                }
+                velocity += AngularDirection * acceleration;
+            }
+
+            if (inputHelper.IsKeyDown(Keys.S) && !inputHelper.IsKeyDown(Keys.A) && !inputHelper.IsKeyDown(Keys.D))
+            {
+                if (Degrees >= 85 && Degrees <= 95)
+                {
+                    Degrees = 90;
+                }
+                else
+                {
+                    if (Degrees >= 270 || Degrees < 90)
+                    {
+                        Degrees += 6;
+                    }
+                    else
+                    {
+                        Degrees -= 6;
+                    }
+                }
+                velocity += AngularDirection * acceleration;
+            }
+
+            if (inputHelper.IsKeyDown(Keys.W) && !inputHelper.IsKeyDown(Keys.A) && !inputHelper.IsKeyDown(Keys.D))
+            {
+                if (Degrees >= 265 && Degrees <= 275)
+                {
+                    Degrees = 270;
+                }
+                else
+                {
+                    if (Degrees >= 90 && Degrees < 270)
+                    {
+                        Degrees += 6;
+                    }
+                    else
+                    {
+                        Degrees -= 6;
+                    }
+                }
+                velocity += AngularDirection * acceleration;
+            }
+
+            //diagonal movement
+            if (inputHelper.IsKeyDown(Keys.W) && inputHelper.IsKeyDown(Keys.D) && !inputHelper.IsKeyDown(Keys.A))
+            {
+                if (Degrees >= 310 && Degrees <= 320)
+                {
+                    Degrees = 315;
+                }
+                else
+                {
+                    if (Degrees >= 135 && Degrees < 315)
+                    {
+                        Degrees += 6;
+                    }
+                    else
+                    {
+                        Degrees -= 6;
+                    }
+                }
+                velocity += AngularDirection * acceleration;
+            }
+
+            if (inputHelper.IsKeyDown(Keys.W) && inputHelper.IsKeyDown(Keys.A) && !inputHelper.IsKeyDown(Keys.D))
+            {
+                if (Degrees >= 220 && Degrees <= 230)
+                {
+                    Degrees = 225;
+                }
+                else
+                {
+                    if (Degrees >= 45 && Degrees < 225)
+                    {
+                        Degrees += 6;
+                    }
+                    else
+                    {
+                        Degrees -= 6;
+                    }
+                }
+                velocity += AngularDirection * acceleration;
+            }
+
+            if (inputHelper.IsKeyDown(Keys.S) && inputHelper.IsKeyDown(Keys.A) && !inputHelper.IsKeyDown(Keys.D))
+            {
+                if (Degrees >= 130 && Degrees <= 140)
+                {
+                    Degrees = 135;
+                }
+                else
+                {
+                    if (Degrees >= 315 || Degrees < 135)
+                    {
+                        Degrees += 6;
+                    }
+                    else
+                    {
+                        Degrees -= 6;
+                    }
+                }
+                velocity += AngularDirection * acceleration;
+            }
+
+            if (inputHelper.IsKeyDown(Keys.S) && inputHelper.IsKeyDown(Keys.D) && !inputHelper.IsKeyDown(Keys.A))
+            {
+                if (Degrees >= 40 && Degrees <= 50)
+                {
+                    Degrees = 45;
+                }
+                else
+                {
+                    if (Degrees >= 225 || Degrees < 45)
+                    {
+                        Degrees += 6;
+                    }
+                    else
+                    {
+                        Degrees -= 6;
+                    }
+                }
+                velocity += AngularDirection * acceleration;
+            }
+
         }
         public void WrapScreen()
         {
@@ -85,5 +240,41 @@ namespace BaseProject
             this.position = position;
         }
 
+        public void DegreeCorrect()
+        {
+            if (Degrees > 360)
+                Degrees -= 360;
+            if (Degrees < 0)
+                Degrees += 360;
+        }
+    }
+
+    class SecondPlayerShaft : RotatingSpriteGameObject
+    {
+        Vector2 centerOffset = new Vector2(24, 0);
+        float turningSpeed;
+        float turningFriction = 0.28f;
+        public SecondPlayerShaft() : base("yellowTankShaft")
+        {
+            origin = Center - centerOffset;
+        }
+
+        public override void HandleInput(InputHelper inputHelper)
+        {
+            base.HandleInput(inputHelper);
+            {
+                if (inputHelper.IsKeyDown(Keys.E))
+                    turningSpeed += 2;
+                if (inputHelper.IsKeyDown(Keys.Q))
+                    turningSpeed -= 2;
+            }
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+            turningSpeed -= turningSpeed * turningFriction;
+            Degrees += turningSpeed;
+        }
     }
 }

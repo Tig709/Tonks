@@ -16,33 +16,29 @@ namespace BaseProject
 
         public MainState()
         {
-            GameEnvironment.AssetManager.mainVolume = 1;
+            GameEnvironment.AssetManager.mainVolume = 1.0f;
 
             Add(new SpriteGameObject("mainBackground"));
 
             buttons = new GameObjectList();
             this.Add(buttons);
 
-            buttons.Add(new Button("buttonSelected", buttonStandardPositionX, buttonOffScreenPositionX, 100, 0, true));
-            buttons.Add(new Button("buttonSelected", buttonStandardPositionX, buttonOffScreenPositionX, 300, 1, false));
-            buttons.Add(new Button("buttonSelected", buttonStandardPositionX, buttonOffScreenPositionX, 500, 2, false));
-            buttons.Add(new Button("buttonSelected", buttonStandardPositionX, buttonOffScreenPositionX, 700, 3, false));
-            buttons.Add(new Button("buttonTransparent", buttonStandardPositionX, buttonOffScreenPositionX, 100, 4, false));
-            buttons.Add(new Button("buttonTransparent", buttonStandardPositionX, buttonOffScreenPositionX, 300, 5, true));
-            buttons.Add(new Button("buttonTransparent", buttonStandardPositionX, buttonOffScreenPositionX, 500, 6, true));
-            buttons.Add(new Button("buttonTransparent", buttonStandardPositionX, buttonOffScreenPositionX, 700, 7, true));
+            buttons.Add(new Button("buttonSelected", buttonStandardPositionX, buttonOffScreenPositionX, 150, 0, true));
+            buttons.Add(new Button("buttonSelected", buttonStandardPositionX, buttonOffScreenPositionX, 350, 1, false));
+            buttons.Add(new Button("buttonSelected", buttonStandardPositionX, buttonOffScreenPositionX, 550, 2, false));
+            buttons.Add(new Button("buttonTransparent", buttonStandardPositionX, buttonOffScreenPositionX, 150, 3, false));
+            buttons.Add(new Button("buttonTransparent", buttonStandardPositionX, buttonOffScreenPositionX, 350, 4, true));
+            buttons.Add(new Button("buttonTransparent", buttonStandardPositionX, buttonOffScreenPositionX, 550, 5, true));
 
             texts = new GameObjectList();
             this.Add(texts);
 
             texts.Add(new Text("play", 0));
             texts.Add(new Text("settings", 1));
-            texts.Add(new Text("map", 2));
-            texts.Add(new Text("exit", 3));
-            texts.Add(new Text("playTransparent", 4));
-            texts.Add(new Text("settingsTransparent", 5));
-            texts.Add(new Text("mapTransparent", 6));
-            texts.Add(new Text("exitTransparent", 7));
+            texts.Add(new Text("exit", 2));
+            texts.Add(new Text("playTransparent", 3));
+            texts.Add(new Text("settingsTransparent", 4));
+            texts.Add(new Text("exitTransparent", 5));
 
             selectedButton = 0;
         }
@@ -55,14 +51,14 @@ namespace BaseProject
             if (inputHelper.KeyPressed(Keys.Enter) && selectedButton == 1)
                 GameEnvironment.GameStateManager.SwitchTo("Settings");
 
-            if (inputHelper.KeyPressed(Keys.Enter) && selectedButton == 3)
+            if (inputHelper.KeyPressed(Keys.Enter) && selectedButton == 2)
                 Environment.Exit(0);
 
-            if (inputHelper.KeyPressed(Keys.Down) && selectedButton < 4)
+            if (inputHelper.KeyPressed(Keys.Down) && selectedButton < 3)
             {
-                if (selectedButton < 4)
+                if (selectedButton < 3)
                     selectedButton++;
-                if (selectedButton == 4)
+                if (selectedButton == 3)
                     selectedButton = 0;
             }
             
@@ -71,7 +67,7 @@ namespace BaseProject
                 if(selectedButton >= 0)
                     selectedButton--;
                 if(selectedButton < 0)
-                    selectedButton = 3;
+                    selectedButton = 2;
             }
         }
 
@@ -83,9 +79,9 @@ namespace BaseProject
                 if(selectedButton == button.buttonIndex)
                 {
                         button.selected = true;
-                } else if (button.buttonIndex > 3)
+                } else if (button.buttonIndex > 2)
                 {
-                    if(button.buttonIndex == selectedButton + 4)
+                    if(button.buttonIndex == selectedButton + 3)
                     {
                         button.selected = false;
                     } else

@@ -13,11 +13,14 @@ namespace BaseProject
             base.LoadContent();
             /*GraphicsDebug.*/
             screen = new Point(1920, 1080);
+            //this.FullScreen = true;
             ApplyResolutionSettings();
 
             // TODO: use this.Content to load your game content here
             GameStateManager.AddGameState("Play", new PlayingState());
             GameStateManager.AddGameState("Settings", new SettingsState());
+            GameStateManager.AddGameState("Sound", new SoundState());
+            GameStateManager.AddGameState("Controls", new ControlState());
             GameStateManager.AddGameState("Begin", new MainState());
             GameStateManager.AddGameState("Tie", new TieState());
             GameStateManager.AddGameState("winState_player_1", new WinState1());

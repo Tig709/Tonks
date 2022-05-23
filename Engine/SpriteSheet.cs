@@ -28,7 +28,9 @@ public class SpriteSheet
         for (int i = 0; i < colorData.Length; ++i)
         {
             collisionMask[i] = colorData[i].A != 0;
+           // colorData[i] = new Color(colorData[i].R, colorData[i].G, colorData[i].B, Color.Transparent.A);
         }
+      //  sprite.SetData(colorData);
 
         sheetColumns = 1;
         sheetRows = 1;
@@ -62,6 +64,23 @@ public class SpriteSheet
         }
         spriteBatch.Draw(sprite, position, spriteRectangle, color,
             radians, origin, scale, spriteEffects, 0.0f);
+    }
+
+    public void Draw(SpriteBatch spriteBatch, Vector2 position, Vector2 origin, Rectangle scaleDestination, Color color)
+    {
+        SpriteEffects spriteEffects = SpriteEffects.None;
+        if (mirror)
+        {
+            spriteEffects = SpriteEffects.FlipHorizontally;
+        }
+        spriteBatch.Draw(sprite,
+            scaleDestination,
+            spriteRectangle,
+            color,
+            radians,
+            origin,
+            spriteEffects,
+            0.0f);
     }
 
     public bool IsTranslucent(int x, int y)

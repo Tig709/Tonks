@@ -10,7 +10,6 @@ namespace BaseProject
         SpriteGameObject dashUpgrade;
         public DashUpgrade()
         {
-
         }
 
         public override void UpgradeEssentials()

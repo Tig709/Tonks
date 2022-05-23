@@ -5,17 +5,20 @@ using System.Text;
 
 namespace BaseProject
 {
- class WinState2 : SpriteGameObject
+    class ControlState : GameObjectList
     {
-        public WinState2() : base("winState_player_2")
+        public ControlState()
         {
 
         }
+
         public override void HandleInput(InputHelper inputHelper)
         {
             base.HandleInput(inputHelper);
-            if (inputHelper.KeyPressed(Keys.Enter))
-                GameEnvironment.GameStateManager.SwitchTo("Begin");
+            if (inputHelper.KeyPressed(Keys.Back))
+            {
+                GameEnvironment.GameStateManager.SwitchTo("Settings");
+            }
         }
     }
 }
