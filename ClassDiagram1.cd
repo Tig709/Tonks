@@ -1,0 +1,356 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AnimatedGameObject" Collapsed="true">
+    <Position X="26.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAgAAAACAAAAAAAAgEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engine\AnimatedGameObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Animation" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQBAAAAAAAAAAAAIAAAAAQAAAAEACAAgAAAIAAAACA=</HashCode>
+      <FileName>Engine\Animation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AssetManager" Collapsed="true">
+    <Position X="78.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAEAAAAAAAAAkABAAAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>Engine\AssetManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Collision" Collapsed="true">
+    <Position X="80.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAABAAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engine\Collision.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DrawingHelper" Collapsed="true">
+    <Position X="82" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAQEAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engine\DrawingHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameEnvironment" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BJQAAECQAAAAAwIABIAAIAQAAAAAJAwAAAQAAAAAAAQ=</HashCode>
+      <FileName>Engine\GameEnvironment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameObject" Collapsed="true">
+    <Position X="40" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCAACAAACABiBgAAABYAAAACAAAAAMAAQADAAEAgA=</HashCode>
+      <FileName>Engine\GameObject.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GameObjectGrid" Collapsed="true">
+    <Position X="76" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAACAAAIABkBAAAAAIAAAACAAAAEAAAAAwAgAAEA=</HashCode>
+      <FileName>Engine\GameObjectGrid.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameObjectList" Collapsed="true">
+    <Position X="13" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAACAAAAABgQAAAAEBAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engine\GameObjectList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameSettingsManager" Collapsed="true">
+    <Position X="78.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAgAAAAAAAAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engine\GameSettingsManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameStateManager" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="80.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAACAQAAABgAAAAQAAAIUAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>Engine\GameStateManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="InputHelper" Collapsed="true">
+    <Position X="82" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AASIAAAgAAAAAAAAAAIAAUBCAAAAAAAAAAAAQABSgAA=</HashCode>
+      <FileName>Engine\InputHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RotatingSpriteGameObject" Collapsed="true">
+    <Position X="55.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQABAAAAAAAAgAAAgAAAEAAAAAAAAASAEQAAAAAAAI=</HashCode>
+      <FileName>Engine\RotatingSpriteGameObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpriteGameObject" Collapsed="true">
+    <Position X="50.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>SgAAAAAABAAAAgAAAAIABEQCgDAAAAAQAAAEAEgIAAA=</HashCode>
+      <FileName>Engine\SpriteGameObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpriteSheet" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIEAABAAAAgEAAACAAEAAgBBABCAQAAQAAAAIAkE=</HashCode>
+      <FileName>Engine\SpriteSheet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TextGameObject" Collapsed="true">
+    <Position X="24.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAggAAACAAAAAAAAAAAACIAAAAiAAAAAA=</HashCode>
+      <FileName>Engine\TextGameObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseProject.Bar" Collapsed="true">
+    <Position X="31" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAICAAAAA=</HashCode>
+      <FileName>GameObjects\Bar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseProject.Bullet" Collapsed="true">
+    <Position X="55.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAACAAAAABBAAAAAAAAAAAMACAABgAAAEYAADAAA=</HashCode>
+      <FileName>GameObjects\Bullet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseProject.Button" Collapsed="true">
+    <Position X="37.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAEAAAAAgAgAAAAAAIAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>GameObjects\Button.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseProject.Text" Collapsed="true">
+    <Position X="42.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameObjects\Button.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseProject.chosenUpgrade" Collapsed="true">
+    <Position X="62.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>GameObjects\chosenUpgrade.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseProject.DashUpgrade" Collapsed="true">
+    <Position X="13" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>GameObjects\DashUpgrade.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseProject.Explosion" Collapsed="true">
+    <Position X="71.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABBAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameObjects\Explosion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseProject.Helicopter" Collapsed="true">
+    <Position X="28.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAABBAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameObjects\Helicopter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseProject.Warning" Collapsed="true">
+    <Position X="33.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACQAAAAAAAAIBAAAAAAAAAAAAAQAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>GameObjects\Helicopter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseProject.Lives" Collapsed="true">
+    <Position X="35.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameObjects\Lives.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseProject.Mine" Collapsed="true">
+    <Position X="40" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAACAAAAABBAAAAAAAAAAAAACAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameObjects\Mine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseProject.MineExplosion" Collapsed="true">
+    <Position X="44.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABBAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>GameObjects\MineExplosion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseProject.Pit" Collapsed="true">
+    <Position X="64.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAIAAABAAAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>GameObjects\Pit.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseProject.Score" Collapsed="true">
+    <Position X="67" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameObjects\Score.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseProject.ShieldUpgrade" Collapsed="true">
+    <Position X="15.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAICAAAAAAAAAAAAAAAAAAAACAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>GameObjects\ShieldUpgrade.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseProject.TankFirstPlayer" Collapsed="true">
+    <Position X="51.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAQAAACAAAACBBAAAAAAAAAAAQAAAAQgABAAAAAAAAA=</HashCode>
+      <FileName>GameObjects\TankFirstPlayer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseProject.FirstPlayerShaft" Collapsed="true">
+    <Position X="53.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAACCAAAAAAAAAAAAAAABAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>GameObjects\TankFirstPlayer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseProject.TankSecondPlayer" Collapsed="true">
+    <Position X="58" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CQQAAACAAACCBBAAIAAAAAAAAQAAAAQgABAAAAABACA=</HashCode>
+      <FileName>GameObjects\TankSecondPlayer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseProject.SecondPlayerShaft" Collapsed="true">
+    <Position X="60.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAACCAAAAAAAAAAAAAAABAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>GameObjects\TankSecondPlayer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseProject.UnbreakableWall" Collapsed="true">
+    <Position X="46.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAIAAABAAAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>GameObjects\UnbreakableWall.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseProject.Upgrades" Collapsed="true">
+    <Position X="14.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQABACAAAAAAAAAAAAAQAAAAAAAAAAAEAAEAAAAAAg=</HashCode>
+      <FileName>GameObjects\Upgrades.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseProject.ControlState" Collapsed="true">
+    <Position X="19.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameStates\ControlState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseProject.EndOfRoundState" Collapsed="true">
+    <Position X="22" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAACAAAAAAQAAAAAIAAAgAAAAAAAAAAAAAEQCAAA=</HashCode>
+      <FileName>GameStates\EndOfRoundState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseProject.MainState" Collapsed="true">
+    <Position X="4" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAABCAAAAAAAAgIAAAAABEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameStates\MainState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseProject.PlayingState" Collapsed="true">
+    <Position X="6.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>JDxOUwDIQoEABwIAAIBOgIEFIAgCVIAwFq4FAEwiIkA=</HashCode>
+      <FileName>GameStates\PlayingState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseProject.SettingsState" Collapsed="true">
+    <Position X="8.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAABCAAAAAAAAAIAAAAABEAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>GameStates\SettingsState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseProject.SoundState" Collapsed="true">
+    <Position X="10.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAGAAAAAAAAAIAAAAABEAIAAAAAAAAggAAACAAA=</HashCode>
+      <FileName>GameStates\SoundState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseProject.TieState" Collapsed="true">
+    <Position X="49" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameStates\TieState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseProject.UpgradeState" Collapsed="true">
+    <Position X="17.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAACAAAACAgAAAAAACBAAAAAAAAAgAAAQCAAAAAI=</HashCode>
+      <FileName>GameStates\UpgradeState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseProject.WinState1" Collapsed="true">
+    <Position X="69.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameStates\WinState1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseProject.WinState2" Collapsed="true">
+    <Position X="73.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameStates\WinState2.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseProject.Program" Collapsed="true">
+    <Position X="78.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseProject.TonksGame" Collapsed="true">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>TonksGame.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="IGameLoopObject" Collapsed="true">
+    <Position X="78.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAACAAAAABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engine\IGameLoopObject.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
