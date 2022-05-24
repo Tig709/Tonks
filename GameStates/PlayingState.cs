@@ -45,7 +45,8 @@ namespace BaseProject
         float helicopterHealth = 600;
         float helicopterTotalHealth = 600;
         int wallHealth = 180;
-        Boolean explosionDamage1, explosionDamage2;
+        Boolean explosionDamage1 = true; 
+        Boolean explosionDamage2 = true;
         Boolean mine1Placed = false;
         Boolean mine2Placed = false;
         Boolean p1Explosion = false;
@@ -475,22 +476,13 @@ namespace BaseProject
             }
 
 
-            if (roundCounter1 >= 3 || roundCounter2 >= 3)
-            {
-                this.Remove(score1);
-                this.Remove(score2);
-                roundCounter1 = 0;
-                roundCounter2 = 0; 
-                score.Add(new Score(assetNamesScore[roundCounter1], new Vector2(GameEnvironment.Screen.X / 2 - 50, 50))); 
-                score.Add(new Score(assetNamesScore[roundCounter2], new Vector2(GameEnvironment.Screen.X / 2 + 50, 50)));
-                this.Add(score);
-            }
+            
             if (healthbarFirst <= 0)
             {
                 GameEnvironment.GameStateManager.SwitchTo("End");
                 this.Remove(score2);
                 roundCounter2++;
-
+                
                 score.Add(new Score(assetNamesScore[roundCounter2], new Vector2(GameEnvironment.Screen.X / 2 + 50, 50)));
                 this.Add(score);
                 healthbarFirst = 100;
@@ -503,7 +495,7 @@ namespace BaseProject
                 GameEnvironment.GameStateManager.SwitchTo("End");
                 this.Remove(score1);
                 roundCounter1++;
-
+                
                 score.Add(new Score(assetNamesScore[roundCounter1], new Vector2(GameEnvironment.Screen.X / 2 - 50, 50)));
                 this.Add(score);
                 healthbarSecond = 100;
@@ -730,6 +722,17 @@ namespace BaseProject
             {
                 if (firstPlayerTank.CollidesWith(explosion) && explosionDamage1) { healthbarFirst = healthbarFirst - 60; explosionDamage1 = false; }
                 if (secondPlayerTank.CollidesWith(explosion) && explosionDamage2) { healthbarSecond = healthbarSecond - 60; explosionDamage2 = false; }
+
+            }
+        }
+
+        public void CorrectScore() {
+            if (roundCounter1 >= 3 || roundCounter2 >= 3)
+            {
+                score.Remove(score1);
+                score.Remove(score2);
+                roundCounter1 = 0;
+                roundCounter2 = 0;
 
             }
         }
