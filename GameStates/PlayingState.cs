@@ -594,7 +594,13 @@ namespace BaseProject
 
                 if (pit.CollidesWith(firstPlayerTank))
                 {
-
+                   firstPlayerTank.velocity =  firstPlayerTank.velocity * 1.2f;
+                    firstPlayerShaft.Angle = firstPlayerTank.velocity.X/100;
+                }
+                if (pit.CollidesWith(secondPlayerTank))
+                {
+                    secondPlayerTank.velocity = secondPlayerTank.velocity * 1.2f;
+                    secondPlayerShaft.Angle = secondPlayerTank.velocity.X / 100;
                 }
             }
 
