@@ -7,14 +7,14 @@ namespace BaseProject
 {
     class UnbreakableWall : SpriteGameObject
     {
-       Vector2 firstWallPosition;
-        Vector2 secondWallPosition;
+
+        // give the constructer a AssetName and a Position for the walls
         public UnbreakableWall(String assetName, Vector2 position) : base(assetName)
         {
+            //set originof the sprite on Center
             origin = Center;
             this.Position = position;
-            firstWallPosition = new Vector2(100,0);
-            secondWallPosition = new Vector2(300,0);
+
         }
         public override void Reset()
         {
@@ -24,7 +24,7 @@ namespace BaseProject
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            /*Position = firstWallPosition;*/
+            
            
         }
 

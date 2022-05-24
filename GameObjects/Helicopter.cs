@@ -9,11 +9,15 @@ namespace BaseProject
     {
         int timer;
         Vector2 startPosition;
+        const int RANDOM_POSITION_X = -500;
+        const int RANDOM_POSITION_Y = -300;
+        //set the Origin of the sprite on Center.
+        //let the helicopter spawn on random position above the map.
         public Helicopter() : base("attack_heli")
         {
             origin = Center;
             this.position.X = GameEnvironment.Random.Next(0 + Width, GameEnvironment.Screen.X - Width);
-            this.position.Y = GameEnvironment.Random.Next(-500, -300);
+            this.position.Y = GameEnvironment.Random.Next(RANDOM_POSITION_X, RANDOM_POSITION_Y);
             this.velocity.X = 0;
             this.velocity.Y = 0;
             position = startPosition;
@@ -23,7 +27,7 @@ namespace BaseProject
         {
             base.Reset();
             this.position.X = GameEnvironment.Random.Next(0 + Width, GameEnvironment.Screen.X - Width);
-            this.position.Y = GameEnvironment.Random.Next(-500, -300);
+            this.position.Y = GameEnvironment.Random.Next(RANDOM_POSITION_X, RANDOM_POSITION_Y);
         }
         public override void Update(GameTime gameTime)
         {
@@ -38,7 +42,7 @@ namespace BaseProject
                 velocity.Y = 0;
                 timer = 0;
                 this.position.X = GameEnvironment.Random.Next(0 + Width, GameEnvironment.Screen.X - Width);
-                this.position.Y = GameEnvironment.Random.Next(-500, -300);
+                this.position.Y = GameEnvironment.Random.Next(RANDOM_POSITION_X, RANDOM_POSITION_Y);
             }
         }
     }
