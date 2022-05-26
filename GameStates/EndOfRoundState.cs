@@ -1,5 +1,4 @@
-﻿
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 namespace BaseProject
@@ -10,13 +9,10 @@ namespace BaseProject
         int roundCounter1, roundCounter2;
         string[] assetNamesScore = { "text_0", "text_1", "text_2", "text_3", "text_dots" };
         GameObject score1, score2, scoreText;
-
-
-        
         public EndOfRoundState()
         {
             this.Add(new SpriteGameObject("EndOfRoundStateTest"));
-
+            //adds sccore also in end of round screen
             score = new GameObjectList();
             this.Add(score);
 
@@ -31,7 +27,6 @@ namespace BaseProject
             this.Add(scoreText);
             this.Add(score2);
         }
-
         public override void Update(GameTime gameTime)
         {
             UpdateScore();
@@ -43,9 +38,8 @@ namespace BaseProject
             if (inputHelper.KeyPressed(Keys.Enter))
                 GameEnvironment.GameStateManager.SwitchTo("Upgrade");
         }
-
         public void UpdateScore()
-        {
+        {//updates the score so the score is the same as the score showed in playingstate
             Remove(score1);
             Remove(score2);
 
@@ -56,10 +50,7 @@ namespace BaseProject
             score2 = new Score(assetNamesScore[roundCounter2], new Vector2(GameEnvironment.Screen.X / 2 + 50, 50));
 
             this.Add(score1);
-            this.Add(score2);
-
-            if (roundCounter1 >= 3 || roundCounter2 >= 3) { Remove(score1); Remove(score2); }
+            this.Add(score2);           
         }
-
     }
 }

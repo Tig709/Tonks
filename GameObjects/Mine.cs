@@ -4,24 +4,16 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
-
-
 namespace BaseProject
 {
-
     class Mine : SpriteGameObject
-    {
-        int frameCounter;
-        Vector2 startPosition;
-        
-      
+    {          
         public Mine(string assetNames, Vector2 startPosition) : base(assetNames)
         {
             origin = Center;
-            this.position = startPosition;
-            this.startPosition = startPosition;
-            
-         }
+            this.position = startPosition;           
+        }
+
         public override void HandleInput(InputHelper inputHelper)
         {
             base.HandleInput(inputHelper);
@@ -29,17 +21,11 @@ namespace BaseProject
         public override void Reset()
         {
             base.Reset();
-            this.position.X = -1000;
-            this.position.Y = -1000;
-
+            visible = false;
         }
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-  
-            frameCounter++;
-
         }
-
     }
 }
