@@ -30,7 +30,8 @@ namespace BaseProject
         GameObjectList hpBar;
         GameObjectList bulletBar;
         GameObjectList track;
-        Vector2 wallbounce, wallbounce2, positionPrevious;
+        Vector2 wallbounce = new Vector2(-50, 10);
+        Vector2 wallbounce2 = new Vector2(50, 10);
         Vector2 minePosition1, minePosition2;
         Vector2 offset_heli = new Vector2(5, 25);
         int explosionTimer1 = 0;
@@ -46,7 +47,7 @@ namespace BaseProject
         float helicopterHealth = 600;
         float helicopterTotalHealth = 600;
         int wallHealth = 180;
-        Boolean explosionDamage1 = true; 
+        Boolean explosionDamage1 = true;
         Boolean explosionDamage2 = true;
         Boolean mine1Placed = false;
         Boolean mine2Placed = false;
@@ -88,8 +89,7 @@ namespace BaseProject
 
         public PlayingState()
         {
-            wallbounce = new Vector2(-50, 10);
-            wallbounce2 = new Vector2(50, 10);
+
 
             this.Add(new SpriteGameObject("spr_dirt"));
 
@@ -122,9 +122,9 @@ namespace BaseProject
             minePlayer2 = new GameObjectList();
             this.Add(minePlayer2);
 
-            track = new GameObjectList(); 
+            track = new GameObjectList();
             this.Add(track);
-       
+
 
             firstPlayerTank = new TankFirstPlayer();
             this.Add(firstPlayerTank);
@@ -141,8 +141,8 @@ namespace BaseProject
             score = new GameObjectList();
             this.Add(score);
 
-           
-            
+
+
 
 
 
@@ -179,31 +179,38 @@ namespace BaseProject
             hpBar = new GameObjectList();
             bulletBar = new GameObjectList();
 
-            //FirstPlayerTank
-           
-            for (int i = 0; i < helicopterHealth / 2; i++)
+            
+            for (int j = 0; j < 5; j++)
             {
-                hpBar.Add(new Bar("healthBar", i, 0));
-            }
+                //helicopter hpbar
+                for (int i = 0; i < helicopterHealth / 2; i++)
+                {
+                    hpBar.Add(new Bar("healthBar", i, j));
+                }
 
+                //firsplayertank hpbar
+                for (int i = 0; i < healthbarFirst; i++)
+                {
+                    hpBar.Add(new Bar("healthBar", i, j));
+                }
 
-            for (int i = 0; i < healthbarFirst; i++)
-            {
-                hpBar.Add(new Bar("healthBar", i, 1));
-            }
+                //secondplayertank hpbar
+                for (int i = 0; i < healthbarSecond; i++)
+                {
+                    hpBar.Add(new Bar("healthBar", i, j));
+                }
 
-            for (int i = 0; i < healthbarSecond; i++)
-            {
-                hpBar.Add(new Bar("healthBar", i, 2));
-            }
+                //firstplayertank bulletbar
+                for (int i = 0; i < bulletTimer; i++)
+                {
+                    bulletBar.Add(new Bar("spr_bulletBar", i, j));
+                }
 
-            for (int i = 0; i < bulletTimer; i++)
-            {
-                bulletBar.Add(new Bar("spr_bulletBar", i, 3));
-            }
-            for (int i = 0; i < bulletTimer2; i++)
-            {
-                bulletBar.Add(new Bar("spr_bulletBar", i, 4));
+                //secondplayertank bulletbar
+                for (int i = 0; i < bulletTimer2; i++)
+                {
+                    bulletBar.Add(new Bar("spr_bulletBar", i, j));
+                }
             }
             this.Add(hpBar);
             this.Add(bulletBar);
@@ -503,7 +510,7 @@ namespace BaseProject
             }
 
 
-            
+
             if (healthbarFirst <= 0)
             {
                 GameEnvironment.GameStateManager.SwitchTo("End");
@@ -613,7 +620,7 @@ namespace BaseProject
 
                 if (pit.CollidesWith(firstPlayerTank))
                 {
-                   firstPlayerTank.velocity =  firstPlayerTank.velocity * 1.2f;
+                    firstPlayerTank.velocity = firstPlayerTank.velocity * 1.2f;
                     //firstPlayerShaft.Angle = firstPlayerTank.velocity.X/100;
                     firstPlayerShaft.Angle++;
                 }

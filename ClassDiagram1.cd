@@ -166,7 +166,7 @@
   <Class Name="BaseProject.Helicopter" Collapsed="true">
     <Position X="28.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAAAAAABBAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAQAAAgAAAAABBAAAAAAAAAAAAAAAABAAAAAAAAAAAA=</HashCode>
       <FileName>GameObjects\Helicopter.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -175,13 +175,6 @@
     <TypeIdentifier>
       <HashCode>ACQAAAAAAAAIBAAAAAAAAAAAAAQAAAAEAAAAAAAAAAA=</HashCode>
       <FileName>GameObjects\Helicopter.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="BaseProject.Lives" Collapsed="true">
-    <Position X="35.5" Y="3.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAQAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>GameObjects\Lives.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BaseProject.Mine" Collapsed="true">
@@ -250,7 +243,7 @@
   <Class Name="BaseProject.UnbreakableWall" Collapsed="true">
     <Position X="46.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAAIAAABAAAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <HashCode>AAQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>GameObjects\UnbreakableWall.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -285,7 +278,7 @@
   <Class Name="BaseProject.PlayingState" Collapsed="true">
     <Position X="6.25" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>JDxOUwDIQoEABwIAAIBOgIEFIAgCVIAwFq4FAEwiIkA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>GameStates\PlayingState.cs</FileName>
     </TypeIdentifier>
   </Class>
