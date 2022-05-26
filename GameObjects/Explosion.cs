@@ -16,6 +16,11 @@ namespace BaseProject
             this.position = startPosition;
             this.startPosition = startPosition;
         }
-
+        public override void Reset()
+        {
+            base.Reset();
+            this.position.X = -1000;
+            this.position.Y = -1000;
+        }
     }
 }
