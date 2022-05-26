@@ -215,8 +215,7 @@ namespace BaseProject
         {
             base.HandleInput(inputHelper);
 
-            if (inputHelper.KeyPressed(Keys.L) && bulletTimer >= BULLET_RELOAD_TIME)
-            if (inputHelper.KeyPressed(Keys.L) && bulletTimer >= 100 && doubleBulletsP1)
+            if (inputHelper.KeyPressed(Keys.L) && bulletTimer >= BULLET_RELOAD_TIME && doubleBulletsP1)
             {
                 bullets.Add(new Bullet("tank_bullet", new Vector2(firstPlayerShaft.Position.X + 20, firstPlayerShaft.Position.Y), new Vector2(firstPlayerShaft.AngularDirection.X * 500, firstPlayerShaft.AngularDirection.Y * 500)));
                 bullets.Add(new Bullet("tank_bullet", new Vector2(firstPlayerShaft.Position.X - 20, firstPlayerShaft.Position.Y), new Vector2(firstPlayerShaft.AngularDirection.X * 500, firstPlayerShaft.AngularDirection.Y * 500)));
@@ -253,11 +252,10 @@ namespace BaseProject
                 bulletBar.Reset();
             }
 
-            if (inputHelper.KeyPressed(Keys.Space) && bulletTimer2 >= BULLET_RELOAD_TIME && doubleBulletsEquipped)
+            if (inputHelper.KeyPressed(Keys.Space) && bulletTimer2 >= BULLET_RELOAD_TIME && doubleBulletsP2)
             {
                 bullets2.Add(new Bullet("tank_bullet1", new Vector2(secondPlayerShaft.Position.X, secondPlayerShaft.Position.Y), new Vector2(secondPlayerShaft.AngularDirection.X * 500, secondPlayerShaft.AngularDirection.Y * 500)));
                 bullets2.Add(new Bullet("tank_bullet1", new Vector2(secondPlayerShaft.Position.X + 20, secondPlayerShaft.Position.Y), new Vector2(secondPlayerShaft.AngularDirection.X * 500, secondPlayerShaft.AngularDirection.Y * 500)));
-                bullets2.Add(new Bullet("tank_bullet1", new Vector2(secondPlayerShaft.Position.X - 20, secondPlayerShaft.Position.Y), new Vector2(secondPlayerShaft.AngularDirection.X * 500, secondPlayerShaft.AngularDirection.Y * 500)));
                 ScreenShake();
                 bulletTimer2 = 0;
                 generateSound("monoShoot", 1.0f, -0.2f, secondPlayerTank.position.X, true);
@@ -265,7 +263,7 @@ namespace BaseProject
             }
             if (inputHelper.KeyPressed(Keys.Space) && bulletTimer2 >= 100 && !doubleBulletsP2)
 
-            if (inputHelper.KeyPressed(Keys.Space) && bulletTimer2 >= BULLET_RELOAD_TIME && doubleBulletsEquipped)
+            if (inputHelper.KeyPressed(Keys.Space) && bulletTimer2 >= BULLET_RELOAD_TIME && doubleBulletsP2)
             {
                 bullets2.Add(new Bullet("tank_bullet1", new Vector2(secondPlayerShaft.Position.X, secondPlayerShaft.Position.Y), new Vector2(secondPlayerShaft.AngularDirection.X * 500, secondPlayerShaft.AngularDirection.Y * 500)));
                 ScreenShake();
@@ -441,7 +439,6 @@ namespace BaseProject
                 {
                     bullet.Reset();
                     track.Reset();
-                    healthbarSecond -= 60;
                     if (!invincibilityP1)
                        healthbarSecond -= 60;
            
@@ -490,7 +487,8 @@ namespace BaseProject
                 {
                     bullet2.Reset();
                     track.Reset();
-                    healthbarFirst -= 60;
+                    if (!invincibilityP1)
+                        healthbarSecond -= 60;
 
 
                 }
@@ -547,7 +545,8 @@ namespace BaseProject
                     bullet.Reset();
                     if (!invincibilityP2)
                         healthbarSecond -= 60;
-
+                }
+            }
             if (roundCounter2 == 3)
             {
                 //MOET NOG GEMAAKT WORDEN : WINSTATE VOOR PLAYER2, SPEL IS OVER ETC.
