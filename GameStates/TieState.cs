@@ -9,11 +9,9 @@ namespace BaseProject
     {
         public TieState() : base("tie_state")
         {
-
         }
         public override void HandleInput(InputHelper inputHelper)
         {
-            
             base.HandleInput(inputHelper);
             if (inputHelper.KeyPressed(Keys.Enter))
                 GameEnvironment.GameStateManager.SwitchTo("Play");

@@ -19,7 +19,7 @@ namespace BaseProject
         FirstPlayerShaft firstPlayerShaft;
         TankSecondPlayer secondPlayerTank;
         SecondPlayerShaft secondPlayerShaft;
-        SpriteGameObject wall, breakableWall;
+        SpriteGameObject breakableWall;
         GameObjectList pit;
         Warning theWarning;
         RotatingSpriteGameObject propeller;
@@ -288,16 +288,6 @@ namespace BaseProject
                 p2Explosion = true;
             }
 
-            else
-            {
-                if (frameCounter >= 6)
-                {
-                    velocity.X = 0;
-                    position.X = 0;
-                    frameCounter = 0;
-                }
-            }
-
             //Dashing
             if (inputHelper.KeyPressed(Keys.M) && firstPlayerTankWon && UpgradeState.dashingP1)
             {
@@ -415,7 +405,6 @@ namespace BaseProject
             else if (explosionTimer >= 15)
             {
                 explosionTimer = 0;
-                explosion.Reset();
                 explosion.Visible = false;
             }
 
@@ -545,7 +534,7 @@ namespace BaseProject
             {
                 GameEnvironment.GameStateManager.SwitchTo("winState_player_2");
             }
-
+            //collision with Unbreakablewalls
             foreach (UnbreakableWall wall in walls.Children)
             {
 
@@ -566,6 +555,7 @@ namespace BaseProject
 
                 }
             }
+            //collision breakablewall
             if (breakableWall.CollidesWith(firstPlayerTank))
             {
                 if (firstPlayerTank.Position.X <= breakableWall.Position.X || firstPlayerTank.Position.X >= breakableWall.Position.X)
@@ -663,7 +653,7 @@ namespace BaseProject
             firstPlayerShaft.position = firstPlayerTank.position;
             secondPlayerShaft.position = secondPlayerTank.position;
         }
-
+        //sound for shooting and helicopter.
         public void generateSound(string assetName, float volume, float pitch, float positionX, bool stereoPanning)
         {
             if (stereoPanning)
@@ -678,6 +668,7 @@ namespace BaseProject
                 GameEnvironment.AssetManager.PlaySound(assetName, volume, pitch, 0.0f);
             }
         }
+        //mine explosion
         public void MineDetonate()
         {
             //adds explosion sprite if detonated
