@@ -13,7 +13,6 @@ namespace BaseProject
 {
     class PlayingState : GameObjectList
     {
-        Upgrades upgrade;
         GameObjectList bullets, bullets2;
         TankFirstPlayer firstPlayerTank;
         FirstPlayerShaft firstPlayerShaft;
@@ -39,6 +38,8 @@ namespace BaseProject
         int frameCounter = 0;
         int bulletTimer = 100;
         int bulletTimer2 = 100;
+        int invincibilityTimerP1 = 180;
+        int invincibilityTimerP2 = 180;
         int explosionTimer = 0;
         int healthbarFirst = 100;
         int totalHealthFirst = 100;
@@ -54,7 +55,7 @@ namespace BaseProject
         Boolean p1Explosion = false;
         Boolean p2Explosion = false;
         public static int roundCounter1, roundCounter2;
-        public static bool firstPlayerTankWon, secondPlayerTankWon;
+        public static bool firstPlayerTankWon, secondPlayerTankWon, dashingP1, dashingP2;
         int maxMines1 = 1, maxMines2 = 1;
         string[] assetNamesScore = { "text_0", "text_1", "text_2", "text_3", "text_dots", };
         string[] mineType = { "spr_mine", "spr_mine2" };
@@ -65,7 +66,10 @@ namespace BaseProject
 
         GameObject score1, score2, scoreText;
         bool wasHelicopterOnScreen;
-        bool doubleBulletsEquipped;
+        public static bool doubleBulletsP1;
+        public static bool doubleBulletsP2;
+        public static bool invincibilityP1;
+        public static bool invincibilityP2;
 
         float soundPanning;
         float volumePan;
@@ -100,9 +104,6 @@ namespace BaseProject
             this.Add(pit);
             pit.Add(new Pit("spr_pit", new Vector2(GameEnvironment.Screen.X / 2 - WALL_TO_PIT_DIST, GameEnvironment.Screen.Y / 2)));
             pit.Add(new Pit("spr_pit", new Vector2(GameEnvironment.Screen.X / 2 + WALL_TO_PIT_DIST, GameEnvironment.Screen.Y / 2)));
-
-            upgrade = new Upgrades();
-            this.Add(upgrade);
 
             walls = new GameObjectList();
             this.Add(walls);
@@ -223,17 +224,24 @@ namespace BaseProject
         public override void HandleInput(InputHelper inputHelper)
         {
             base.HandleInput(inputHelper);
-
-            if (inputHelper.KeyPressed(Keys.L) && bulletTimer >= 100)
+            if (inputHelper.KeyPressed(Keys.L) && bulletTimer >= 100 && doubleBulletsP1)
+            {
+                bullets.Add(new Bullet("tank_bullet", new Vector2(firstPlayerShaft.Position.X + 20, firstPlayerShaft.Position.Y), new Vector2(firstPlayerShaft.AngularDirection.X * 500, firstPlayerShaft.AngularDirection.Y * 500)));
+                bullets.Add(new Bullet("tank_bullet", new Vector2(firstPlayerShaft.Position.X - 20, firstPlayerShaft.Position.Y), new Vector2(firstPlayerShaft.AngularDirection.X * 500, firstPlayerShaft.AngularDirection.Y * 500)));
+                ScreenShake();
+                bulletTimer = 0;
+                generateSound("monoShoot", 1.0f, -0.2f, firstPlayerTank.position.X, true);
+                bulletBar.Reset();
+            }
+            if (inputHelper.KeyPressed(Keys.L) && bulletTimer >= 100 && !doubleBulletsP1)
             {
                 bullets.Add(new Bullet("tank_bullet", new Vector2(firstPlayerShaft.Position.X, firstPlayerShaft.Position.Y), new Vector2(firstPlayerShaft.AngularDirection.X * 500, firstPlayerShaft.AngularDirection.Y * 500)));
                 ScreenShake();
                 bulletTimer = 0;
                 generateSound("monoShoot", 1.0f, -0.2f, firstPlayerTank.position.X, true);
                 bulletBar.Reset();
-
-
             }
+
             else
             {
                 if (frameCounter >= 6)
@@ -243,24 +251,17 @@ namespace BaseProject
                     frameCounter = 0;
                 }
             }
-            if (inputHelper.KeyPressed(Keys.Space) && bulletTimer2 >= 100)
+            
+            if (inputHelper.KeyPressed(Keys.Space) && bulletTimer2 >= 100 && doubleBulletsP2)
             {
-                bullets2.Add(new Bullet("tank_bullet1", new Vector2(secondPlayerShaft.Position.X, secondPlayerShaft.Position.Y), new Vector2(secondPlayerShaft.AngularDirection.X * 500, secondPlayerShaft.AngularDirection.Y * 500)));
+                bullets2.Add(new Bullet("tank_bullet1", new Vector2(secondPlayerShaft.Position.X + 20, secondPlayerShaft.Position.Y), new Vector2(secondPlayerShaft.AngularDirection.X * 500, secondPlayerShaft.AngularDirection.Y * 500)));
+                bullets2.Add(new Bullet("tank_bullet1", new Vector2(secondPlayerShaft.Position.X - 20, secondPlayerShaft.Position.Y), new Vector2(secondPlayerShaft.AngularDirection.X * 500, secondPlayerShaft.AngularDirection.Y * 500)));
                 ScreenShake();
                 bulletTimer2 = 0;
                 generateSound("monoShoot", 1.0f, -0.2f, secondPlayerTank.position.X, true);
                 bulletBar.Reset();
             }
-            if (inputHelper.KeyPressed(Keys.Space) && bulletTimer2 >= 100 && doubleBulletsEquipped)
-            {
-                bullets2.Add(new Bullet("tank_bullet1", new Vector2(secondPlayerShaft.Position.X, secondPlayerShaft.Position.Y), new Vector2(secondPlayerShaft.AngularDirection.X * 500, secondPlayerShaft.AngularDirection.Y * 500)));
-                ScreenShake();
-                bulletTimer2 = 0;
-                generateSound("monoShoot", 1.0f, -0.2f, secondPlayerTank.position.X, true);
-                bulletBar.Reset();
-            }
-
-            if (inputHelper.KeyPressed(Keys.Space) && bulletTimer2 >= 100 && doubleBulletsEquipped)
+            if (inputHelper.KeyPressed(Keys.Space) && bulletTimer2 >= 100 && !doubleBulletsP2)
             {
                 bullets2.Add(new Bullet("tank_bullet1", new Vector2(secondPlayerShaft.Position.X, secondPlayerShaft.Position.Y), new Vector2(secondPlayerShaft.AngularDirection.X * 500, secondPlayerShaft.AngularDirection.Y * 500)));
                 ScreenShake();
@@ -286,8 +287,6 @@ namespace BaseProject
             if (inputHelper.KeyPressed(Keys.C) && mine1Placed)
             {
                 p1Explosion = true;
-
-
             }
 
             if (inputHelper.KeyPressed(Keys.V) && mine2Placed)
@@ -306,7 +305,7 @@ namespace BaseProject
             }
 
             //Dashing
-            if (inputHelper.KeyPressed(Keys.M) && firstPlayerTankWon && UpgradeState.dashingP1)
+            if (inputHelper.KeyPressed(Keys.M) && firstPlayerTankWon && dashingP1)
             {
                 firstPlayerTank.position += firstPlayerTank.AngularDirection * 150;
                 foreach (UnbreakableWall wall in walls.Children)
@@ -317,8 +316,8 @@ namespace BaseProject
                     }
                 }
             }
-
-            if (inputHelper.KeyPressed(Keys.M) && secondPlayerTankWon && UpgradeState.dashingP2)
+            
+            if (inputHelper.KeyPressed(Keys.M) && secondPlayerTankWon && dashingP2)
             {
                 secondPlayerTank.position += secondPlayerTank.AngularDirection * 150;
                 foreach (UnbreakableWall wall in walls.Children)
@@ -466,6 +465,9 @@ namespace BaseProject
                     bullet.Reset();
                     track.Reset();
                     healthbarSecond -= 60;
+                    if (!invincibilityP1)
+                       healthbarSecond -= 60;
+           
                 }
 
                 foreach (UnbreakableWall wall in walls.Children)
@@ -559,7 +561,14 @@ namespace BaseProject
                 helicopterHealth = 600;
                 theHelicopter.Reset();
             }
-
+            foreach (Bullet bullet in bullets2.Children)
+            {
+                if (bullet.CollidesWith(firstPlayerTank))
+                {
+                    /*firstPlayerTank.Reset();*/
+                    bullet.Reset();
+                    if (!invincibilityP2)
+                        healthbarSecond -= 60;
 
             if (roundCounter2 == 3)
             {

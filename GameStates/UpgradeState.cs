@@ -9,48 +9,51 @@ namespace BaseProject
 {
     class UpgradeState : GameObjectList
     {
-        string[] upgradeArray = new string[] { "spr_double_lives", "spr_dash", "spr_invisibility" }; 
+        string[] upgradeArray = new string[] { "spr_dash", "spr_double_bullets", "spr_invincibility" };
         GameObject upgradeName;
         AnimatedGameObject scrollingUpgrade;
-        Vector2 upgradeOffset = new Vector2(80, 120);
-        
-        public static bool dashingP1;
-        public static bool dashingP2;
+        Vector2 upgradeOffset = new Vector2(80, 50);
+        bool spinnedForUpgrade;
+        int spinTimer = 60;
+        int index;
 
         public UpgradeState()
         {
+            if (PlayingState.firstPlayerTankWon)
+                this.Add(new SpriteGameObject("first_player_tank_upgrade"));
+            else
+                this.Add(new SpriteGameObject("second_player_tank_upgrade"));
+
+            
+            
             ChosenUpgrade();
-            stylesheetUpgrade(new Vector2(GameEnvironment.Screen.X / 2, GameEnvironment.Screen.Y / 2));
+            this.Add(new ScrollingUpgrade(new Vector2(GameEnvironment.Screen.X / 2 - upgradeOffset.X, GameEnvironment.Screen.Y / 2 + upgradeOffset.Y)));
         }
 
         public void ChosenUpgrade()
         {
             Random rnd = new Random();
-            int index = rnd.Next(upgradeArray.Length);
-            upgradeName = new chosenUpgrade(upgradeArray[index], new Vector2(0, 0));           
-
-        }
-
-        public void stylesheetUpgrade(Vector2 position)
-        {
-            this.position = position - upgradeOffset;
-            scrollingUpgrade = new AnimatedGameObject();
-            scrollingUpgrade.LoadAnimation("scrollingUpgrade@3x1", "upgradeStates", true, 0.10f);
-
-            this.Add(scrollingUpgrade);
-
-            scrollingUpgrade.PlayAnimation("upgradeStates");
+            index = rnd.Next(upgradeArray.Length);
+            upgradeName = new ChosenUpgrade(upgradeArray[index], new Vector2(GameEnvironment.Screen.X / 2 - upgradeOffset.X, GameEnvironment.Screen.Y / 2 + upgradeOffset.Y));
         }
 
         public override void HandleInput(InputHelper inputHelper)
         {
             base.HandleInput(inputHelper);
             if (inputHelper.KeyPressed(Keys.Enter))
+            { 
                 this.Add(upgradeName);
+                spinnedForUpgrade = true;
+            }
+            if (spinnedForUpgrade)
+                spinTimer--;
 
+            if (inputHelper.KeyPressed(Keys.Enter) && spinnedForUpgrade && spinTimer <= 0)
+            {
+                GameEnvironment.GameStateManager.SwitchTo("Play");
+                spinnedForUpgrade = false;
+            }
 
-            if (inputHelper.KeyPressed(Keys.E))
-               GameEnvironment.GameStateManager.SwitchTo("Play");
         }
 
         public override void Update(GameTime gameTime)
@@ -59,31 +62,29 @@ namespace BaseProject
             //Console.WriteLine(PlayingState.firstPlayerTankWon);
             //Console.WriteLine(dashingP1);
 
-            
-            //if (index == 0)
-            //{
-                if (PlayingState.firstPlayerTankWon)
-                    dashingP1 = true;
-                
-                if (PlayingState.secondPlayerTankWon)
-                    dashingP2 = true;
-            //}
-            /*if (index == 1)
+
+            if (index == 0)
             {
                 if (PlayingState.firstPlayerTankWon)
-                    dashingP1 = true;
+                    PlayingState.dashingP1 = true;
                 if (PlayingState.secondPlayerTankWon)
-                    dashingP2 = true;
-            //}
+                    PlayingState.dashingP2 = true;
+            }
+            if (index == 1)
+            {
+                if (PlayingState.firstPlayerTankWon)
+                    PlayingState.doubleBulletsP1 = true;
+                if (PlayingState.secondPlayerTankWon)
+                    PlayingState.doubleBulletsP2 = true;
+            }
 
             if (index == 2)
             {
                 if (PlayingState.firstPlayerTankWon)
-                    dashingP1 = true;
+                    PlayingState.invincibilityP1 = true;
                 if (PlayingState.secondPlayerTankWon)
-                    dashingP2 = true;
-            }*/
-
+                    PlayingState.invincibilityP2 = true;
+            }
             //Console.WriteLine(PlayingState.secondPlayerTankWon);
 
 

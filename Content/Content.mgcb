@@ -181,6 +181,18 @@
 /processorParam:TextureFormat=Color
 /build:explosion_heli.png
 
+#begin first_player_tank_upgrade.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:first_player_tank_upgrade.png
+
 #begin healthBar.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -348,6 +360,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:scrollingUpgrade@3x1.png
+
+#begin second_player_tank_upgrade.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:second_player_tank_upgrade.png
 
 #begin settings.png
 /importer:TextureImporter
@@ -571,7 +595,7 @@
 /processorParam:TextureFormat=Color
 /build:spr_dirt.png
 
-#begin spr_double_lives.png
+#begin spr_double_bullets.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -581,9 +605,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:spr_double_lives.png
+/build:spr_double_bullets.png
 
-#begin spr_invisibility.png
+#begin spr_invincibility.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -593,7 +617,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:spr_invisibility.png
+/build:spr_invincibility.png
 
 #begin spr_mine.png
 /importer:TextureImporter
