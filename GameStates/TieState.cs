@@ -7,7 +7,7 @@ namespace BaseProject
 {
    class TieState : SpriteGameObject
     {
-        public TieState() : base("tie_state")
+        public TieState() : base("spr_tie")
         {
         }
         public override void HandleInput(InputHelper inputHelper)

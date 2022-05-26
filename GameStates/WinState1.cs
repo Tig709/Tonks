@@ -7,7 +7,7 @@ namespace BaseProject
 {
    class WinState1 : SpriteGameObject
     {
-        public WinState1() : base("winState_player_1")
+        public WinState1() : base("spr_red_wins")
         {
             
         }
