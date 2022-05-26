@@ -295,16 +295,6 @@ namespace BaseProject
                 p2Explosion = true;
             }
 
-            else
-            {
-                if (frameCounter >= 6)
-                {
-                    velocity.X = 0;
-                    position.X = 0;
-                    frameCounter = 0;
-                }
-            }
-
             //Dashing
             if (inputHelper.KeyPressed(Keys.M) && firstPlayerTankWon && UpgradeState.dashingP1)
             {
@@ -528,7 +518,7 @@ namespace BaseProject
             }
 
 
-
+            // healthbars and add of score
             if (healthbarFirst <= 0)
             {
                 GameEnvironment.GameStateManager.SwitchTo("End");
@@ -572,7 +562,7 @@ namespace BaseProject
                 //MOET NOG GEMAAKT WORDEN : WINSTATE VOOR PLAYER1, SPEL IS OVER ETC.
                 GameEnvironment.GameStateManager.SwitchTo("winState_player_1");
             }
-
+            //collision with Unbreakablewalls
             foreach (UnbreakableWall wall in walls.Children)
             {
 
@@ -593,6 +583,7 @@ namespace BaseProject
 
                 }
             }
+            //collision breakablewall
             if (breakableWall.CollidesWith(firstPlayerTank))
             {
                 if (firstPlayerTank.Position.X <= breakableWall.Position.X || firstPlayerTank.Position.X >= breakableWall.Position.X)
@@ -608,7 +599,7 @@ namespace BaseProject
                 }
             }
 
-
+            //collision with pit
             foreach (Pit pit in pit.Children)
             {
 
@@ -625,7 +616,7 @@ namespace BaseProject
                     secondPlayerShaft.Angle++;
                 }
             }
-
+            //hpbar position and size
             foreach (Bar bar in bulletBar.Children)
             {
                 if (bar.dedicatedObject == 3)
@@ -697,7 +688,7 @@ namespace BaseProject
             firstPlayerShaft.position = firstPlayerTank.position;
             secondPlayerShaft.position = secondPlayerTank.position;
         }
-
+        //sound for shooting and helicopter.
         public void generateSound(string assetName, float volume, float pitch, float positionX, bool stereoPanning)
         {
             if (stereoPanning)
@@ -712,6 +703,7 @@ namespace BaseProject
                 GameEnvironment.AssetManager.PlaySound(assetName, volume, pitch, 0.0f);
             }
         }
+        //mine explosion
         public void MineDetonate()
         {
             if (p1Explosion == true)
