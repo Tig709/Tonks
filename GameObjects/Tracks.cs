@@ -12,7 +12,7 @@ namespace BaseProject
         int trackcounter = 0;
         const int MAX_TRACK_COUNT_AMOUNT = 100;
         //set the Origin of the sprite on Center
-        //give the constructer a startposition and a rotation
+        //give the constructer a variable startposition and a rotation
         public Tracks(Vector2 startPosition, Vector2 rotation) : base("spr_tracks")
         {
             Origin = Center;

@@ -19,7 +19,7 @@ namespace BaseProject
         FirstPlayerShaft firstPlayerShaft;
         TankSecondPlayer secondPlayerTank;
         SecondPlayerShaft secondPlayerShaft;
-        SpriteGameObject wall, breakableWall;
+        SpriteGameObject breakableWall;
         GameObjectList pit;
         Warning theWarning;
         RotatingSpriteGameObject propeller;
@@ -423,7 +423,6 @@ namespace BaseProject
             else if (explosionTimer >= 15)
             {
                 explosionTimer = 0;
-                explosion.Reset();
                 explosion.Visible = false;
             }
 
