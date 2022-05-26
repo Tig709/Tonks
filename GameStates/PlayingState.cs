@@ -395,7 +395,7 @@ namespace BaseProject
             {
                 velocity.X = +velocity.X;
             }
-
+            //collision helicopter
             if (firstPlayerTank.CollidesWith(theHelicopter))
             {
 
@@ -430,7 +430,7 @@ namespace BaseProject
                 explosion.Visible = false;
             }
 
-
+            //collision tanks with eachother
             if (firstPlayerTank.CollidesWith(secondPlayerTank))
             {
                 firstPlayerTank.Reset();
@@ -440,7 +440,7 @@ namespace BaseProject
                 bullets2.Reset();
                 track.Reset();
             }
-
+            //collision firstplayer bullets
             foreach (Bullet bullet in bullets.Children)
             {
 
@@ -455,8 +455,7 @@ namespace BaseProject
                     breakableWall.Visible = false;
                 }
                 if (bullet.CollidesWith(secondPlayerTank))
-                {
-                    /* secondPlayerTank.Reset();*/
+                { 
                     bullet.Reset();
                     track.Reset();
                     healthbarSecond -= 60;
@@ -482,6 +481,7 @@ namespace BaseProject
                 }
 
             }
+            //collision secondplayer collision
             foreach (Bullet bullet2 in bullets2.Children)
             {
                 if (bullet2.CollidesWith(breakableWall))
@@ -499,6 +499,24 @@ namespace BaseProject
                     {
                         bullet2.WrapWallBullet(wall.position, wall.Height, wall.Width);
                     }
+                }
+                if (bullet2.CollidesWith(firstPlayerTank))
+                {
+                    bullet2.Reset();
+                    track.Reset();
+                    healthbarFirst -= 60;
+
+
+                }
+                if (bullet2.CollidesWith(theHelicopter))
+                {
+                    bullet2.Reset();
+                    helicopterHealth -= 60;
+                    theHelicopter.Scale -= 0.5f;
+                }
+                else
+                {
+                    theHelicopter.Scale = 1;
                 }
             }
 
@@ -532,31 +550,7 @@ namespace BaseProject
             if (helicopterHealth <= 0)
             {
                 helicopterHealth = 600;
-                /* theHelicopter.Velocity = new Vector2(0, 0);*/
                 theHelicopter.Reset();
-            }
-            foreach (Bullet bullet in bullets2.Children)
-            {
-                if (bullet.CollidesWith(firstPlayerTank))
-                {
-                    /*firstPlayerTank.Reset();*/
-                    bullet.Reset();
-                    track.Reset();
-                    healthbarFirst -= 60;
-
-
-                }
-                if (bullet.CollidesWith(theHelicopter))
-                {
-                    bullet.Reset();
-                    helicopterHealth -= 60;
-                    theHelicopter.Scale -= 0.5f;
-                }
-                else
-                {
-                    theHelicopter.Scale = 1;
-                }
-
             }
 
 
