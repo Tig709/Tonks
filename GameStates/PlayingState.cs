@@ -13,7 +13,6 @@ namespace BaseProject
 {
     class PlayingState : GameObjectList
     {
-        Upgrades upgrade;
         GameObjectList bullets, bullets2;
         TankFirstPlayer firstPlayerTank;
         FirstPlayerShaft firstPlayerShaft;
@@ -54,7 +53,7 @@ namespace BaseProject
         Boolean p1Explosion = false;
         Boolean p2Explosion = false;
         public static int roundCounter1, roundCounter2;
-        public static bool firstPlayerTankWon, secondPlayerTankWon;
+        public static bool firstPlayerTankWon, secondPlayerTankWon, dashingP1, dashingP2;
         int maxMines1 = 1, maxMines2 = 1;
         string[] assetNamesScore = { "text_0", "text_1", "text_2", "text_3", "text_dots", };
         string[] mineType = { "spr_mine", "spr_mine2" };
@@ -104,9 +103,6 @@ namespace BaseProject
             this.Add(pit);
             pit.Add(new Pit("spr_pit", new Vector2(GameEnvironment.Screen.X / 2 - WALL_TO_PIT_DIST, GameEnvironment.Screen.Y / 2)));
             pit.Add(new Pit("spr_pit", new Vector2(GameEnvironment.Screen.X / 2 + WALL_TO_PIT_DIST, GameEnvironment.Screen.Y / 2)));
-
-            upgrade = new Upgrades();
-            this.Add(upgrade);
 
             walls = new GameObjectList();
             this.Add(walls);
@@ -293,7 +289,7 @@ namespace BaseProject
             }
 
             //Dashing
-            if (inputHelper.KeyPressed(Keys.M) && firstPlayerTankWon && UpgradeState.dashingP1)
+            if (inputHelper.KeyPressed(Keys.M) && firstPlayerTankWon && dashingP1)
             {
                 firstPlayerTank.position += firstPlayerTank.AngularDirection * 150;
                 foreach (UnbreakableWall wall in walls.Children)
@@ -305,7 +301,7 @@ namespace BaseProject
                 }
             }
             
-            if (inputHelper.KeyPressed(Keys.M) && secondPlayerTankWon && UpgradeState.dashingP2)
+            if (inputHelper.KeyPressed(Keys.M) && secondPlayerTankWon && dashingP2)
             {
                 secondPlayerTank.position += secondPlayerTank.AngularDirection * 150;
                 foreach (UnbreakableWall wall in walls.Children)
