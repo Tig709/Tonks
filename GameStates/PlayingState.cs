@@ -29,6 +29,7 @@ namespace BaseProject
         GameObjectList minePlayer1, minePlayer2;
         GameObjectList hpBar;
         GameObjectList bulletBar;
+        GameObjectList track;
         Vector2 wallbounce, wallbounce2, positionPrevious;
         Vector2 minePosition1, minePosition2;
         Vector2 offset_heli = new Vector2(5, 25);
@@ -121,6 +122,10 @@ namespace BaseProject
             minePlayer2 = new GameObjectList();
             this.Add(minePlayer2);
 
+            track = new GameObjectList(); 
+            this.Add(track);
+       
+
             firstPlayerTank = new TankFirstPlayer();
             this.Add(firstPlayerTank);
 
@@ -135,6 +140,9 @@ namespace BaseProject
 
             score = new GameObjectList();
             this.Add(score);
+
+           
+            
 
 
 
@@ -172,6 +180,7 @@ namespace BaseProject
             bulletBar = new GameObjectList();
 
             //FirstPlayerTank
+           
             for (int i = 0; i < helicopterHealth / 2; i++)
             {
                 hpBar.Add(new Bar("healthBar", i, 0));
@@ -207,6 +216,7 @@ namespace BaseProject
         public override void HandleInput(InputHelper inputHelper)
         {
             base.HandleInput(inputHelper);
+
             if (inputHelper.KeyPressed(Keys.L) && bulletTimer >= 100)
             {
                 bullets.Add(new Bullet("tank_bullet", new Vector2(firstPlayerShaft.Position.X, firstPlayerShaft.Position.Y), new Vector2(firstPlayerShaft.AngularDirection.X * 500, firstPlayerShaft.AngularDirection.Y * 500)));
@@ -300,7 +310,7 @@ namespace BaseProject
                     }
                 }
             }
-            
+
             if (inputHelper.KeyPressed(Keys.M) && secondPlayerTankWon && UpgradeState.dashingP2)
             {
                 secondPlayerTank.position += secondPlayerTank.AngularDirection * 150;
@@ -326,13 +336,14 @@ namespace BaseProject
             mineExplosion.Reset();
             explosion.Reset();
             mineExplosion.Visible = false;
+            track.Reset();
         }
         public void Bounce()
         {
             firstPlayerTank.position -= firstPlayerTank.AngularDirection * 100;
         }
         public void ScreenShake()
-         {
+        {
             velocity.X = 1000;
         }
 
@@ -348,6 +359,9 @@ namespace BaseProject
             bulletTimer2++;
 
             MineDetonate();
+
+            track.Add(new Tracks(new Vector2(firstPlayerTank.Position.X, firstPlayerTank.Position.Y), new Vector2(firstPlayerTank.AngularDirection.X, firstPlayerTank.AngularDirection.Y)));
+            track.Add(new Tracks(new Vector2(secondPlayerTank.Position.X, secondPlayerTank.Position.Y), new Vector2(secondPlayerTank.AngularDirection.X, secondPlayerTank.AngularDirection.Y)));
 
 
             theWarning.position.X = theHelicopter.position.X;
@@ -392,6 +406,7 @@ namespace BaseProject
                 healthbarFirst -= 90;
                 theHelicopter.Reset();
                 theWarning.helicopterOnScreen = false;
+                track.Reset();
                 ScreenShake();
 
             }
@@ -404,6 +419,7 @@ namespace BaseProject
                 healthbarSecond -= 90;
                 theHelicopter.Reset();
                 theWarning.helicopterOnScreen = false;
+                track.Reset();
                 ScreenShake();
             }
 
@@ -422,6 +438,7 @@ namespace BaseProject
                 GameEnvironment.GameStateManager.SwitchTo("Tie");
                 bullets.Reset();
                 bullets2.Reset();
+                track.Reset();
             }
 
             foreach (Bullet bullet in bullets.Children)
@@ -441,6 +458,7 @@ namespace BaseProject
                 {
                     /* secondPlayerTank.Reset();*/
                     bullet.Reset();
+                    track.Reset();
                     healthbarSecond -= 60;
                 }
 
@@ -523,6 +541,7 @@ namespace BaseProject
                 {
                     /*firstPlayerTank.Reset();*/
                     bullet.Reset();
+                    track.Reset();
                     healthbarFirst -= 60;
 
 
@@ -739,17 +758,6 @@ namespace BaseProject
             {
                 if (firstPlayerTank.CollidesWith(explosion) && explosionDamage1) { healthbarFirst = healthbarFirst - 60; explosionDamage1 = false; }
                 if (secondPlayerTank.CollidesWith(explosion) && explosionDamage2) { healthbarSecond = healthbarSecond - 60; explosionDamage2 = false; }
-
-            }
-        }
-
-        public void CorrectScore() {
-            if (roundCounter1 >= 3 || roundCounter2 >= 3)
-            {
-                score.Remove(score1);
-                score.Remove(score2);
-                roundCounter1 = 0;
-                roundCounter2 = 0;
 
             }
         }

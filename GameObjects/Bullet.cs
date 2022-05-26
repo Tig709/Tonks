@@ -21,14 +21,16 @@ namespace BaseProject
         float distanceY, distanceX;
         bool active = false;
 
-        public Bullet(String assetName, Vector2 startPosition, Vector2 startSnelheid) : base(assetName)
+        // give the contructor an AssetName, a Startposition and a StartVelocity
+        public Bullet(String assetName, Vector2 startPosition, Vector2 startSpeed) : base(assetName)
         {
+            //  AngularDirection is the angle of the velocity.
             this.wall = wall;
             origin = Center;
             this.position = startPosition;
             this.startPosition = startPosition;
-            this.startSnelheid = startSnelheid;
-            velocity += startSnelheid;
+            this.startSnelheid = startSpeed;
+            velocity += startSpeed;
             AngularDirection = velocity;
             positionPrevious = new Vector2();
             active = true;

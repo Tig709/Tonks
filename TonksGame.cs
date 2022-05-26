@@ -11,7 +11,7 @@ namespace BaseProject
         protected override void LoadContent()
         {
             base.LoadContent();
-            /*GraphicsDebug.*/
+            
             screen = new Point(1920, 1080);
             //this.FullScreen = true;
             ApplyResolutionSettings();
