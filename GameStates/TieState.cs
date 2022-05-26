@@ -7,13 +7,11 @@ namespace BaseProject
 {
    class TieState : SpriteGameObject
     {
-        public TieState() : base("tie_state")
+        public TieState() : base("spr_tie")
         {
-
         }
         public override void HandleInput(InputHelper inputHelper)
         {
-            
             base.HandleInput(inputHelper);
             if (inputHelper.KeyPressed(Keys.Enter))
                 GameEnvironment.GameStateManager.SwitchTo("Play");
