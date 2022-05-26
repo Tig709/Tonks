@@ -77,16 +77,12 @@ namespace BaseProject
             set { RoundCounterP1 = roundCounter1; }
         }
 
-
         public static int RoundCounterP2
         {
             get { return roundCounter2; }
 
             set { RoundCounterP2 = roundCounter2; }
         }
-
-
-
 
         public PlayingState()
         {
@@ -176,7 +172,7 @@ namespace BaseProject
             hpBar = new GameObjectList();
             bulletBar = new GameObjectList();
 
-            //each for loop with i inside is used for calculating the length of the bar, the j loop is used for index
+            //each for loop with i inside is used for calculating the length of the bar, the j loop is used for giving the length and position later
             for (int j = 0; j < 5; j++)
             {
                 //helicopter hpbar
@@ -213,9 +209,6 @@ namespace BaseProject
             this.Add(bulletBar);
 
         }
-
-
-
 
         public override void HandleInput(InputHelper inputHelper)
         {
@@ -329,7 +322,6 @@ namespace BaseProject
                     }
                 }
             }
-
         }
 
         public void Reset()
@@ -357,8 +349,6 @@ namespace BaseProject
 
         public override void Update(GameTime gameTime)
         {
-
-
             base.Update(gameTime);
             frameCounter++;
             explosionTimer++;
@@ -369,7 +359,6 @@ namespace BaseProject
 
             track.Add(new Tracks(new Vector2(firstPlayerTank.Position.X, firstPlayerTank.Position.Y), new Vector2(firstPlayerTank.AngularDirection.X, firstPlayerTank.AngularDirection.Y)));
             track.Add(new Tracks(new Vector2(secondPlayerTank.Position.X, secondPlayerTank.Position.Y), new Vector2(secondPlayerTank.AngularDirection.X, secondPlayerTank.AngularDirection.Y)));
-
 
             theWarning.position.X = theHelicopter.position.X;
 
@@ -417,6 +406,12 @@ namespace BaseProject
                 HelicopterCollision();
             }
 
+            if (firstPlayerTank.CollidesWith(secondPlayerTank))
+            {
+                GameEnvironment.GameStateManager.SwitchTo("Tie");
+                Reset();
+            }
+
             else if (explosionTimer >= 15)
             {
                 explosionTimer = 0;
@@ -424,16 +419,7 @@ namespace BaseProject
                 explosion.Visible = false;
             }
 
-            //collision tanks with eachother
-            if (firstPlayerTank.CollidesWith(secondPlayerTank))
-            {
-                firstPlayerTank.Reset();
-                secondPlayerTank.Reset();
-                GameEnvironment.GameStateManager.SwitchTo("Tie");
-                bullets.Reset();
-                bullets2.Reset();
-                track.Reset();
-            }
+          
             //collision firstplayer bullets
             foreach (Bullet bullet in bullets.Children)
             {
@@ -515,7 +501,7 @@ namespace BaseProject
             }
 
 
-
+            //if healthbar of player 1 is zero or lower, player 2 will get 1 point and the game resets
             if (healthbarFirst <= 0)
             {
                 GameEnvironment.GameStateManager.SwitchTo("End");
@@ -529,6 +515,7 @@ namespace BaseProject
                 Reset();
 
             }
+            //if healthbar of player 2 is zero or lower, player 1 will get 1 point and the game resets
             if (healthbarSecond <= 0)
             {
                 GameEnvironment.GameStateManager.SwitchTo("End");
@@ -547,17 +534,16 @@ namespace BaseProject
                 theHelicopter.Reset();
             }
 
-
-            if (roundCounter2 == 3)
-            {
-                //MOET NOG GEMAAKT WORDEN : WINSTATE VOOR PLAYER2, SPEL IS OVER ETC.
-                GameEnvironment.GameStateManager.SwitchTo("winState_player_2");
-            }
-
+            //player 1 wins if score is 3
             if (roundCounter1 == 3)
             {
-                //MOET NOG GEMAAKT WORDEN : WINSTATE VOOR PLAYER1, SPEL IS OVER ETC.
                 GameEnvironment.GameStateManager.SwitchTo("winState_player_1");
+            }
+
+            //player 2 wins if score is 3
+            if (roundCounter2 == 3)
+            {
+                GameEnvironment.GameStateManager.SwitchTo("winState_player_2");
             }
 
             foreach (UnbreakableWall wall in walls.Children)
@@ -596,6 +582,7 @@ namespace BaseProject
             }
 
 
+            //if tanks collides with pits the shaft will spin and the velocity will be higher
             foreach (Pit pit in pit.Children)
             {
 
@@ -612,30 +599,23 @@ namespace BaseProject
                 }
             }
 
+            //gives bulletbar a position and length
             foreach (Bar bar in bulletBar.Children)
             {
                 if (bar.dedicatedObject == 3)
                 {
-
+                    bar.position = new Vector2(10000, 10000);
                     if (bar.barIndex <= bulletTimer)
                     {
                         bar.position = new Vector2(firstPlayerTank.position.X + bar.barIndex - BULLET_BAR_OFFSET_X, firstPlayerTank.position.Y + firstPlayerTank.Height / 2 + BULLET_BAR_OFFSET_Y);
                     }
-                    else
-                    {
-                        bar.position = new Vector2(10000, 10000);
-                    }
                 }
                 if (bar.dedicatedObject == 4)
                 {
-
+                    bar.position = new Vector2(10000, 10000);
                     if (bar.barIndex <= bulletTimer2)
                     {
                         bar.position = new Vector2(secondPlayerTank.position.X + bar.barIndex - BULLET_BAR_OFFSET_X, secondPlayerTank.position.Y + secondPlayerTank.Height / 2 + BULLET_BAR_OFFSET_Y);
-                    }
-                    else
-                    {
-                        bar.position = new Vector2(10000, 10000);
                     }
                 }
             }
