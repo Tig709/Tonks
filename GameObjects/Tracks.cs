@@ -17,8 +17,6 @@ namespace BaseProject
         {
             Origin = Center;
             this.position = startPosition;
-            this.startPosition = startPosition;
-            this.rotation = rotation;
             AngularDirection = rotation;
             visible = true;
         }
