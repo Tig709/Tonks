@@ -36,8 +36,10 @@ namespace BaseProject
         int frameCounter = 0;
         int bulletTimer = 100;
         int bulletTimer2 = 100;
-        int invincibilityTimerP1 = 180;
-        int invincibilityTimerP2 = 180;
+        int invincibilityTimerP1 = 0;
+        int invincibilityTimerP2 = 0;
+        int dashTimerP1 = 0;
+        int dashTimerP2 = 0;
         int explosionTimer = 0;
         int healthbarFirst = 100;
         int totalHealthFirst = 100;
@@ -301,7 +303,7 @@ namespace BaseProject
             }
 
             //Dashing
-            if (inputHelper.KeyPressed(Keys.M) && firstPlayerTankWon && dashingP1)
+            if (inputHelper.KeyPressed(Keys.M) && firstPlayerTankWon && dashingP1 && dashTimerP1 >= 7200)
             {
                 firstPlayerTank.position += firstPlayerTank.AngularDirection * 150;
                 foreach (UnbreakableWall wall in walls.Children)
@@ -311,9 +313,10 @@ namespace BaseProject
                         Bounce();
                     }
                 }
+                dashTimerP1 = 0;
             }
             
-            if (inputHelper.KeyPressed(Keys.M) && secondPlayerTankWon && dashingP2)
+            if (inputHelper.KeyPressed(Keys.N) && secondPlayerTankWon && dashingP2 && dashTimerP2 >= 7200) 
             {
                 secondPlayerTank.position += secondPlayerTank.AngularDirection * 150;
                 foreach (UnbreakableWall wall in walls.Children)
@@ -323,6 +326,7 @@ namespace BaseProject
                         Bounce();
                     }
                 }
+                dashTimerP1 = 0;
             }
         }
 
@@ -356,6 +360,9 @@ namespace BaseProject
             explosionTimer++;
             bulletTimer++;
             bulletTimer2++;
+            dashTimerP1++;
+            dashTimerP2++;
+            //Console.WriteLine(invincibilityTimerP1);
 
             MineDetonate();
 
@@ -439,9 +446,12 @@ namespace BaseProject
                 {
                     bullet.Reset();
                     track.Reset();
-                    if (!invincibilityP1)
-                       healthbarSecond -= 60;
-           
+                    if (invincibilityP1 && invincibilityTimerP1 >= 0 && invincibilityTimerP1 <= 120 )
+                        healthbarSecond -= 0;
+                    else
+                        healthbarSecond -= 60;
+
+
                 }
 
                 foreach (UnbreakableWall wall in walls.Children)
@@ -488,7 +498,7 @@ namespace BaseProject
                     bullet2.Reset();
                     track.Reset();
                     if (!invincibilityP1)
-                        healthbarSecond -= 60;
+                        healthbarFirst -= 60;
 
 
                 }
@@ -543,7 +553,9 @@ namespace BaseProject
                 {
                     /*firstPlayerTank.Reset();*/
                     bullet.Reset();
-                    if (!invincibilityP2)
+                    if (invincibilityP2 && invincibilityTimerP2 >= 120)
+                        healthbarSecond -= 0;
+                    else
                         healthbarSecond -= 60;
                 }
             }

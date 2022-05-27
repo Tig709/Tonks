@@ -61,28 +61,29 @@ namespace BaseProject
             base.Update(gameTime);
             //Console.WriteLine(PlayingState.firstPlayerTankWon);
             //Console.WriteLine(dashingP1);
-
+            PlayingState.invincibilityP1 = true;
+            PlayingState.invincibilityP2 = true;
 
             if (index == 0)
             {
-                if (PlayingState.firstPlayerTankWon)
+                //if (PlayingState.firstPlayerTankWon)
                     PlayingState.dashingP1 = true;
-                if (PlayingState.secondPlayerTankWon)
+                //if (PlayingState.secondPlayerTankWon)
                     PlayingState.dashingP2 = true;
             }
             if (index == 1)
             {
-                if (PlayingState.firstPlayerTankWon)
+                //if (PlayingState.firstPlayerTankWon)
                     PlayingState.doubleBulletsP1 = true;
-                if (PlayingState.secondPlayerTankWon)
+                //if (PlayingState.secondPlayerTankWon)
                     PlayingState.doubleBulletsP2 = true;
             }
 
             if (index == 2)
             {
-                if (PlayingState.firstPlayerTankWon)
+                //if (PlayingState.firstPlayerTankWon)
                     PlayingState.invincibilityP1 = true;
-                if (PlayingState.secondPlayerTankWon)
+                //if (PlayingState.secondPlayerTankWon)
                     PlayingState.invincibilityP2 = true;
             }
             //Console.WriteLine(PlayingState.secondPlayerTankWon);
