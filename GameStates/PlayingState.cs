@@ -519,9 +519,9 @@ namespace BaseProject
                     bullet2.Reset();
                     track.Reset();
                     if (invincibilityActivatedP1 && invincibilityTimerP1 <= 120)
-                        healthbarSecond -= 0;
+                        healthbarFirst -= 0;
                     else
-                        healthbarSecond -= 60;
+                        healthbarFirst -= 60;
 
 
                 }
