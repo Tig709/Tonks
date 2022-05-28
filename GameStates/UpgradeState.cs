@@ -20,12 +20,10 @@ namespace BaseProject
         public UpgradeState()
         {
             if (PlayingState.firstPlayerTankWon)
-                this.Add(new SpriteGameObject("first_player_tank_upgrade"));
-            else
                 this.Add(new SpriteGameObject("second_player_tank_upgrade"));
+            if (PlayingState.secondPlayerTankWon)
+                this.Add(new SpriteGameObject("first_player_tank_upgrade"));
 
-            
-            
             ChosenUpgrade();
             this.Add(new ScrollingUpgrade(new Vector2(GameEnvironment.Screen.X / 2 - upgradeOffset.X, GameEnvironment.Screen.Y / 2 + upgradeOffset.Y)));
         }
@@ -48,10 +46,16 @@ namespace BaseProject
             if (spinnedForUpgrade)
                 spinTimer--;
 
-            if (inputHelper.KeyPressed(Keys.Enter) && spinnedForUpgrade && spinTimer <= 0)
+            if (spinTimer <= 10)
             {
-                GameEnvironment.GameStateManager.SwitchTo("Play");
-                spinnedForUpgrade = false;
+                this.Remove(upgradeName);
+                
+                if (spinTimer <= 0)
+                {
+                    GameEnvironment.GameStateManager.SwitchTo("Play");
+                    spinnedForUpgrade = false;
+                    spinTimer = 60;
+                }
             }
 
         }
@@ -60,28 +64,29 @@ namespace BaseProject
         {
             base.Update(gameTime);
             //Console.WriteLine(PlayingState.firstPlayerTankWon);
-            //Console.WriteLine(dashingP1);
+            //Console.WriteLine(PlayingState.secondPlayerTankWon);
+            //Console.WriteLine(dashingP1);            
 
             if (index == 0)
             {
-                //if (PlayingState.firstPlayerTankWon)
+                if (PlayingState.secondPlayerTankWon)
                     PlayingState.dashingP1 = true;
-                //if (PlayingState.secondPlayerTankWon)
+                if (PlayingState.firstPlayerTankWon)
                     PlayingState.dashingP2 = true;
             }
             if (index == 1)
             {
-                //if (PlayingState.firstPlayerTankWon)
+                if (PlayingState.secondPlayerTankWon)
                     PlayingState.doubleBulletsP1 = true;
-                //if (PlayingState.secondPlayerTankWon)
+                if (PlayingState.firstPlayerTankWon)
                     PlayingState.doubleBulletsP2 = true;
             }
 
             if (index == 2)
             {
-                //if (PlayingState.firstPlayerTankWon)
+                if (PlayingState.secondPlayerTankWon)
                     PlayingState.invincibilityP1 = true;
-                //if (PlayingState.secondPlayerTankWon)
+                if (PlayingState.firstPlayerTankWon)
                     PlayingState.invincibilityP2 = true;
             }
             //Console.WriteLine(PlayingState.secondPlayerTankWon);
