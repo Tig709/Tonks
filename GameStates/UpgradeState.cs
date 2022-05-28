@@ -61,8 +61,6 @@ namespace BaseProject
             base.Update(gameTime);
             //Console.WriteLine(PlayingState.firstPlayerTankWon);
             //Console.WriteLine(dashingP1);
-            PlayingState.invincibilityP1 = true;
-            PlayingState.invincibilityP2 = true;
 
             if (index == 0)
             {

@@ -69,6 +69,8 @@ namespace BaseProject
 
         GameObject score1, score2, scoreText;
         bool wasHelicopterOnScreen;
+        bool invincibilityActivatedP1;
+        bool invincibilityActivatedP2;
         public static bool doubleBulletsP1;
         public static bool doubleBulletsP2;
         public static bool invincibilityP1;
@@ -328,6 +330,16 @@ namespace BaseProject
                 }
                 dashTimerP1 = 0;
             }
+
+            if (inputHelper.KeyPressed(Keys.P) && invincibilityP1)
+            {
+                invincibilityActivatedP1 = true;
+            }
+            
+            if (inputHelper.KeyPressed(Keys.P) && invincibilityP2)
+            {
+                invincibilityActivatedP2 = true;
+            }
         }
 
         public void Reset()
@@ -362,7 +374,16 @@ namespace BaseProject
             bulletTimer2++;
             dashTimerP1++;
             dashTimerP2++;
-            //Console.WriteLine(invincibilityTimerP1);
+            
+            if (invincibilityActivatedP1)
+            {
+                invincibilityTimerP1++;
+            }
+
+            if (invincibilityActivatedP2)
+            {
+                invincibilityTimerP1++;
+            }
 
             MineDetonate();
 
@@ -446,7 +467,7 @@ namespace BaseProject
                 {
                     bullet.Reset();
                     track.Reset();
-                    if (invincibilityP1 && invincibilityTimerP1 >= 0 && invincibilityTimerP1 <= 120 )
+                    if (invincibilityActivatedP2 && invincibilityTimerP2 <= 120 )
                         healthbarSecond -= 0;
                     else
                         healthbarSecond -= 60;
@@ -497,8 +518,10 @@ namespace BaseProject
                 {
                     bullet2.Reset();
                     track.Reset();
-                    if (!invincibilityP1)
-                        healthbarFirst -= 60;
+                    if (invincibilityActivatedP1 && invincibilityTimerP1 <= 120)
+                        healthbarSecond -= 0;
+                    else
+                        healthbarSecond -= 60;
 
 
                 }
@@ -553,7 +576,7 @@ namespace BaseProject
                 {
                     /*firstPlayerTank.Reset();*/
                     bullet.Reset();
-                    if (invincibilityP2 && invincibilityTimerP2 >= 120)
+                    if (invincibilityP2 && invincibilityTimerP2 <= 120)
                         healthbarSecond -= 0;
                     else
                         healthbarSecond -= 60;
