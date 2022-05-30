@@ -13,7 +13,6 @@ namespace BaseProject
         GameObject upgradeName;
         AnimatedGameObject scrollingUpgrade;
         Vector2 upgradeOffset = new Vector2(65, 55);
-        bool spinnedForUpgrade;
         int spinTimer = 240;
         int index;
 
@@ -62,7 +61,6 @@ namespace BaseProject
             { 
                 this.Add(upgradeName);
                 this.Remove(scrollingUpgrade);
-                spinnedForUpgrade = true;
             }
             
 
@@ -74,7 +72,6 @@ namespace BaseProject
                 PlayingState.firstPlayerTankWon = false;
                 PlayingState.secondPlayerTankWon = false;
                 GameEnvironment.GameStateManager.SwitchTo("Play");
-                spinnedForUpgrade = false;
                 spinTimer = 240;
             }
         }
