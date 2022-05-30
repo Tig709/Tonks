@@ -36,7 +36,10 @@ namespace BaseProject
         {
             base.HandleInput(inputHelper);
             if (inputHelper.KeyPressed(Keys.Enter))
+            {
+                (GameEnvironment.GameStateManager.GetGameState("Upgrade") as UpgradeState).Load();
                 GameEnvironment.GameStateManager.SwitchTo("Upgrade");
+            }
         }
         public void UpdateScore()
         {//updates the score so the score is the same as the score showed in playingstate

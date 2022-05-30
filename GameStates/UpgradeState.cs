@@ -17,6 +17,8 @@ namespace BaseProject
         int spinTimer = 60;
         int index;
 
+        SpriteGameObject upgradeDisplay = new SpriteGameObject("spr_dash");
+
         public UpgradeState()
         {
             if (PlayingState.firstPlayerTankWon)
@@ -28,12 +30,26 @@ namespace BaseProject
             this.Add(new ScrollingUpgrade(new Vector2(GameEnvironment.Screen.X / 2 - upgradeOffset.X, GameEnvironment.Screen.Y / 2 + upgradeOffset.Y)));
         }
 
+        public void Load()
+        {
+            SpriteGameObject background = new SpriteGameObject("second_player_tank_upgrade");
+
+            if (PlayingState.firstPlayerTankWon)
+                background = new SpriteGameObject("second_player_tank_upgrade", -1);
+            if (PlayingState.secondPlayerTankWon)
+                background = new SpriteGameObject("first_player_tank_upgrade", -1);
+            this.Add(background);
+
+            ChosenUpgrade();
+        }
+
         public void ChosenUpgrade()
         {
             Random rnd = new Random();
             index = rnd.Next(upgradeArray.Length);
             upgradeName = new ChosenUpgrade(upgradeArray[index], new Vector2(GameEnvironment.Screen.X / 2 - upgradeOffset.X, GameEnvironment.Screen.Y / 2 + upgradeOffset.Y));
         }
+
 
         public override void HandleInput(InputHelper inputHelper)
         {
@@ -49,15 +65,14 @@ namespace BaseProject
             if (spinTimer <= 10)
             {
                 this.Remove(upgradeName);
-                
-                if (spinTimer <= 0)
-                {
-                    GameEnvironment.GameStateManager.SwitchTo("Play");
-                    spinnedForUpgrade = false;
-                    spinTimer = 60;
-                }
             }
 
+            if (spinTimer <= 0 && inputHelper.KeyPressed(Keys.Enter))
+            {
+                GameEnvironment.GameStateManager.SwitchTo("Play");
+                spinnedForUpgrade = false;
+                spinTimer = 60;
+            }
         }
 
         public override void Update(GameTime gameTime)

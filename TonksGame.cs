@@ -16,7 +16,11 @@ namespace BaseProject
             //this.FullScreen = true;
             ApplyResolutionSettings();
 
-            // TODO: use this.Content to load your game content here
+            // TODO: use
+            //
+            //
+            //
+            // this.Content to load your game content here
             GameStateManager.AddGameState("Play", new PlayingState());
             GameStateManager.AddGameState("Settings", new SettingsState());
             GameStateManager.AddGameState("Sound", new SoundState());

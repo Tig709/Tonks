@@ -12,7 +12,6 @@ namespace BaseProject
         {
             origin = Center;
             this.position = position + upgradeOffset;
-
         }
     }
 }
