@@ -10,7 +10,7 @@ namespace BaseProject
     class UpgradeState : GameObjectList
     {
         string[] upgradeArray = new string[] { "spr_dash", "spr_double_bullets", "spr_invincibility" };
-        GameObject upgradeName;
+        GameObject upgradeType;
         AnimatedGameObject scrollingUpgrade;
         Vector2 upgradeOffset = new Vector2(65, 55);
         int spinTimer = 240;
@@ -48,7 +48,7 @@ namespace BaseProject
         {
             Random rnd = new Random();
             index = rnd.Next(upgradeArray.Length);
-            upgradeName = new ChosenUpgrade(upgradeArray[index], new Vector2(GameEnvironment.Screen.X / 2 - upgradeOffset.X, GameEnvironment.Screen.Y / 2 + upgradeOffset.Y));
+            upgradeType = new ChosenUpgrade(upgradeArray[index], new Vector2(GameEnvironment.Screen.X / 2 - upgradeOffset.X, GameEnvironment.Screen.Y / 2 + upgradeOffset.Y));
         }
 
 
@@ -58,15 +58,15 @@ namespace BaseProject
             spinTimer--;
 
             if (spinTimer <= 60)
-            { 
-                this.Add(upgradeName);
+            {
                 this.Remove(scrollingUpgrade);
+                this.Add(upgradeType); 
             }
             
 
             if (spinTimer <= 0 && inputHelper.KeyPressed(Keys.Enter))
             {
-                this.Remove(upgradeName);
+                this.Remove(upgradeType);
                 PlayingState.invincibilityTimerP1 = 0;
                 PlayingState.invincibilityTimerP2 = 0;
                 PlayingState.firstPlayerTankWon = false;

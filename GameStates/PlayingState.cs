@@ -55,7 +55,7 @@ namespace BaseProject
         Boolean p1Explosion = false;
         Boolean p2Explosion = false;
         public static int roundCounter1, roundCounter2;
-        public static bool firstPlayerTankWon, secondPlayerTankWon, dashingP1 = true, dashingP2 = true;
+        public static bool firstPlayerTankWon, secondPlayerTankWon, dashingP1, dashingP2 = true;
         int maxMines1 = 1, maxMines2 = 1;
         string[] assetNamesScore = { "text_0", "text_1", "text_2", "text_3", "text_dots", };
         string[] mineType = { "spr_mine", "spr_mine2" };
@@ -319,7 +319,7 @@ namespace BaseProject
                         Bounce();
                     }
                 }
-                dashTimerP1 = 300;
+                dashTimerP2 = 300;
             }
 
             if (inputHelper.KeyPressed(Keys.P) && invincibilityP1 && invincibilityTimerP1 <= 120 && !invincibilityActivatedP1)
