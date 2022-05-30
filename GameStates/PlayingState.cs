@@ -74,8 +74,8 @@ namespace BaseProject
         bool invincibilityActivatedP2;
         public static bool doubleBulletsP1;
         public static bool doubleBulletsP2;
-        public static bool invincibilityP1 = true;
-        public static bool invincibilityP2 = true;
+        public static bool invincibilityP1;
+        public static bool invincibilityP2;
 
         float soundPanning;
         float volumePan;
