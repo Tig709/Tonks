@@ -7,6 +7,8 @@ namespace BaseProject
 {
     class TankFirstPlayer : RotatingSpriteGameObject
     {
+        SpriteSheet invincibleTank = new SpriteSheet("invincibleRedTank");
+        SpriteSheet normalTank = new SpriteSheet("redTankBase");
         Vector2 startPosition;
         Vector2 positionPrevious;
         int acceleration = 75;
@@ -18,6 +20,17 @@ namespace BaseProject
             positionPrevious = new Vector2();
             Reset();
         }
+
+        public void Invincibility()
+        {
+            sprite = invincibleTank;
+        }
+
+        public void InvincibilityExpired()
+        {
+            sprite = normalTank;
+        }
+
         public override void Reset()
         {
             base.Reset();
@@ -238,6 +251,8 @@ namespace BaseProject
 
     class FirstPlayerShaft : RotatingSpriteGameObject
     {
+        SpriteSheet invincibleTankShaft = new SpriteSheet("invincibleRedTankShaft");
+        SpriteSheet normalTankShaft = new SpriteSheet("redTankShaft");
         Vector2 centerOffset = new Vector2(24, 0);
         float turningSpeed;
         float turningFriction = 0.28f;
@@ -245,6 +260,16 @@ namespace BaseProject
         {
             origin = Center - centerOffset;
         }
+
+        public void Invincibility()
+        {
+            sprite = invincibleTankShaft;
+        }
+        public void InvincibilityExpired()
+        {
+            sprite = normalTankShaft;
+        }
+
 
         public override void HandleInput(InputHelper inputHelper)
         {

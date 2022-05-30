@@ -36,8 +36,8 @@ namespace BaseProject
         int frameCounter = 0;
         int bulletTimer = 100;
         int bulletTimer2 = 100;
-        int invincibilityTimerP1 = 0;
-        int invincibilityTimerP2 = 0;
+        public static int invincibilityTimerP1 = 0;
+        public static int invincibilityTimerP2 = 0;
         int dashTimerP1 = 0;
         int dashTimerP2 = 0;
         int explosionTimer = 0;
@@ -55,7 +55,7 @@ namespace BaseProject
         Boolean p1Explosion = false;
         Boolean p2Explosion = false;
         public static int roundCounter1, roundCounter2;
-        public static bool firstPlayerTankWon, secondPlayerTankWon, dashingP1, dashingP2;
+        public static bool firstPlayerTankWon, secondPlayerTankWon, dashingP1 = true, dashingP2 = true;
         int maxMines1 = 1, maxMines2 = 1;
         string[] assetNamesScore = { "text_0", "text_1", "text_2", "text_3", "text_dots", };
         string[] mineType = { "spr_mine", "spr_mine2" };
@@ -66,6 +66,7 @@ namespace BaseProject
         const int BULLET_RELOAD_TIME = 100;
         const int SCORE_OFFSET = 50;
         const int MINEDAMAGE = 60;
+        const int DOUBLE_BULLETS_OFFSET = 20;
 
         GameObject score1, score2, scoreText;
         bool wasHelicopterOnScreen;
@@ -73,8 +74,8 @@ namespace BaseProject
         bool invincibilityActivatedP2;
         public static bool doubleBulletsP1;
         public static bool doubleBulletsP2;
-        public static bool invincibilityP1;
-        public static bool invincibilityP2;
+        public static bool invincibilityP1 = true;
+        public static bool invincibilityP2 = true;
 
         float soundPanning;
         float volumePan;
@@ -94,8 +95,6 @@ namespace BaseProject
 
         public PlayingState()
         {
-
-
             this.Add(new SpriteGameObject("spr_dirt"));
 
             breakableWall = new SpriteGameObject("spr_breakable_wall");
@@ -221,14 +220,14 @@ namespace BaseProject
 
             if (inputHelper.KeyPressed(Keys.L) && bulletTimer >= BULLET_RELOAD_TIME && doubleBulletsP1)
             {
-                bullets.Add(new Bullet("tank_bullet", new Vector2(firstPlayerShaft.Position.X + 20, firstPlayerShaft.Position.Y), new Vector2(firstPlayerShaft.AngularDirection.X * 500, firstPlayerShaft.AngularDirection.Y * 500)));
-                bullets.Add(new Bullet("tank_bullet", new Vector2(firstPlayerShaft.Position.X - 20, firstPlayerShaft.Position.Y), new Vector2(firstPlayerShaft.AngularDirection.X * 500, firstPlayerShaft.AngularDirection.Y * 500)));
+                bullets.Add(new Bullet("tank_bullet", new Vector2(firstPlayerShaft.Position.X - DOUBLE_BULLETS_OFFSET, firstPlayerShaft.Position.Y - DOUBLE_BULLETS_OFFSET), new Vector2(firstPlayerShaft.AngularDirection.X * 500, firstPlayerShaft.AngularDirection.Y * 500)));
+                bullets.Add(new Bullet("tank_bullet", new Vector2(firstPlayerShaft.Position.X + DOUBLE_BULLETS_OFFSET, firstPlayerShaft.Position.Y + DOUBLE_BULLETS_OFFSET), new Vector2(firstPlayerShaft.AngularDirection.X * 500, firstPlayerShaft.AngularDirection.Y * 500)));
                 ScreenShake();
                 bulletTimer = 0;
                 generateSound("monoShoot", 1.0f, -0.2f, firstPlayerTank.position.X, true);
                 bulletBar.Reset();
             }
-            if (inputHelper.KeyPressed(Keys.L) && bulletTimer >= 100 && !doubleBulletsP1)
+            if (inputHelper.KeyPressed(Keys.L) && bulletTimer >= BULLET_RELOAD_TIME && !doubleBulletsP1)
             {
                 bullets.Add(new Bullet("tank_bullet", new Vector2(firstPlayerShaft.Position.X, firstPlayerShaft.Position.Y), new Vector2(firstPlayerShaft.AngularDirection.X * 500, firstPlayerShaft.AngularDirection.Y * 500)));
                 ScreenShake();
@@ -247,27 +246,18 @@ namespace BaseProject
                 }
             }
 
-            if (inputHelper.KeyPressed(Keys.Space) && bulletTimer2 >= BULLET_RELOAD_TIME)
+            
+            if (inputHelper.KeyPressed(Keys.Space) && bulletTimer2 >= BULLET_RELOAD_TIME && doubleBulletsP2)
             {
-                bullets2.Add(new Bullet("tank_bullet1", new Vector2(secondPlayerShaft.Position.X, secondPlayerShaft.Position.Y), new Vector2(secondPlayerShaft.AngularDirection.X * 500, secondPlayerShaft.AngularDirection.Y * 500)));
+                bullets2.Add(new Bullet("tank_bullet1", new Vector2(secondPlayerShaft.Position.X - DOUBLE_BULLETS_OFFSET, secondPlayerShaft.Position.Y - DOUBLE_BULLETS_OFFSET), new Vector2(secondPlayerShaft.AngularDirection.X * 500, secondPlayerShaft.AngularDirection.Y * 500)));
+                bullets2.Add(new Bullet("tank_bullet1", new Vector2(secondPlayerShaft.Position.X + DOUBLE_BULLETS_OFFSET, secondPlayerShaft.Position.Y + DOUBLE_BULLETS_OFFSET), new Vector2(secondPlayerShaft.AngularDirection.X * 500, secondPlayerShaft.AngularDirection.Y * 500)));
                 ScreenShake();
                 bulletTimer2 = 0;
                 generateSound("monoShoot", 1.0f, -0.2f, secondPlayerTank.position.X, true);
                 bulletBar.Reset();
             }
 
-            if (inputHelper.KeyPressed(Keys.Space) && bulletTimer2 >= BULLET_RELOAD_TIME && doubleBulletsP2)
-            {
-                bullets2.Add(new Bullet("tank_bullet1", new Vector2(secondPlayerShaft.Position.X, secondPlayerShaft.Position.Y), new Vector2(secondPlayerShaft.AngularDirection.X * 500, secondPlayerShaft.AngularDirection.Y * 500)));
-                bullets2.Add(new Bullet("tank_bullet1", new Vector2(secondPlayerShaft.Position.X + 20, secondPlayerShaft.Position.Y), new Vector2(secondPlayerShaft.AngularDirection.X * 500, secondPlayerShaft.AngularDirection.Y * 500)));
-                ScreenShake();
-                bulletTimer2 = 0;
-                generateSound("monoShoot", 1.0f, -0.2f, secondPlayerTank.position.X, true);
-                bulletBar.Reset();
-            }
-            if (inputHelper.KeyPressed(Keys.Space) && bulletTimer2 >= 100 && !doubleBulletsP2)
-
-            if (inputHelper.KeyPressed(Keys.Space) && bulletTimer2 >= BULLET_RELOAD_TIME && doubleBulletsP2)
+            if (inputHelper.KeyPressed(Keys.Space) && bulletTimer2 >= BULLET_RELOAD_TIME && !doubleBulletsP2)
             {
                 bullets2.Add(new Bullet("tank_bullet1", new Vector2(secondPlayerShaft.Position.X, secondPlayerShaft.Position.Y), new Vector2(secondPlayerShaft.AngularDirection.X * 500, secondPlayerShaft.AngularDirection.Y * 500)));
                 ScreenShake();
@@ -305,7 +295,7 @@ namespace BaseProject
             }
 
             //Dashing
-            if (inputHelper.KeyPressed(Keys.M) && firstPlayerTankWon && dashingP1 && dashTimerP1 >= 7200)
+            if (inputHelper.KeyPressed(Keys.M) && dashingP1 && dashTimerP1 <= 0)
             {
                 firstPlayerTank.position += firstPlayerTank.AngularDirection * 150;
                 foreach (UnbreakableWall wall in walls.Children)
@@ -315,10 +305,11 @@ namespace BaseProject
                         Bounce();
                     }
                 }
-                dashTimerP1 = 0;
+                dashTimerP1 = 300;
             }
-            
-            if (inputHelper.KeyPressed(Keys.N) && secondPlayerTankWon && dashingP2 && dashTimerP2 >= 7200) 
+
+
+            if (inputHelper.KeyPressed(Keys.N) && dashingP2 && dashTimerP2 <= 0) 
             {
                 secondPlayerTank.position += secondPlayerTank.AngularDirection * 150;
                 foreach (UnbreakableWall wall in walls.Children)
@@ -328,17 +319,23 @@ namespace BaseProject
                         Bounce();
                     }
                 }
-                dashTimerP1 = 0;
+                dashTimerP1 = 300;
             }
 
-            if (inputHelper.KeyPressed(Keys.P) && invincibilityP1)
+            if (inputHelper.KeyPressed(Keys.P) && invincibilityP1 && invincibilityTimerP1 <= 120 && !invincibilityActivatedP1)
             {
+                firstPlayerTank.Invincibility();
+                firstPlayerShaft.Invincibility();
                 invincibilityActivatedP1 = true;
+                //invincibilityTimerP1 = 0; 
             }
             
-            if (inputHelper.KeyPressed(Keys.P) && invincibilityP2)
+            if (inputHelper.KeyPressed(Keys.P) && invincibilityP2 && invincibilityTimerP2 <= 120 && !invincibilityActivatedP2)
             {
+                secondPlayerTank.Invincibility();
+                secondPlayerShaft.Invincibility();
                 invincibilityActivatedP2 = true;
+                //invincibilityTimerP2 = 0;
             }
         }
 
@@ -372,17 +369,29 @@ namespace BaseProject
             explosionTimer++;
             bulletTimer++;
             bulletTimer2++;
-            dashTimerP1++;
-            dashTimerP2++;
+            dashTimerP1--;
+            dashTimerP2--;
             
             if (invincibilityActivatedP1)
             {
                 invincibilityTimerP1++;
+                if (invincibilityTimerP1 >= 120)
+                {
+                    firstPlayerTank.InvincibilityExpired();
+                    firstPlayerShaft.InvincibilityExpired();
+                    invincibilityActivatedP1 = false;
+                }
             }
 
             if (invincibilityActivatedP2)
             {
-                invincibilityTimerP1++;
+                invincibilityTimerP2++;
+                if (invincibilityTimerP2 >= 120)
+                {
+                    secondPlayerTank.InvincibilityExpired();
+                    secondPlayerShaft.InvincibilityExpired();
+                    invincibilityActivatedP2 = false;
+                }
             }
 
             MineDetonate();
@@ -467,9 +476,7 @@ namespace BaseProject
                 {
                     bullet.Reset();
                     track.Reset();
-                    if (invincibilityActivatedP2 && invincibilityTimerP2 <= 120 )
-                        healthbarSecond -= 0;
-                    else
+                    if (invincibilityActivatedP2 == false || invincibilityTimerP2 <= 120)
                         healthbarSecond -= 60;
 
 
@@ -518,12 +525,8 @@ namespace BaseProject
                 {
                     bullet2.Reset();
                     track.Reset();
-                    if (invincibilityActivatedP1 && invincibilityTimerP1 <= 120)
-                        healthbarFirst -= 0;
-                    else
+                    if (invincibilityActivatedP1 == false || invincibilityTimerP1 >= 120)
                         healthbarFirst -= 60;
-
-
                 }
                 if (bullet2.CollidesWith(theHelicopter))
                 {

@@ -12,9 +12,9 @@ namespace BaseProject
         string[] upgradeArray = new string[] { "spr_dash", "spr_double_bullets", "spr_invincibility" };
         GameObject upgradeName;
         AnimatedGameObject scrollingUpgrade;
-        Vector2 upgradeOffset = new Vector2(80, 50);
+        Vector2 upgradeOffset = new Vector2(65, 55);
         bool spinnedForUpgrade;
-        int spinTimer = 60;
+        int spinTimer = 240;
         int index;
 
         SpriteGameObject upgradeDisplay = new SpriteGameObject("spr_dash");
@@ -27,7 +27,6 @@ namespace BaseProject
                 this.Add(new SpriteGameObject("first_player_tank_upgrade"));
 
             ChosenUpgrade();
-            this.Add(new ScrollingUpgrade(new Vector2(GameEnvironment.Screen.X / 2 - upgradeOffset.X, GameEnvironment.Screen.Y / 2 + upgradeOffset.Y)));
         }
 
         public void Load()
@@ -40,6 +39,9 @@ namespace BaseProject
                 background = new SpriteGameObject("first_player_tank_upgrade", -1);
             this.Add(background);
 
+            scrollingUpgrade = new ScrollingUpgrade(new Vector2(GameEnvironment.Screen.X / 2 - upgradeOffset.X, GameEnvironment.Screen.Y / 2 + upgradeOffset.Y));
+            this.Add(scrollingUpgrade);
+            
             ChosenUpgrade();
         }
 
@@ -54,24 +56,26 @@ namespace BaseProject
         public override void HandleInput(InputHelper inputHelper)
         {
             base.HandleInput(inputHelper);
-            if (inputHelper.KeyPressed(Keys.Enter))
+            spinTimer--;
+
+            if (spinTimer <= 60)
             { 
                 this.Add(upgradeName);
+                this.Remove(scrollingUpgrade);
                 spinnedForUpgrade = true;
             }
-            if (spinnedForUpgrade)
-                spinTimer--;
-
-            if (spinTimer <= 10)
-            {
-                this.Remove(upgradeName);
-            }
+            
 
             if (spinTimer <= 0 && inputHelper.KeyPressed(Keys.Enter))
             {
+                this.Remove(upgradeName);
+                PlayingState.invincibilityTimerP1 = 0;
+                PlayingState.invincibilityTimerP2 = 0;
+                PlayingState.firstPlayerTankWon = false;
+                PlayingState.secondPlayerTankWon = false;
                 GameEnvironment.GameStateManager.SwitchTo("Play");
                 spinnedForUpgrade = false;
-                spinTimer = 60;
+                spinTimer = 240;
             }
         }
 
@@ -104,8 +108,7 @@ namespace BaseProject
                 if (PlayingState.firstPlayerTankWon)
                     PlayingState.invincibilityP2 = true;
             }
-            //Console.WriteLine(PlayingState.secondPlayerTankWon);
-
+            Console.WriteLine(PlayingState.doubleBulletsP2);
 
         }
 
