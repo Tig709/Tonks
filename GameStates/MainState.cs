@@ -54,7 +54,7 @@ namespace BaseProject
             if (inputHelper.KeyPressed(Keys.Enter) && selectedButton == 2)
                 Environment.Exit(0);
 
-            if (inputHelper.KeyPressed(Keys.Down) && selectedButton < 3)
+            if (inputHelper.KeyPressed(Keys.Down) && selectedButton < 3 || inputHelper.KeyPressed(Keys.S) && selectedButton < 3)
             {
                 if (selectedButton < 3)
                     selectedButton++;
@@ -62,7 +62,7 @@ namespace BaseProject
                     selectedButton = 0;
             }
             
-            if (inputHelper.KeyPressed(Keys.Up))
+            if (inputHelper.KeyPressed(Keys.Up) || inputHelper.KeyPressed(Keys.W))
             {
                 if(selectedButton >= 0)
                     selectedButton--;

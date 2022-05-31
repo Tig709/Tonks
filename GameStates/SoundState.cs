@@ -46,12 +46,12 @@ namespace BaseProject
             base.HandleInput(inputHelper);
             if(optionIndex == 0)
             {
-                if (inputHelper.KeyPressed(Keys.Left) && volumeIndex > 0)
+                if (inputHelper.KeyPressed(Keys.Left) && volumeIndex > 0 || inputHelper.KeyPressed(Keys.A) && volumeIndex > 0)
                 {
                     volumeIndex--;
                 }
 
-                if (inputHelper.KeyPressed(Keys.Right) && volumeIndex < 5)
+                if (inputHelper.KeyPressed(Keys.Right) && volumeIndex < 5 || inputHelper.KeyPressed(Keys.D) && volumeIndex < 5)
                 {
                     volumeIndex++;
                 }

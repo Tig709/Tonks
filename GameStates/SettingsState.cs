@@ -40,7 +40,7 @@ namespace BaseProject
         public override void HandleInput(InputHelper inputHelper)
         {
             base.HandleInput(inputHelper);
-            if (inputHelper.KeyPressed(Keys.Down) || inputHelper.KeyPressed(Keys.Up))
+            if (inputHelper.KeyPressed(Keys.Down) || inputHelper.KeyPressed(Keys.Up) || inputHelper.KeyPressed(Keys.W) || inputHelper.KeyPressed(Keys.S))
             {
                 if (optionIndex == 0)
                 {
