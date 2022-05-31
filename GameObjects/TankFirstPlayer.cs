@@ -51,7 +51,7 @@ namespace BaseProject
             Origin = Center;
 
             //regular movement
-            if (inputHelper.IsKeyDown(Keys.Left) && !inputHelper.IsKeyDown(Keys.Up) && !inputHelper.IsKeyDown(Keys.Down))
+            if (inputHelper.IsKeyDown(Keys.Left) && !inputHelper.IsKeyDown(Keys.Up) && !inputHelper.IsKeyDown(Keys.Down) && !inputHelper.IsKeyDown(Keys.Right))
             {
                 if (Degrees >= 175 && Degrees <= 185)
                 {
@@ -71,7 +71,7 @@ namespace BaseProject
                 velocity += AngularDirection * acceleration;
             }
 
-            if (inputHelper.IsKeyDown(Keys.Right) && !inputHelper.IsKeyDown(Keys.Up) && !inputHelper.IsKeyDown(Keys.Down))
+            if (inputHelper.IsKeyDown(Keys.Right) && !inputHelper.IsKeyDown(Keys.Up) && !inputHelper.IsKeyDown(Keys.Down) && !inputHelper.IsKeyDown(Keys.Left))
             {
                 if (Degrees >= 355 || Degrees <= 5)
                 {
@@ -91,7 +91,7 @@ namespace BaseProject
                 velocity += AngularDirection * acceleration;
             }
 
-            if (inputHelper.IsKeyDown(Keys.Down) && !inputHelper.IsKeyDown(Keys.Left) && !inputHelper.IsKeyDown(Keys.Right))
+            if (inputHelper.IsKeyDown(Keys.Down) && !inputHelper.IsKeyDown(Keys.Left) && !inputHelper.IsKeyDown(Keys.Right) && !inputHelper.IsKeyDown(Keys.Up))
             {
                 if (Degrees >= 85 && Degrees <= 95)
                 {
@@ -111,7 +111,7 @@ namespace BaseProject
                 velocity += AngularDirection * acceleration;
             }
 
-            if (inputHelper.IsKeyDown(Keys.Up) && !inputHelper.IsKeyDown(Keys.Left) && !inputHelper.IsKeyDown(Keys.Right))
+            if (inputHelper.IsKeyDown(Keys.Up) && !inputHelper.IsKeyDown(Keys.Left) && !inputHelper.IsKeyDown(Keys.Right) && !inputHelper.IsKeyDown(Keys.Down))
             {
                 if (Degrees >= 265 && Degrees <= 275)
                 {
@@ -132,7 +132,7 @@ namespace BaseProject
             }
 
             //diagonal movement
-            if (inputHelper.IsKeyDown(Keys.Up) && inputHelper.IsKeyDown(Keys.Right) && !inputHelper.IsKeyDown(Keys.Left))
+            if (inputHelper.IsKeyDown(Keys.Up) && inputHelper.IsKeyDown(Keys.Right) && !inputHelper.IsKeyDown(Keys.Left) && !inputHelper.IsKeyDown(Keys.Down))
             {
                 if (Degrees >= 310 && Degrees <= 320)
                 {
@@ -152,7 +152,7 @@ namespace BaseProject
                 velocity += AngularDirection * acceleration;
             }
 
-            if (inputHelper.IsKeyDown(Keys.Up) && inputHelper.IsKeyDown(Keys.Left) && !inputHelper.IsKeyDown(Keys.Right))
+            if (inputHelper.IsKeyDown(Keys.Up) && inputHelper.IsKeyDown(Keys.Left) && !inputHelper.IsKeyDown(Keys.Right) && !inputHelper.IsKeyDown(Keys.Down))
             {
                 if (Degrees >= 220 && Degrees <= 230)
                 {
@@ -172,7 +172,7 @@ namespace BaseProject
                 velocity += AngularDirection * acceleration;
             }
 
-            if (inputHelper.IsKeyDown(Keys.Down) && inputHelper.IsKeyDown(Keys.Left) && !inputHelper.IsKeyDown(Keys.Right))
+            if (inputHelper.IsKeyDown(Keys.Down) && inputHelper.IsKeyDown(Keys.Left) && !inputHelper.IsKeyDown(Keys.Right) && !inputHelper.IsKeyDown(Keys.Up))
             {
                 if (Degrees >= 130 && Degrees <= 140)
                 {
@@ -192,7 +192,7 @@ namespace BaseProject
                 velocity += AngularDirection * acceleration;
             }
 
-            if (inputHelper.IsKeyDown(Keys.Down) && inputHelper.IsKeyDown(Keys.Right) && !inputHelper.IsKeyDown(Keys.Left))
+            if (inputHelper.IsKeyDown(Keys.Down) && inputHelper.IsKeyDown(Keys.Right) && !inputHelper.IsKeyDown(Keys.Left) && !inputHelper.IsKeyDown(Keys.Up))
             {
                 if (Degrees >= 40 && Degrees <= 50)
                 {
