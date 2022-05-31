@@ -20,10 +20,10 @@ namespace BaseProject
 
         public UpgradeState()
         {
-            if (PlayingState.firstPlayerTankWon)
+           /* if (PlayingState.firstPlayerTankWon)
                 this.Add(new SpriteGameObject("second_player_tank_upgrade"));
             if (PlayingState.secondPlayerTankWon)
-                this.Add(new SpriteGameObject("first_player_tank_upgrade"));
+                this.Add(new SpriteGameObject("first_player_tank_upgrade"));*/
 
             ChosenUpgrade();
         }

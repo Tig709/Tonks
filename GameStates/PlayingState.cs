@@ -55,7 +55,8 @@ namespace BaseProject
         Boolean p1Explosion = false;
         Boolean p2Explosion = false;
         public static int roundCounter1, roundCounter2;
-        public static bool firstPlayerTankWon, secondPlayerTankWon, dashingP1, dashingP2 = true;
+        public static bool firstPlayerTankWon, secondPlayerTankWon = false;
+        public static bool dashingP1, dashingP2 = false;
         int maxMines1 = 1, maxMines2 = 1;
         string[] assetNamesScore = { "text_0", "text_1", "text_2", "text_3", "text_dots", };
         string[] mineType = { "spr_mine", "spr_mine2" };
@@ -283,19 +284,19 @@ namespace BaseProject
             }
 
             //If player1 has a mine already on the field and presses the explosion button the mine will explode
-            if (inputHelper.KeyPressed(Keys.C) && mine1Placed)
+            if (inputHelper.KeyPressed(Keys.M) && mine1Placed)
             {
                 p1Explosion = true;
             }
 
             //If player2 has a mine already on the field and presses the explosion button the mine will explode
-            if (inputHelper.KeyPressed(Keys.V) && mine2Placed)
+            if (inputHelper.KeyPressed(Keys.N) && mine2Placed)
             {
                 p2Explosion = true;
             }
 
             //Dashing
-            if (inputHelper.KeyPressed(Keys.M) && dashingP1 && dashTimerP1 <= 0)
+            if (inputHelper.KeyPressed(Keys.M) && dashingP1 == true && dashTimerP1 <= 0)
             {
                 firstPlayerTank.position += firstPlayerTank.AngularDirection * 150;
                 foreach (UnbreakableWall wall in walls.Children)
@@ -309,7 +310,7 @@ namespace BaseProject
             }
 
 
-            if (inputHelper.KeyPressed(Keys.N) && dashingP2 && dashTimerP2 <= 0) 
+            if (inputHelper.KeyPressed(Keys.N) && dashingP2 == true && dashTimerP2 <= 0) 
             {
                 secondPlayerTank.position += secondPlayerTank.AngularDirection * 150;
                 foreach (UnbreakableWall wall in walls.Children)
@@ -330,7 +331,7 @@ namespace BaseProject
                 //invincibilityTimerP1 = 0; 
             }
             
-            if (inputHelper.KeyPressed(Keys.P) && invincibilityP2 && invincibilityTimerP2 <= 120 && !invincibilityActivatedP2)
+            if (inputHelper.KeyPressed(Keys.O) && invincibilityP2 && invincibilityTimerP2 <= 120 && !invincibilityActivatedP2)
             {
                 secondPlayerTank.Invincibility();
                 secondPlayerShaft.Invincibility();
