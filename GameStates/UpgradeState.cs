@@ -57,16 +57,19 @@ namespace BaseProject
             base.HandleInput(inputHelper);
             spinTimer--;
 
-            if (spinTimer <= 60)
+            if (spinTimer == 60)
             {
                 this.Remove(scrollingUpgrade);
                 this.Add(upgradeType); 
             }
-            
-
-            if (spinTimer <= 0 && inputHelper.KeyPressed(Keys.Enter))
+            if(spinTimer <= 5)
             {
                 this.Remove(upgradeType);
+                upgradeType.Reset();
+            }
+
+            if (spinTimer <= 0)
+            {
                 PlayingState.invincibilityTimerP1 = 0;
                 PlayingState.invincibilityTimerP2 = 0;
                 PlayingState.firstPlayerTankWon = false;
