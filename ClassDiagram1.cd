@@ -142,18 +142,11 @@
       <FileName>GameObjects\Button.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="BaseProject.chosenUpgrade" Collapsed="true">
+  <Class Name="BaseProject.ChosenUpgrade" Collapsed="true">
     <Position X="62.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
       <FileName>GameObjects\chosenUpgrade.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="BaseProject.DashUpgrade" Collapsed="true">
-    <Position X="13" Y="4.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAEAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
-      <FileName>GameObjects\DashUpgrade.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BaseProject.Explosion" Collapsed="true">
@@ -180,21 +173,14 @@
   <Class Name="BaseProject.Mine" Collapsed="true">
     <Position X="40" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAACAAAAABBAAAAAAAAAAAAACAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAQAAACAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>GameObjects\Mine.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="BaseProject.MineExplosion" Collapsed="true">
-    <Position X="44.5" Y="3.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAABBAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
-      <FileName>GameObjects\MineExplosion.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BaseProject.Pit" Collapsed="true">
     <Position X="64.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAAIAAABAAAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <HashCode>AAQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>GameObjects\Pit.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -205,53 +191,39 @@
       <FileName>GameObjects\Score.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="BaseProject.ShieldUpgrade" Collapsed="true">
-    <Position X="15.25" Y="4.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAICAAAAAAAAAAAAAAAAAAAACAAAAAAAEAAAAAAA=</HashCode>
-      <FileName>GameObjects\ShieldUpgrade.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="BaseProject.TankFirstPlayer" Collapsed="true">
     <Position X="51.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CAQAAACAAAACBBAAAAAAAAAAAQAAAAQgABAAAAAAAAA=</HashCode>
+      <HashCode>CAwAAACAQAACBBAAAAAAAAAAAQAAAAQgABAAgAAAAAA=</HashCode>
       <FileName>GameObjects\TankFirstPlayer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BaseProject.FirstPlayerShaft" Collapsed="true">
     <Position X="53.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAACCAAAAAAAAAAAAAAABAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <HashCode>AAQAAACCQAAAAAAAAAAAAAABAAAAAAAAAAAYgAAAAAA=</HashCode>
       <FileName>GameObjects\TankFirstPlayer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BaseProject.TankSecondPlayer" Collapsed="true">
     <Position X="58" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CQQAAACAAACCBBAAIAAAAAAAAQAAAAQgABAAAAABACA=</HashCode>
+      <HashCode>CQwAAACAQACCBBAAIAAAAAAAAQAAAAQgABAAgAABACA=</HashCode>
       <FileName>GameObjects\TankSecondPlayer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BaseProject.SecondPlayerShaft" Collapsed="true">
     <Position X="60.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAACCAAAAAAAAAAAAAAABAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <HashCode>AAQAAACCQAAAAAAAAAAAAAABAAAAAAAAAAAYgAAAAAA=</HashCode>
       <FileName>GameObjects\TankSecondPlayer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BaseProject.UnbreakableWall" Collapsed="true">
     <Position X="46.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>GameObjects\UnbreakableWall.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="BaseProject.Upgrades" Collapsed="true">
-    <Position X="14.25" Y="3.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAQABACAAAAAAAAAAAAAQAAAAAAAAAAAEAAEAAAAAAg=</HashCode>
-      <FileName>GameObjects\Upgrades.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BaseProject.ControlState" Collapsed="true">
@@ -278,7 +250,7 @@
   <Class Name="BaseProject.PlayingState" Collapsed="true">
     <Position X="6.25" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>JDxOUwDYAoECBwJAAIAOgIEHAAgSVIQRFucBCEwiIkA=</HashCode>
       <FileName>GameStates\PlayingState.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -306,7 +278,7 @@
   <Class Name="BaseProject.UpgradeState" Collapsed="true">
     <Position X="17.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAACAAAACAgAAAAAACBAAAAAAAAAgAAAQCAAAAAI=</HashCode>
+      <HashCode>AAQAgACAAQAAAgAAAAAACAAABAAAAAAgAAIQAAABAAI=</HashCode>
       <FileName>GameStates\UpgradeState.cs</FileName>
     </TypeIdentifier>
   </Class>
