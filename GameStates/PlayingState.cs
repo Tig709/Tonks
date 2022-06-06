@@ -586,12 +586,7 @@ namespace BaseProject
                         healthbarSecond -= 60;
                 }
             }
-            if (roundCounter2 == 3)
-            {
-                //MOET NOG GEMAAKT WORDEN : WINSTATE VOOR PLAYER2, SPEL IS OVER ETC.
-                GameEnvironment.GameStateManager.SwitchTo("winState_player_2");
-            }
-
+           
             if (roundCounter1 == 3)
             {
                 GameEnvironment.GameStateManager.SwitchTo("winState_player_1");
