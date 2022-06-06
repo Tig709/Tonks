@@ -16,6 +16,7 @@ namespace BaseProject
             this.position = startPosition;
             this.startPosition = startPosition;
         }
+        // reset buiten het scherm
         public override void Reset()
         {
             base.Reset();

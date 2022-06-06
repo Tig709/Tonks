@@ -28,6 +28,8 @@ namespace BaseProject
             base.Reset();
             this.position.X = GameEnvironment.Random.Next(0 + Width, GameEnvironment.Screen.X - Width);
             this.position.Y = GameEnvironment.Random.Next(RANDOM_POSITION_X, RANDOM_POSITION_Y);
+            velocity.Y = 0;
+            timer = 0;
         }
         public override void Update(GameTime gameTime)
         {
