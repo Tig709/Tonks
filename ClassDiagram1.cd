@@ -124,7 +124,7 @@
   <Class Name="BaseProject.Bullet" Collapsed="true">
     <Position X="55.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAACAAAAABBAAAAAAAAAAAMACAABgAAAEYAADAAA=</HashCode>
+      <HashCode>AAQAAACAAAAABBAAAAAAAAAAAEACAABgAAAFYAADAAA=</HashCode>
       <FileName>GameObjects\Bullet.cs</FileName>
     </TypeIdentifier>
   </Class>

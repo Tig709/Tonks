@@ -15,7 +15,7 @@ namespace BaseProject
         int frameCounter;
         Vector2 positionPrevious;
         Vector2 startPosition;
-        Vector2 startSnelheid;
+        Vector2 startSpeed;
         Vector2 positionWall;
         float turningspeed = 1.57f;
         float distanceY, distanceX;
@@ -29,7 +29,7 @@ namespace BaseProject
             origin = Center;
             this.position = startPosition;
             this.startPosition = startPosition;
-            this.startSnelheid = startSpeed;
+            this.startSpeed = startSpeed;
             velocity += startSpeed;
             AngularDirection = velocity;
             positionPrevious = new Vector2();
