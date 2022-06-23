@@ -19,6 +19,7 @@ namespace BaseProject
         Vector2 positionWall;
         float distanceY, distanceX;
         bool active = false;
+        const int RESET_VALUE = -1000;
 
         // give the contructor an AssetName, a Startposition and a StartVelocity
         public Bullet(String assetName, Vector2 startPosition, Vector2 startSpeed) : base(assetName)
@@ -41,8 +42,8 @@ namespace BaseProject
         public override void Reset()
         {
             base.Reset();
-            this.position.X = -1000;
-            this.position.Y = -1000;
+            this.position.X = RESET_VALUE;
+            this.position.Y = RESET_VALUE;
             this.velocity.X = 0;
             this.velocity.Y = 0;
             active = false;
