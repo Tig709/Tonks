@@ -20,14 +20,10 @@ namespace BaseProject
 
         public UpgradeState()
         {
-           /* if (PlayingState.firstPlayerTankWon)
-                this.Add(new SpriteGameObject("second_player_tank_upgrade"));
-            if (PlayingState.secondPlayerTankWon)
-                this.Add(new SpriteGameObject("first_player_tank_upgrade"));*/
-
             ChosenUpgrade();
         }
 
+        //On load zodra de state wordt geladen zal hij pas de objecten inladen.
         public void Load()
         {
             SpriteGameObject background = new SpriteGameObject("second_player_tank_upgrade");
@@ -44,6 +40,7 @@ namespace BaseProject
             ChosenUpgrade();
         }
 
+        //Method voor het kiezen van de upgrade
         public void ChosenUpgrade()
         {
             Random rnd = new Random();
@@ -51,7 +48,7 @@ namespace BaseProject
             upgradeType = new ChosenUpgrade(upgradeArray[index], new Vector2(GameEnvironment.Screen.X / 2 - upgradeOffset.X, GameEnvironment.Screen.Y / 2 + upgradeOffset.Y));
         }
 
-
+        //Handles the timer
         public override void HandleInput(InputHelper inputHelper)
         {
             base.HandleInput(inputHelper);
@@ -79,12 +76,10 @@ namespace BaseProject
             }
         }
 
+        //Booleans worden hier op true gezet
         public override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
-            //Console.WriteLine(PlayingState.firstPlayerTankWon);
-            //Console.WriteLine(PlayingState.secondPlayerTankWon);
-            //Console.WriteLine(dashingP1);            
+            base.Update(gameTime);           
 
             if (index == 0)
             {
