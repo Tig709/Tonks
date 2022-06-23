@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BaseProject
 {
-   class TieState : SpriteGameObject
+    class TieState : SpriteGameObject
     {
         public TieState() : base("spr_tie")
         {

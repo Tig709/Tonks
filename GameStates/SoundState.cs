@@ -44,7 +44,7 @@ namespace BaseProject
         public override void HandleInput(InputHelper inputHelper)
         {
             base.HandleInput(inputHelper);
-            if(optionIndex == 0)
+            if (optionIndex == 0)
             {
                 if (inputHelper.KeyPressed(Keys.Left) && volumeIndex > 0 || inputHelper.KeyPressed(Keys.A) && volumeIndex > 0)
                 {
@@ -66,19 +66,21 @@ namespace BaseProject
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            foreach(Button button in buttons.Children)
+            foreach (Button button in buttons.Children)
             {
-                if(button.buttonIndex <= volumeIndex + 1 && button.buttonIndex >= 2 && button.buttonIndex <= 6)
+                if (button.buttonIndex <= volumeIndex + 1 && button.buttonIndex >= 2 && button.buttonIndex <= 6)
                 {
                     button.selected = true;
-                } else if(button.buttonIndex >= 2 && button.buttonIndex <= 6)
+                }
+                else if (button.buttonIndex >= 2 && button.buttonIndex <= 6)
                 {
                     button.selected = false;
                 }
-                if(button.buttonIndex <= volumeIndex + 6 && button.buttonIndex >= 7 && button.buttonIndex <= 12)
+                if (button.buttonIndex <= volumeIndex + 6 && button.buttonIndex >= 7 && button.buttonIndex <= 12)
                 {
                     button.selected = false;
-                } else if(button.buttonIndex >= 7 && button.buttonIndex <= 12)
+                }
+                else if (button.buttonIndex >= 7 && button.buttonIndex <= 12)
                 {
                     button.selected = true;
                 }

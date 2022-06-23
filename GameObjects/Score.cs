@@ -5,10 +5,11 @@ using System.Text;
 
 namespace BaseProject
 {
-     class Score : SpriteGameObject
+    class Score : SpriteGameObject
     {
-        public Score(string assetnames, Vector2 position) : base(assetnames) {
-           this.position = position;
+        public Score(string assetnames, Vector2 position) : base(assetnames)
+        {
+            this.position = position;
             origin = Center;
         }
         public override void Update(GameTime gameTime)

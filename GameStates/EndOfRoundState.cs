@@ -53,7 +53,7 @@ namespace BaseProject
             score2 = new Score(assetNamesScore[roundCounter2], new Vector2(GameEnvironment.Screen.X / 2 + 50, 50));
 
             this.Add(score1);
-            this.Add(score2);           
+            this.Add(score2);
         }
     }
 }

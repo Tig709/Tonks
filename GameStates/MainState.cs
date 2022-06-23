@@ -61,12 +61,12 @@ namespace BaseProject
                 if (selectedButton == 3)
                     selectedButton = 0;
             }
-            
+
             if (inputHelper.KeyPressed(Keys.Up) || inputHelper.KeyPressed(Keys.W))
             {
-                if(selectedButton >= 0)
+                if (selectedButton >= 0)
                     selectedButton--;
-                if(selectedButton < 0)
+                if (selectedButton < 0)
                     selectedButton = 2;
             }
         }
@@ -74,26 +74,29 @@ namespace BaseProject
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            foreach(Button button in buttons.Children)
+            foreach (Button button in buttons.Children)
             {
-                if(selectedButton == button.buttonIndex)
+                if (selectedButton == button.buttonIndex)
                 {
-                        button.selected = true;
-                } else if (button.buttonIndex > 2)
+                    button.selected = true;
+                }
+                else if (button.buttonIndex > 2)
                 {
-                    if(button.buttonIndex == selectedButton + 3)
+                    if (button.buttonIndex == selectedButton + 3)
                     {
                         button.selected = false;
-                    } else
+                    }
+                    else
                     {
                         button.selected = true;
                     }
-                } else
+                }
+                else
                     button.selected = false;
 
-                foreach(Text text in texts.Children)
+                foreach (Text text in texts.Children)
                 {
-                    if(button.buttonIndex == text.textIndex)
+                    if (button.buttonIndex == text.textIndex)
                     {
                         text.position = button.position;
                     }

@@ -247,7 +247,7 @@ namespace BaseProject
                 }
             }
 
-            
+
             if (inputHelper.KeyPressed(Keys.Space) && bulletTimer2 >= BULLET_RELOAD_TIME && doubleBulletsP2)
             {
                 bullets2.Add(new Bullet("tank_bullet1", new Vector2(secondPlayerShaft.Position.X - DOUBLE_BULLETS_OFFSET, secondPlayerShaft.Position.Y - DOUBLE_BULLETS_OFFSET), new Vector2(secondPlayerShaft.AngularDirection.X * 500, secondPlayerShaft.AngularDirection.Y * 500)));
@@ -310,7 +310,7 @@ namespace BaseProject
             }
 
 
-            if (inputHelper.KeyPressed(Keys.N) && dashingP2 == true && dashTimerP2 <= 0) 
+            if (inputHelper.KeyPressed(Keys.N) && dashingP2 == true && dashTimerP2 <= 0)
             {
                 secondPlayerTank.position += secondPlayerTank.AngularDirection * 150;
                 foreach (UnbreakableWall wall in walls.Children)
@@ -330,7 +330,7 @@ namespace BaseProject
                 invincibilityActivatedP1 = true;
                 //invincibilityTimerP1 = 0; 
             }
-            
+
             if (inputHelper.KeyPressed(Keys.O) && invincibilityP2 && invincibilityTimerP2 <= 120 && !invincibilityActivatedP2)
             {
                 secondPlayerTank.Invincibility();
@@ -372,7 +372,7 @@ namespace BaseProject
             bulletTimer2++;
             dashTimerP1--;
             dashTimerP2--;
-            
+
             if (invincibilityActivatedP1)
             {
                 invincibilityTimerP1++;
@@ -458,7 +458,7 @@ namespace BaseProject
                 explosion.Visible = false;
             }
 
-          
+
             //collision firstplayer bullets
             foreach (Bullet bullet in bullets.Children)
             {
@@ -586,7 +586,7 @@ namespace BaseProject
                         healthbarSecond -= 60;
                 }
             }
-           
+
             if (roundCounter1 == 3)
             {
                 GameEnvironment.GameStateManager.SwitchTo("winState_player_1");
@@ -789,7 +789,8 @@ namespace BaseProject
             }
         }
 
-        public void HelicopterCollision() {
+        public void HelicopterCollision()
+        {
             explosionTimer++;
             explosion.Visible = true;
             theHelicopter.Reset();

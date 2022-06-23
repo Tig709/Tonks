@@ -6,7 +6,7 @@ using System.Text;
 
 namespace BaseProject
 {
-     class TankSecondPlayer : RotatingSpriteGameObject
+    class TankSecondPlayer : RotatingSpriteGameObject
     {
         SpriteSheet invincibleTank = new SpriteSheet("invincibleYellowTank");
         SpriteSheet normalTank = new SpriteSheet("yellowTankBase");
@@ -19,10 +19,10 @@ namespace BaseProject
         Vector2 positionPrevious;
         int acceleration = 75;
         float friction = 0.15f;
-     
-        public TankSecondPlayer() : base("yellowTankBase") 
+
+        public TankSecondPlayer() : base("yellowTankBase")
         {
-            startPosition = new Vector2(1820,980);
+            startPosition = new Vector2(1820, 980);
             accelerationLeft = new Vector2(-10, 0);
             accelerationRight = new Vector2(10, 0);
             accelerationTop = new Vector2(0, -10);
@@ -44,7 +44,7 @@ namespace BaseProject
 
         public override void Reset()
         {
-            
+
             base.Reset();
             position = startPosition;
             velocity = Vector2.One;

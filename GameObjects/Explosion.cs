@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BaseProject
 {
-     class Explosion : SpriteGameObject
+    class Explosion : SpriteGameObject
     {
         Vector2 startPosition;
         //set Origin of the sprite on Center

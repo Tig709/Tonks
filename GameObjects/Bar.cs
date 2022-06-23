@@ -10,8 +10,8 @@ namespace BaseProject
         public int barIndex;
         public bool active;
         public int dedicatedObject;
-        public Bar(String assetName, int barId, int assignedObject) : base(assetName) 
-        { 
+        public Bar(String assetName, int barId, int assignedObject) : base(assetName)
+        {
             barIndex = barId;
             dedicatedObject = assignedObject;
         }

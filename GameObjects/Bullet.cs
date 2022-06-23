@@ -17,7 +17,6 @@ namespace BaseProject
         Vector2 startPosition;
         Vector2 startSpeed;
         Vector2 positionWall;
-        float turningspeed = 1.57f;
         float distanceY, distanceX;
         bool active = false;
 
@@ -53,11 +52,11 @@ namespace BaseProject
         {
             if (active)
             {
-            positionPrevious = position;
-            base.Update(gameTime);
-            WrapBullet();
-            frameCounter++;
-            AngularDirection = velocity;
+                positionPrevious = position;
+                base.Update(gameTime);
+                WrapBullet();
+                frameCounter++;
+                AngularDirection = velocity;
             }
         }
         public void WrapBullet()

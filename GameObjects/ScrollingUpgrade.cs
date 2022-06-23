@@ -15,7 +15,7 @@ namespace BaseProject
             this.position = position;
 
             //origin = Center;
-            
+
         }
     }
 }

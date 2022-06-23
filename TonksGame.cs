@@ -11,7 +11,7 @@ namespace BaseProject
         protected override void LoadContent()
         {
             base.LoadContent();
-            
+
             screen = new Point(1920, 1080);
             //this.FullScreen = true;
             ApplyResolutionSettings();
@@ -32,8 +32,8 @@ namespace BaseProject
             GameStateManager.AddGameState("End", new EndOfRoundState());
             GameStateManager.AddGameState("Upgrade", new UpgradeState());
             GameStateManager.SwitchTo("Begin");
-            
+
         }
-        
+
     }
 }

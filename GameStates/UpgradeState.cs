@@ -36,7 +36,7 @@ namespace BaseProject
 
             scrollingUpgrade = new ScrollingUpgrade(new Vector2(GameEnvironment.Screen.X / 2 - upgradeOffset.X, GameEnvironment.Screen.Y / 2 + upgradeOffset.Y));
             this.Add(scrollingUpgrade);
-            
+
             ChosenUpgrade();
         }
 
@@ -57,9 +57,9 @@ namespace BaseProject
             if (spinTimer == 60)
             {
                 this.Remove(scrollingUpgrade);
-                this.Add(upgradeType); 
+                this.Add(upgradeType);
             }
-            if(spinTimer <= 5)
+            if (spinTimer <= 5)
             {
                 this.Remove(upgradeType);
                 upgradeType.Reset();
@@ -79,7 +79,7 @@ namespace BaseProject
         //Booleans worden hier op true gezet
         public override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);           
+            base.Update(gameTime);
 
             if (index == 0)
             {

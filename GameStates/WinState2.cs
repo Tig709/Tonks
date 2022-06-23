@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BaseProject
 {
- class WinState2 : SpriteGameObject
+    class WinState2 : SpriteGameObject
     {
         public WinState2() : base("spr_yellow_wins")
         {
@@ -16,8 +16,8 @@ namespace BaseProject
             base.HandleInput(inputHelper);
             if (inputHelper.KeyPressed(Keys.Enter))
                 Environment.Exit(0);
-           // GameEnvironment.GameStateManager.SwitchTo("Begin");
-           
+            // GameEnvironment.GameStateManager.SwitchTo("Begin");
+
         }
     }
 }

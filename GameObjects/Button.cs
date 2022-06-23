@@ -24,7 +24,8 @@ namespace BaseProject
             if (selected)
             {
                 position = new Vector2(buttonStandardPositionX, spawningPositionY);
-            } else
+            }
+            else
             {
                 position = new Vector2(buttonOffScreenPositionX, spawningPositionY);
             }

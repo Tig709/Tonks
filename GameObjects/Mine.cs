@@ -7,11 +7,11 @@ using Microsoft.Xna.Framework.Input;
 namespace BaseProject
 {
     class Mine : SpriteGameObject
-    {          
+    {
         public Mine(string assetNames, Vector2 startPosition) : base(assetNames)
         {
             origin = Center;
-            this.position = startPosition;           
+            this.position = startPosition;
         }
 
         public override void HandleInput(InputHelper inputHelper)

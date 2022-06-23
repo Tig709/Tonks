@@ -5,12 +5,12 @@ using System.Text;
 
 namespace BaseProject
 {
-  class Tracks : RotatingSpriteGameObject
+    class Tracks : RotatingSpriteGameObject
     {
         Vector2 startPosition;
         Vector2 rotation;
         int trackcounter = 0;
-        Vector2 centerOffset = new Vector2(-35,0);
+        Vector2 centerOffset = new Vector2(-35, 0);
         const int MAX_TRACK_COUNT_AMOUNT = 30;
         //set the Origin of the sprite on Center
         //give the constructer a variable startposition and a rotation
@@ -27,7 +27,7 @@ namespace BaseProject
             trackcounter++;
             base.Update(gameTime);
 
-            if(trackcounter == MAX_TRACK_COUNT_AMOUNT)
+            if (trackcounter == MAX_TRACK_COUNT_AMOUNT)
             {
                 trackcounter = 0;
                 visible = false;
