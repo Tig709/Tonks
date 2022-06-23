@@ -21,7 +21,7 @@ namespace BaseProject
             AngularDirection = rotation;
             visible = true;
         }
-        // let the tracks disappear after 100 frames
+        // let the tracks disappear after 30 frames
         public override void Update(GameTime gameTime)
         {
             trackcounter++;
